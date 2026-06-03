@@ -1,10 +1,7 @@
 """
 =============================================================
-  LEXER MANUAL - Lenguaje SMART HOME
+  LEXER  - Lenguaje SMART HOME
   Grupo: C.manticos  -  UTN FRRe  -  2026
-
-  Sin PLY, sin re, sin librerias de expresiones regulares.
-  Implementado como automata finito caracter a caracter.
 =============================================================
   Uso:
     Modo interactivo : python smarthome_lexer.py
