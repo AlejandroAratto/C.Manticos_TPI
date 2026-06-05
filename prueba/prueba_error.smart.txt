@@ -1,0 +1,15 @@
+// Archivo de prueba de errores para Lexer
+// Mezcla de sintaxis válida con errores léxicos intencionales
+
+WHENN sensor_luz_patio < 250lux DO
+    foco_entrada.estado = ON
+    foco_entrada.color = blue
+    licuadora_cocina.estado = OFF
+END
+
+EVERY 10m DO
+    IF reloj.hora > 23:00 THEN
+        alarma_casa.activada = TRUE $
+        persiana_cuarto.posicion = 50% ?
+    END
+END
