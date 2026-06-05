@@ -1,4 +1,4 @@
-/* Lexer para Intérprete Smart Home - Equipo C.mánticos
+/* Lexer - Equipo C.mánticos
    UTN FRRE - SSL 2026
 */ 
 %option noyywrap
@@ -7,7 +7,7 @@
 %{
 #include <stdio.h>
 #include <stdlib.h>
-// #include "y.tab.h" // A descomentar cuando se integre con Yacc/Bison
+// #include "y.tab.h" // esto podemos eliminar cuando se integre con Yacc/Bison (etapa parcer)
 
 int linea = 1;
 %}
