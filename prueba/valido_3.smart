@@ -1,0 +1,13 @@
+// Rutina de la mañana y notificaciones (Valido)
+EVERY 1h DO
+    IF reloj.hora == 07:00 THEN
+        persiana_habitacion.posicion = 100%
+        foco_cocina.estado = ON
+        altavoz_cocina.mensaje = "Buenos dias"
+    END
+END
+
+WHEN sensor_luz_terraza < 150lux DO
+    foco_terraza.estado = ON
+    foco_terraza.email_notif = "notificaciones@smarthome.com"
+END

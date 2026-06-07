@@ -3,11 +3,17 @@
 */ 
 %option noyywrap
 %option case-insensitive
+%option 8bit
 
 %{
 #include <stdio.h>
 #include <stdlib.h>
-// #include "y.tab.h" // esto podemos eliminar cuando se integre con Yacc/Bison (etapa parcer)
+#include <locale.h>
+#ifdef _WIN32
+#include <windows.h>
+#include <fcntl.h>
+#include <io.h>
+#endif
 
 int linea = 1;
 %}
@@ -18,7 +24,7 @@ LETRA       [a-zA-Z]
 ALFANUM     [a-zA-Z0-9_]
 
 /*----- Literales y Unidades -----*/
-TEMPERATURA -?{DIGITO}+(\.{DIGITO}+)?("\xC2\xB0"|"\xB0"|"°"|"º")"C"
+TEMPERATURA -?{DIGITO}+(\.{DIGITO}+)?([\xB0\xBA\xF8]|\xC2[\xB0\xBA])"C"
 PORCENTAJE  {DIGITO}+"%"
 ILUMINANCIA {DIGITO}+"lux"
 TIEMPO      {DIGITO}+[smh]
@@ -95,7 +101,13 @@ ALARMA      alarma(_[a-zA-Z0-9_]+)?
 {ALARMA}                { printf("Token: ALARMA_ID | Lexema: %s\n", yytext); }
 
 	/* Literales y Unidades Compuestas */
-{TEMPERATURA}           { printf("Token: TEMPERATURA | Lexema: %s\n", yytext); }
+{TEMPERATURA} { 
+    DWORD written;
+    HANDLE hOut = GetStdHandle(STD_OUTPUT_HANDLE);
+    char msg[512];
+    int len = snprintf(msg, sizeof(msg), "Token: TEMPERATURA | Lexema: %s\n", yytext);
+    WriteConsoleA(hOut, msg, len, &written, NULL);
+}
 {PORCENTAJE}            { printf("Token: PORCENTAJE | Lexema: %s\n", yytext); }
 {ILUMINANCIA}           { printf("Token: ILUMINANCIA | Lexema: %s\n", yytext); }
 {TIEMPO}                { printf("Token: TIEMPO | Lexema: %s\n", yytext); }
@@ -109,15 +121,29 @@ ALARMA      alarma(_[a-zA-Z0-9_]+)?
 ">"|"<"|">="|"<="       { printf("Token: OP_RELACIONAL | Lexema: %s\n", yytext); }
 "="                     { printf("Token: ASIGNACION | Lexema: =\n"); }
 
-    /* Palabras desconocidas y Control de errores léxicos */
-[a-zA-Z0-9_]+           { printf("TOKEN_DESCONOCIDO: %s (En linea %d)\n", yytext, linea); }
-.                       { printf("TOKEN_ERROR_CARACTER: %s (En linea %d)\n", yytext, linea); }
+    /* Control de errores léxicos unificado */
+[a-zA-Z0-9_]+|[\xC2-\xDF][\x80-\xBF]|. { 
+#ifdef _WIN32
+    DWORD written;
+    HANDLE hOut = GetStdHandle(STD_OUTPUT_HANDLE);
+    char msg[512];
+    int len = snprintf(msg, sizeof(msg), "TOKEN_ERROR: %s (En linea %d)\n", yytext, linea);
+    WriteConsoleA(hOut, msg, len, &written, NULL);
+#else
+    printf("TOKEN_ERROR: %s (En linea %d)\n", yytext, linea);
+#endif
+}
 
 %%
 	/*----- Sección de Procedimientos --------*/
 
 int main(int argc, char *argv[]) {
-    // Si se pasa un argumento, abre el archivo. Si no, inicia modo interactivo.
+#ifdef _WIN32
+    SetConsoleOutputCP(65001);
+    SetConsoleCP(65001);
+#endif
+    setlocale(LC_ALL, "");
+
     if (argc == 2) {
         yyin = fopen(argv[1], "rt");
         if (yyin == NULL) {
@@ -125,12 +151,39 @@ int main(int argc, char *argv[]) {
             exit(-1);
         }
         printf("Analizando archivo: %s\n\n", argv[1]);
+        yylex();
     } else {
         printf("--- Modo Interactivo Smart Home ---\n");
         printf("Escribe comandos o escribe 'quit', 'q' o 'salir' para terminar.\n");
+
+#ifdef _WIN32
+        HANDLE hIn = GetStdHandle(STD_INPUT_HANDLE);
+        wchar_t wbuf[1024];
+        char    ubuf[4096];
+        SetConsoleOutputCP(65001);
+        while (1) {
+            DWORD nread = 0;
+            if (!ReadConsoleW(hIn, wbuf, 1023, &nread, NULL) || nread == 0)
+                break;
+            wbuf[nread] = L'\0';
+
+            /* Convertir UTF-16 a UTF-8 */
+            int ulen = WideCharToMultiByte(CP_UTF8, 0, wbuf, -1,
+                                           ubuf, sizeof(ubuf), NULL, NULL);
+            if (ulen <= 0) continue;
+            /* ulen incluye el \0 final, lo descartamos */
+            ulen--;
+
+            /* Pasarle el buffer a Flex */
+            YY_BUFFER_STATE bs = yy_scan_bytes(ubuf, ulen);
+            yylex();
+            yy_delete_buffer(bs);
+        }
+#else
         yyin = stdin;
+        yylex();
+#endif
     }
 
-    yylex();
     return 0;
 }
