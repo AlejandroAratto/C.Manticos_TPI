@@ -27,10 +27,22 @@ int main(int argc, char *argv[]) {
         return 1;
     }
 
-    // 1. Validar extensión
+    // 1. Validar extensión y preparar nombre de salida
     if (!es_archivo_valido(argv[1])) {
         printf("Error: El archivo debe tener la extension '.smart'.\n");
         return 1;
+    }
+
+    // Clonamos el nombre del archivo de entrada para generar el de salida
+    char nombre_salida[256];
+    strncpy(nombre_salida, argv[1], sizeof(nombre_salida) - 1);
+    
+    // Buscamos el punto de la extensión y lo reemplazamos por .html
+    char *ext = strrchr(nombre_salida, '.');
+    if (ext != NULL) {
+        strcpy(ext, ".html");
+    } else {
+        strcat(nombre_salida, ".html");
     }
 
     // 2. Abrir el archivo de entrada (.smart)
@@ -40,8 +52,8 @@ int main(int argc, char *argv[]) {
         return 1;
     }
 
-    // 3. Abrir el archivo HTML de salida
-    f_html = fopen("resultado.html", "w");
+    // 3. Abrir el archivo HTML dinámico de salida
+    f_html = fopen(nombre_salida, "w");
     if (!f_html) {
         perror("Error al crear el archivo HTML de salida");
         fclose(yyin);
@@ -49,6 +61,7 @@ int main(int argc, char *argv[]) {
     }
 
     printf("--- Analizando archivo: %s ---\n", argv[1]);
+    printf("Archivo de salida configurado: %s\n", nombre_salida);
 
     // 4. Escribir el encabezado estructural del documento HTML
     fprintf(f_html, "<!DOCTYPE html>\n<html lang=\"es\">\n<head>\n");

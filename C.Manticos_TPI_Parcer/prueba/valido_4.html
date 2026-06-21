@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Smart Home - Panel de Control</title>
+  <style>
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f0f2f5; padding: 30px; color: #333; }
+    h1 { color: #1a73e8; border-bottom: 2px solid #1a73e8; padding-bottom: 10px; }
+    .bloque-evento { background: white; border-radius: 8px; border-left: 6px solid #1a73e8; padding: 20px; margin-bottom: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+    .bloque-every { background: white; border-radius: 8px; border-left: 6px solid #f4b400; padding: 20px; margin-bottom: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+    .condicion { font-weight: bold; color: #5f6368; margin-bottom: 15px; font-size: 1.1em; }
+    ul { list-style-type: none; padding-left: 0; }
+    li { background: #f8f9fa; padding: 10px 15px; margin: 5px 0; border-radius: 4px; border: 1px solid #dadce0; }
+    .accion-foco { border-left: 4px solid #4285f4; }
+    .accion-aire { border-left: 4px solid #0f9d58; }
+    .accion-altavoz { border-left: 4px solid #ab47bc; }
+  </style>
+</head>
+<body>
+  <h1>Panel de Control Smart Home</h1>
+<div class='bloque-evento' style='margin-bottom: 30px;'>
+  <h3 style='color: #1a73e8;'>⚡ Evento Condicional (WHEN)</h3>
+  <div class='condicion'>Si se cumple la condicion:</div>
+<div style='border: 1px solid green; padding: 20px; margin-bottom: 10px;'>
+  <label><b>sensor_luz</b></label> valor actual frente a: <span>250lux</span>
+</div>
+  <div style='margin-top: 15px;'>
+    <h4 style='color: #333;'>Acciones a ejecutar (DO):</h4>
+    <div class='acciones-lista' style='padding-left: 20px;'>
+<div style='border: 1px solid gray; padding: 20px; margin-bottom: 10px;'>
+  <label><b>foco_entrada</b></label>
+  <ul>
+    <li>estado = ON</li>
+  </ul>
+</div>
+<div style='border: 1px solid gray; padding: 20px; margin-bottom: 10px;'>
+  <label><b>foco_entrada</b></label>
+  <ul>
+    <li>brillo = 80%</li>
+  </ul>
+</div>
+<div style='border: 1px solid gray; padding: 20px; margin-bottom: 10px;'>
+  <label><b>foco_patio</b></label>
+  <ul>
+    <li>estado = ON</li>
+  </ul>
+</div>
+<div style='border: 1px solid gray; padding: 20px; margin-bottom: 10px;'>
+  <label><b>foco_patio</b></label>
+  <ul>
+    <li>color = azul</li>
+  </ul>
+</div>
+    </div>
+  </div>
+</div>
+<div class='bloque-evento' style='margin-bottom: 30px;'>
+  <h3 style='color: #1a73e8;'>⚡ Evento Condicional (WHEN)</h3>
+  <div class='condicion'>Si se cumple la condicion:</div>
+<div style='border: 1px solid green; padding: 20px; margin-bottom: 10px;'>
+  <label><b>sensor_movimiento</b></label> valor actual frente a: <span>TRUE</span>
+</div>
+  <div style='margin-top: 15px;'>
+    <h4 style='color: #333;'>Acciones a ejecutar (DO):</h4>
+    <div class='acciones-lista' style='padding-left: 20px;'>
+<div class='bloque-if' style='background: #e9ecef; padding: 15px; margin-top: 10px; border-left: 4px solid #17a2b8;'>
+  <h4 style='color: #17a2b8; margin-top: 0;'>❓ Sub-Condición (IF)</h4>
+<div style='border: 1px solid green; padding: 20px; margin-bottom: 10px;'>
+  <label><b>sensor_temp_int</b></label> valor actual frente a: <span>26°C</span>
+</div>
+  <div style='margin-top: 10px;'><strong>THEN (Ejecutar):</strong></div>
+  <div class='bloque-then' style='padding-left: 15px; border-left: 2px solid #ccc; margin-left: 10px;'>
+<div style='border: 1px solid gray; padding: 20px; margin-bottom: 10px;'>
+  <label><b>aire_acondicionado</b></label>
+  <ul>
+    <li>estado = ON</li>
+  </ul>
+</div>
+<div style='border: 1px solid gray; padding: 20px; margin-bottom: 10px;'>
+  <label><b>aire_acondicionado</b></label>
+  <ul>
+    <li>modo = FRIO</li>
+  </ul>
+</div>
+<div style='border: 1px solid gray; padding: 20px; margin-bottom: 10px;'>
+  <label><b>aire_acondicionado</b></label>
+  <ul>
+    <li>temp_objetivo = 22°C</li>
+  </ul>
+</div>
+  </div>
+  <div style='margin-top: 10px;'><strong>ELSE (Sino):</strong></div>
+  <div class='bloque-else' style='padding-left: 15px; border-left: 2px solid #ccc; margin-left: 10px;'>
+<div style='border: 1px solid gray; padding: 20px; margin-bottom: 10px;'>
+  <label><b>aire_acondicionado</b></label>
+  <ul>
+    <li>estado = OFF</li>
+  </ul>
+</div>
+  </div>
+</div>
+    </div>
+  </div>
+</div>
+<div class='bloque-every' style='margin-bottom: 30px;'>
+  <h3 style='color: #f4b400;'>⏱️ Evento Iterativo (EVERY)</h3>
+  <div class='condicion'>Repetir cada: <strong>30m</strong></div>
+  <div style='margin-top: 15px;'>
+    <h4 style='color: #333;'>Acciones a ejecutar (DO):</h4>
+    <div class='acciones-lista' style='padding-left: 20px;'>
+<div class='bloque-if' style='background: #e9ecef; padding: 15px; margin-top: 10px; border-left: 4px solid #17a2b8;'>
+  <h4 style='color: #17a2b8; margin-top: 0;'>❓ Sub-Condición (IF)</h4>
+<div style='border: 1px solid green; padding: 20px; margin-bottom: 10px;'>
+  <label><b>reloj</b></label> (hora) valor actual frente a: <span>22:00</span>
+</div>
+<div style='border: 1px solid green; padding: 20px; margin-bottom: 10px;'>
+  <label><b>alarma</b></label> (estado) valor actual frente a: <span>OFF</span>
+</div>
+  <div style='margin-top: 10px;'><strong>THEN (Ejecutar):</strong></div>
+  <div class='bloque-then' style='padding-left: 15px; border-left: 2px solid #ccc; margin-left: 10px;'>
+<div style='border: 1px solid gray; padding: 20px; margin-bottom: 10px;'>
+  <label><b>persiana_sala</b></label>
+  <ul>
+    <li>posicion = 0%</li>
+  </ul>
+</div>
+<div style='border: 1px solid gray; padding: 20px; margin-bottom: 10px;'>
+  <label><b>cerradura_principal</b></label>
+  <ul>
+    <li>estado = ON</li>
+  </ul>
+</div>
+<div style='border: 1px solid gray; padding: 20px; margin-bottom: 10px;'>
+  <label><b>altavoz_comedor</b></label>
+  <ul>
+    <li>volumen = 0%</li>
+  </ul>
+</div>
+<div style='border: 1px solid gray; padding: 20px; margin-bottom: 10px;'>
+  <label><b>altavoz_comedor</b></label>
+  <ul>
+    <li>mensaje = "Son las 22hs, hora de dormir"</li>
+  </ul>
+</div>
+<div style='border: 1px solid gray; padding: 20px; margin-bottom: 10px;'>
+  <label><b>altavoz_comedor</b></label>
+  <ul>
+    <li>email = <a href='mailto:felipe@smart-home.com.ar'>Contactar a felipe@smart-home.com.ar</a></li>
+  </ul>
+</div>
+  </div>
+</div>
+    </div>
+  </div>
+</div>
+<div class='bloque-if' style='background: #e9ecef; padding: 15px; margin-top: 10px; border-left: 4px solid #17a2b8;'>
+  <h4 style='color: #17a2b8; margin-top: 0;'>❓ Sub-Condición (IF)</h4>
+<div style='border: 1px solid green; padding: 20px; margin-bottom: 10px;'>
+  <label><b>sensor_humo</b></label> valor actual frente a: <span>TRUE</span>
+</div>
+<div style='border: 1px solid green; padding: 20px; margin-bottom: 10px;'>
+  <label><b>aire_acondicionado</b></label> (estado) valor actual frente a: <span>OFF</span>
+</div>
+  <div style='margin-top: 10px;'><strong>THEN (Ejecutar):</strong></div>
+  <div class='bloque-then' style='padding-left: 15px; border-left: 2px solid #ccc; margin-left: 10px;'>
+<div style='border: 1px solid gray; padding: 20px; margin-bottom: 10px;'>
+  <label><b>aire_acondicionado</b></label>
+  <ul>
+    <li>estado = ON</li>
+  </ul>
+</div>
+<div style='border: 1px solid gray; padding: 20px; margin-bottom: 10px;'>
+  <label><b>aire_acondicionado</b></label>
+  <ul>
+    <li>modo = FRIO</li>
+  </ul>
+</div>
+<div style='border: 1px solid gray; padding: 20px; margin-bottom: 10px;'>
+  <label><b>aire_acondicionado</b></label>
+  <ul>
+    <li>temp_objetivo = 22°C</li>
+  </ul>
+</div>
+<div style='border: 1px solid gray; padding: 20px; margin-bottom: 10px;'>
+  <label><b>cerradura_principal</b></label>
+  <ul>
+    <li>estado = OFF</li>
+  </ul>
+</div>
+<div style='border: 1px solid gray; padding: 20px; margin-bottom: 10px;'>
+  <label><b>persiana_comedor</b></label>
+  <ul>
+    <li>posicion = 100%</li>
+  </ul>
+</div>
+<div style='border: 1px solid gray; padding: 20px; margin-bottom: 10px;'>
+  <label><b>altavoz_comedor</b></label>
+  <ul>
+    <li>mensaje = "PELIGRO. HUMO DETECTADO"</li>
+  </ul>
+</div>
+<div style='border: 1px solid gray; padding: 20px; margin-bottom: 10px;'>
+  <label><b>altavoz_comedor</b></label>
+  <ul>
+    <li>email = <a href='mailto:bomberos@smart-home.com.ar'>Contactar a bomberos@smart-home.com.ar</a></li>
+  </ul>
+</div>
+  </div>
+</div>
+</body>
+</html>

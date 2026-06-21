@@ -169,30 +169,39 @@ enum yysymbol_kind_t
   YYSYMBOL_lista_sentencias = 58,          /* lista_sentencias  */
   YYSYMBOL_sentencia = 59,                 /* sentencia  */
   YYSYMBOL_when = 60,                      /* when  */
-  YYSYMBOL_every = 61,                     /* every  */
-  YYSYMBOL_if_sentencia = 62,              /* if_sentencia  */
-  YYSYMBOL_asignacion = 63,                /* asignacion  */
-  YYSYMBOL_asignacion_foco = 64,           /* asignacion_foco  */
-  YYSYMBOL_asignacion_aire = 65,           /* asignacion_aire  */
-  YYSYMBOL_asignacion_persiana = 66,       /* asignacion_persiana  */
-  YYSYMBOL_asignacion_altavoz = 67,        /* asignacion_altavoz  */
-  YYSYMBOL_asignacion_alarma = 68,         /* asignacion_alarma  */
-  YYSYMBOL_asignacion_cerradura = 69,      /* asignacion_cerradura  */
-  YYSYMBOL_bloque = 70,                    /* bloque  */
-  YYSYMBOL_condicion = 71,                 /* condicion  */
-  YYSYMBOL_expresion_or = 72,              /* expresion_or  */
-  YYSYMBOL_expresion_and = 73,             /* expresion_and  */
-  YYSYMBOL_expresion_not = 74,             /* expresion_not  */
-  YYSYMBOL_primaria_condicion = 75,        /* primaria_condicion  */
-  YYSYMBOL_comparacion = 76,               /* comparacion  */
-  YYSYMBOL_comparacion_temp = 77,          /* comparacion_temp  */
-  YYSYMBOL_comparacion_hum = 78,           /* comparacion_hum  */
-  YYSYMBOL_comparacion_luz = 79,           /* comparacion_luz  */
-  YYSYMBOL_comparacion_mov = 80,           /* comparacion_mov  */
-  YYSYMBOL_comparacion_humo = 81,          /* comparacion_humo  */
-  YYSYMBOL_comparacion_reloj = 82,         /* comparacion_reloj  */
-  YYSYMBOL_comparacion_actuador = 83,      /* comparacion_actuador  */
-  YYSYMBOL_operador_comp = 84              /* operador_comp  */
+  YYSYMBOL_61_1 = 61,                      /* $@1  */
+  YYSYMBOL_62_2 = 62,                      /* $@2  */
+  YYSYMBOL_every = 63,                     /* every  */
+  YYSYMBOL_64_3 = 64,                      /* $@3  */
+  YYSYMBOL_65_4 = 65,                      /* $@4  */
+  YYSYMBOL_if_sentencia = 66,              /* if_sentencia  */
+  YYSYMBOL_67_5 = 67,                      /* $@5  */
+  YYSYMBOL_if_inicio = 68,                 /* if_inicio  */
+  YYSYMBOL_69_6 = 69,                      /* $@6  */
+  YYSYMBOL_then_parte = 70,                /* then_parte  */
+  YYSYMBOL_71_7 = 71,                      /* $@7  */
+  YYSYMBOL_asignacion = 72,                /* asignacion  */
+  YYSYMBOL_asignacion_foco = 73,           /* asignacion_foco  */
+  YYSYMBOL_asignacion_aire = 74,           /* asignacion_aire  */
+  YYSYMBOL_asignacion_persiana = 75,       /* asignacion_persiana  */
+  YYSYMBOL_asignacion_altavoz = 76,        /* asignacion_altavoz  */
+  YYSYMBOL_asignacion_alarma = 77,         /* asignacion_alarma  */
+  YYSYMBOL_asignacion_cerradura = 78,      /* asignacion_cerradura  */
+  YYSYMBOL_bloque = 79,                    /* bloque  */
+  YYSYMBOL_condicion = 80,                 /* condicion  */
+  YYSYMBOL_expresion_or = 81,              /* expresion_or  */
+  YYSYMBOL_expresion_and = 82,             /* expresion_and  */
+  YYSYMBOL_expresion_not = 83,             /* expresion_not  */
+  YYSYMBOL_primaria_condicion = 84,        /* primaria_condicion  */
+  YYSYMBOL_comparacion = 85,               /* comparacion  */
+  YYSYMBOL_comparacion_temp = 86,          /* comparacion_temp  */
+  YYSYMBOL_comparacion_hum = 87,           /* comparacion_hum  */
+  YYSYMBOL_comparacion_luz = 88,           /* comparacion_luz  */
+  YYSYMBOL_comparacion_mov = 89,           /* comparacion_mov  */
+  YYSYMBOL_comparacion_humo = 90,          /* comparacion_humo  */
+  YYSYMBOL_comparacion_reloj = 91,         /* comparacion_reloj  */
+  YYSYMBOL_comparacion_actuador = 92,      /* comparacion_actuador  */
+  YYSYMBOL_operador_comp = 93              /* operador_comp  */
 };
 typedef enum yysymbol_kind_t yysymbol_kind_t;
 
@@ -518,18 +527,18 @@ union yyalloc
 #endif /* !YYCOPY_NEEDED */
 
 /* YYFINAL -- State number of the termination state.  */
-#define YYFINAL  59
+#define YYFINAL  34
 /* YYLAST -- Last index in YYTABLE.  */
-#define YYLAST   192
+#define YYLAST   206
 
 /* YYNTOKENS -- Number of terminals.  */
 #define YYNTOKENS  56
 /* YYNNTS -- Number of nonterminals.  */
-#define YYNNTS  29
+#define YYNNTS  38
 /* YYNRULES -- Number of rules.  */
-#define YYNRULES  77
+#define YYNRULES  86
 /* YYNSTATES -- Number of states.  */
-#define YYNSTATES  196
+#define YYNSTATES  205
 
 /* YYMAXUTOK -- Last valid token kind.  */
 #define YYMAXUTOK   310
@@ -582,16 +591,17 @@ static const yytype_int8 yytranslate[] =
 
 #if YYDEBUG
 /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
-static const yytype_uint8 yyrline[] =
+static const yytype_int16 yyrline[] =
 {
        0,    38,    38,    42,    43,    44,    48,    55,    56,    57,
-      58,    62,    66,    70,    71,    75,    76,    77,    78,    79,
-      80,    83,    84,    85,    88,    89,    90,    91,    94,    95,
-      98,    99,   100,   101,   102,   105,   106,   109,   113,   114,
-     118,   120,   121,   124,   125,   128,   129,   133,   134,   139,
-     140,   141,   142,   143,   144,   145,   148,   150,   152,   154,
-     156,   158,   159,   162,   163,   164,   165,   166,   167,   168,
-     169,   170,   171,   172,   173,   174,   178,   179
+      58,    63,    68,    63,    82,    86,    82,   103,   107,   107,
+     120,   120,   128,   128,   136,   137,   138,   139,   140,   141,
+     145,   152,   159,   169,   176,   183,   190,   200,   207,   217,
+     224,   231,   238,   245,   255,   262,   272,   282,   283,   287,
+     289,   290,   293,   294,   297,   298,   302,   303,   307,   308,
+     309,   310,   311,   312,   313,   317,   326,   335,   344,   353,
+     362,   368,   378,   384,   390,   396,   402,   408,   414,   420,
+     426,   432,   438,   444,   450,   459,   460
 };
 #endif
 
@@ -619,7 +629,8 @@ static const char *const yytname[] =
   "ASIGNACION", "BOOLEANO", "PORCENTAJE", "TEMPERATURA", "ILUMINANCIA",
   "TIEMPO", "VALOR_HORA", "VALOR_FECHA", "MODO_AIRE", "VALOR_COLOR",
   "EMAIL", "TEXTO", "TK_AND", "TK_OR", "TK_NOT", "$accept", "programa",
-  "lista_sentencias", "sentencia", "when", "every", "if_sentencia",
+  "lista_sentencias", "sentencia", "when", "$@1", "$@2", "every", "$@3",
+  "$@4", "if_sentencia", "$@5", "if_inicio", "$@6", "then_parte", "$@7",
   "asignacion", "asignacion_foco", "asignacion_aire",
   "asignacion_persiana", "asignacion_altavoz", "asignacion_alarma",
   "asignacion_cerradura", "bloque", "condicion", "expresion_or",
@@ -636,7 +647,7 @@ yysymbol_name (yysymbol_kind_t yysymbol)
 }
 #endif
 
-#define YYPACT_NINF (-96)
+#define YYPACT_NINF (-110)
 
 #define yypact_value_is_default(Yyn) \
   ((Yyn) == YYPACT_NINF)
@@ -650,26 +661,27 @@ yysymbol_name (yysymbol_kind_t yysymbol)
    STATE-NUM.  */
 static const yytype_int16 yypact[] =
 {
-      37,   -96,    19,    34,    41,    42,    54,    56,     1,     1,
-      29,    95,    16,   -96,   -96,   -96,   -96,   -96,   -96,   -96,
-     -96,   -96,   -96,   -96,    46,    51,    45,    74,    52,    -2,
-     -21,   -21,   -21,    61,    63,    66,    67,    68,    69,    70,
-      71,    72,   -96,     1,    84,   -96,    57,    59,   -96,   -96,
-     -96,   -96,   -96,   -96,   -96,   -96,   -96,    96,    97,   -96,
-     -96,   -96,    73,    76,    77,    78,    79,    80,    81,    82,
-      83,    85,    86,    87,    88,    89,    90,    91,    92,   -96,
-     -96,    93,    98,    94,   100,   101,     8,    65,    14,   105,
-     103,    24,    -1,   -96,    50,     1,     1,    50,    50,   102,
-     104,    99,   106,   107,   108,   109,   112,   114,   113,   115,
-     117,   110,    64,   116,   118,   119,   -96,   -96,   -96,   -96,
-     -96,   -21,   -21,   111,   -21,   124,   125,   126,   -21,   -21,
-     -21,   127,   -21,   129,   130,   131,    50,   120,   -96,   -96,
-       4,   151,   -96,   -96,   -96,   -96,   -96,   -96,   -96,   -96,
-     -96,   -96,   -96,   -96,   -96,   -96,   -96,   -96,   -96,   128,
-     132,   134,   135,   122,   137,   133,   139,   140,   138,   143,
-     144,   146,   147,   148,   -96,   -96,    50,   -96,   -96,   -96,
-     -96,   -96,   -96,   -96,   -96,   -96,   -96,   -96,   -96,   -96,
-     -96,   -96,   -96,   -96,   153,   -96
+      35,  -110,   -13,    19,    29,    30,    32,    38,  -110,  -110,
+    -110,    80,    18,  -110,  -110,  -110,  -110,    77,  -110,  -110,
+    -110,  -110,  -110,  -110,  -110,    64,    52,    -6,    74,    51,
+       0,    -1,    -1,    56,  -110,  -110,  -110,  -110,    20,    57,
+      63,    65,    66,    68,    69,    70,    71,    72,    73,    75,
+      76,    78,    79,    81,    82,    83,   -19,   -19,   -19,    58,
+      86,    88,    89,    90,    91,    92,    93,    94,  -110,    -1,
+    -110,  -110,    54,    62,  -110,  -110,  -110,  -110,  -110,  -110,
+    -110,  -110,  -110,  -110,  -110,    50,  -110,  -110,    95,    96,
+      55,    98,    84,    97,    99,   100,   101,   103,   104,   106,
+     102,    85,    87,   107,   108,  -110,  -110,   109,   112,   111,
+     110,   115,     6,    67,    47,   105,   113,    22,     2,  -110,
+     127,    -1,    -1,   132,    50,  -110,    50,  -110,  -110,  -110,
+    -110,  -110,  -110,  -110,  -110,  -110,  -110,  -110,  -110,  -110,
+    -110,  -110,  -110,  -110,  -110,  -110,  -110,  -110,  -110,   -19,
+     -19,   119,   -19,   120,   121,   122,   -19,   -19,   -19,   123,
+     -19,   124,   125,   126,    50,  -110,  -110,    50,  -110,   146,
+     128,   129,   130,   131,   117,   134,   133,   135,   136,   138,
+     141,   142,   144,   145,   147,   148,   149,  -110,  -110,  -110,
+    -110,  -110,  -110,  -110,  -110,  -110,  -110,  -110,  -110,  -110,
+    -110,  -110,  -110,  -110,  -110
 };
 
 /* YYDEFACT[STATE-NUM] -- Default reduction number in state STATE-NUM.
@@ -677,42 +689,45 @@ static const yytype_int16 yypact[] =
    means the default is an error.  */
 static const yytype_int8 yydefact[] =
 {
-       0,     5,     0,     0,     0,     0,     0,     0,     0,     0,
-       0,     0,     0,     3,     7,     8,     9,    10,    15,    16,
-      17,    19,    20,    18,     0,     0,     0,     0,     0,     0,
+       0,     5,     0,     0,     0,     0,     0,     0,    11,    20,
+      14,     0,     0,     3,     7,     8,     9,     0,    10,    24,
+      25,    26,    28,    29,    27,     0,     0,     0,     0,     0,
+       0,     0,     0,     0,     1,     6,     4,    22,     0,     0,
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
-       0,     0,    48,     0,     0,    40,    42,    44,    46,    47,
-      49,    50,    51,    52,    53,    54,    55,     0,     0,     1,
-       6,     4,     0,     0,     0,     0,     0,     0,     0,     0,
-       0,     0,     0,     0,     0,     0,     0,     0,     0,    76,
-      77,     0,     0,     0,     0,     0,     0,     0,     0,     0,
-       0,     0,     0,    45,     0,     0,     0,     0,     0,     0,
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
-       0,     0,     0,     0,     0,     0,    56,    57,    58,    59,
-      60,     0,     0,     0,     0,     0,     0,     0,     0,     0,
-       0,     0,     0,     0,     0,     0,    39,     0,    41,    43,
-       0,     0,    22,    23,    21,    26,    27,    24,    25,    29,
-      28,    37,    30,    31,    32,    33,    34,    35,    36,     0,
+       0,     0,     0,     0,     0,     0,     0,     0,    57,     0,
+      12,    49,    51,    53,    55,    56,    58,    59,    60,    61,
+      62,    63,    64,    21,    15,     0,    18,    17,     0,     0,
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
-       0,     0,     0,     0,    38,    11,     0,    14,    12,    61,
-      62,    63,    64,    65,    66,    67,    68,    69,    70,    71,
-      72,    73,    74,    75,     0,    13
+       0,     0,     0,     0,     0,    85,    86,     0,     0,     0,
+       0,     0,     0,     0,     0,     0,     0,     0,     0,    54,
+       0,     0,     0,     0,    48,    23,     0,    31,    32,    30,
+      35,    36,    33,    34,    38,    37,    46,    39,    40,    41,
+      42,    43,    44,    45,    65,    66,    67,    68,    69,     0,
+       0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+       0,     0,     0,     0,     0,    50,    52,     0,    47,     0,
+       0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+       0,     0,     0,     0,     0,     0,     0,    19,    70,    71,
+      72,    73,    74,    75,    76,    77,    78,    79,    80,    81,
+      82,    83,    84,    13,    16
 };
 
 /* YYPGOTO[NTERM-NUM].  */
 static const yytype_int16 yypgoto[] =
 {
-     -96,   -96,   -96,    23,   -96,   -96,   -96,   -96,   -96,   -96,
-     -96,   -96,   -96,   -96,   -95,   136,    40,    55,   149,   -96,
-     -96,   -96,   -96,   -96,   -96,   -96,   -96,   -96,   -31
+    -110,  -110,  -110,    14,  -110,  -110,  -110,  -110,  -110,  -110,
+    -110,  -110,  -110,  -110,  -110,  -110,  -110,  -110,  -110,  -110,
+    -110,  -110,  -110,  -109,   139,    -3,    48,   137,  -110,  -110,
+    -110,  -110,  -110,  -110,  -110,  -110,  -110,   -57
 };
 
 /* YYDEFGOTO[NTERM-NUM].  */
-static const yytype_uint8 yydefgoto[] =
+static const yytype_int8 yydefgoto[] =
 {
-       0,    11,    12,   136,    14,    15,    16,    17,    18,    19,
-      20,    21,    22,    23,   137,    44,    45,    46,    47,    48,
-      49,    50,    51,    52,    53,    54,    55,    56,    81
+       0,    11,    12,   124,    14,    31,   120,    15,    33,   123,
+      16,   126,    17,    32,    38,    85,    18,    19,    20,    21,
+      22,    23,    24,   125,    70,    71,    72,    73,    74,    75,
+      76,    77,    78,    79,    80,    81,    82,   107
 };
 
 /* YYTABLE[YYPACT[STATE-NUM]] -- What to do in state STATE-NUM.  If
@@ -720,50 +735,52 @@ static const yytype_uint8 yydefgoto[] =
    number is the opposite.  If YYTABLE_NINF, syntax error.  */
 static const yytype_int16 yytable[] =
 {
-      82,    83,   140,   141,    30,    31,    32,    33,    34,    35,
-      36,    37,    38,    39,    40,    41,    -2,    60,    79,    80,
-      77,   134,   176,    13,   177,     2,     3,     4,     5,     6,
-       7,     8,     9,    78,   135,    61,   126,    10,     1,   127,
-     128,   174,   129,    42,   121,   122,     2,     3,     4,     5,
-       6,     7,     8,     9,   132,   133,    43,    24,    10,     2,
-       3,     4,     5,     6,     7,     8,     9,    69,    62,    63,
-      64,    10,    25,    65,    70,    58,    66,    67,    68,    26,
-      27,   194,    72,    73,    74,    75,    76,   123,   124,   125,
-     159,   160,    28,   162,    29,    59,    71,   166,   167,   168,
-      84,   170,    85,    94,    86,    87,    88,    89,    90,    91,
-      92,    95,    96,    97,    99,   155,    98,   100,   101,   102,
-     103,   104,   105,   106,   107,   131,   108,   109,   110,   111,
-     112,   113,   114,   115,   130,   138,     0,   116,     0,   118,
-     175,   117,   119,   120,   142,    57,     0,   143,   145,   144,
-     161,   139,   147,   148,   149,   151,   146,   150,   152,   153,
-     157,   158,   154,   163,   164,   165,   169,   156,   171,   172,
-     173,   178,   183,   195,     0,   179,   181,     0,   182,   184,
-     180,   188,   185,   186,   187,   189,     0,   190,   191,   192,
-     193,     0,    93
+     108,   109,    56,    57,    58,    59,    60,    61,    62,    63,
+      64,    65,    66,    67,    13,   168,    46,   169,    -2,    35,
+     105,   106,    54,    47,   162,    25,    36,     2,     3,     4,
+       5,     6,     7,     8,     9,    55,     1,   163,    86,    10,
+      87,    68,   149,   150,     2,     3,     4,     5,     6,     7,
+       8,     9,   160,   161,    69,   185,    10,    26,   186,     2,
+       3,     4,     5,     6,     7,     8,     9,    27,    28,   154,
+      29,    10,   155,   156,    42,   157,    30,    43,    44,    45,
+      34,    49,    50,    51,    52,    53,    39,    40,    41,   151,
+     152,   153,   170,   171,    37,   173,    48,   110,    88,   177,
+     178,   179,    84,   181,    89,   129,    90,    91,   121,    92,
+      93,    94,    95,    96,    97,   122,    98,    99,   165,   100,
+     101,     0,   102,   103,   104,   111,   112,   113,   114,   115,
+     116,   117,   118,   131,   158,   159,   140,   127,   141,   128,
+     130,   132,   134,   133,   135,   136,   164,   137,   138,   142,
+     143,   167,   147,   144,   139,   145,   146,   148,   172,   174,
+     175,   176,   180,   182,   183,   184,   187,   192,   203,   204,
+     166,    83,   190,     0,   191,   188,   193,   189,     0,   195,
+     196,   197,   194,   198,     0,   199,   200,   201,     0,   202,
+       0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+       0,     0,     0,     0,     0,     0,   119
 };
 
 static const yytype_int16 yycheck[] =
 {
-      31,    32,    97,    98,     3,     4,     5,     6,     7,     8,
-       9,    10,    11,    12,    13,    14,     0,     1,    39,    40,
-      22,    22,    18,     0,    20,     9,    10,    11,    12,    13,
-      14,    15,    16,    35,    35,    12,    22,    21,     1,    25,
-      26,   136,    28,    42,    36,    37,     9,    10,    11,    12,
-      13,    14,    15,    16,    30,    31,    55,    38,    21,     9,
-      10,    11,    12,    13,    14,    15,    16,    22,    22,    23,
-      24,    21,    38,    22,    29,    46,    25,    26,    27,    38,
-      38,   176,    30,    31,    32,    33,    34,    22,    23,    24,
-     121,   122,    38,   124,    38,     0,    22,   128,   129,   130,
-      39,   132,    39,    19,    38,    38,    38,    38,    38,    38,
-      38,    54,    53,    17,    41,    51,    19,    41,    41,    41,
-      41,    41,    41,    41,    41,    22,    41,    41,    41,    41,
-      41,    41,    41,    41,    29,    95,    -1,    44,    -1,    45,
-      20,    43,    42,    42,    42,     9,    -1,    43,    42,    50,
-      39,    96,    44,    44,    42,    42,    49,    43,    43,    42,
-      42,    42,    52,    39,    39,    39,    39,    51,    39,    39,
-      39,    20,    50,    20,    -1,    47,    42,    -1,    43,    42,
-      48,    43,    49,    44,    44,    42,    -1,    43,    42,    42,
-      42,    -1,    43
+      57,    58,     3,     4,     5,     6,     7,     8,     9,    10,
+      11,    12,    13,    14,     0,   124,    22,   126,     0,     1,
+      39,    40,    22,    29,    22,    38,    12,     9,    10,    11,
+      12,    13,    14,    15,    16,    35,     1,    35,    18,    21,
+      20,    42,    36,    37,     9,    10,    11,    12,    13,    14,
+      15,    16,    30,    31,    55,   164,    21,    38,   167,     9,
+      10,    11,    12,    13,    14,    15,    16,    38,    38,    22,
+      38,    21,    25,    26,    22,    28,    38,    25,    26,    27,
+       0,    30,    31,    32,    33,    34,    22,    23,    24,    22,
+      23,    24,   149,   150,    17,   152,    22,    39,    41,   156,
+     157,   158,    46,   160,    41,    50,    41,    41,    54,    41,
+      41,    41,    41,    41,    41,    53,    41,    41,   121,    41,
+      41,    -1,    41,    41,    41,    39,    38,    38,    38,    38,
+      38,    38,    38,    49,    29,    22,    51,    42,    51,    43,
+      42,    44,    42,    44,    43,    42,    19,    43,    42,    42,
+      42,    19,    42,    44,    52,    43,    45,    42,    39,    39,
+      39,    39,    39,    39,    39,    39,    20,    50,    20,    20,
+     122,    32,    42,    -1,    43,    47,    42,    48,    -1,    44,
+      44,    43,    49,    42,    -1,    43,    42,    42,    -1,    42,
+      -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,
+      -1,    -1,    -1,    -1,    -1,    -1,    69
 };
 
 /* YYSTOS[STATE-NUM] -- The symbol kind of the accessing symbol of
@@ -771,51 +788,54 @@ static const yytype_int16 yycheck[] =
 static const yytype_int8 yystos[] =
 {
        0,     1,     9,    10,    11,    12,    13,    14,    15,    16,
-      21,    57,    58,    59,    60,    61,    62,    63,    64,    65,
-      66,    67,    68,    69,    38,    38,    38,    38,    38,    38,
-       3,     4,     5,     6,     7,     8,     9,    10,    11,    12,
-      13,    14,    42,    55,    71,    72,    73,    74,    75,    76,
-      77,    78,    79,    80,    81,    82,    83,    71,    46,     0,
-       1,    59,    22,    23,    24,    22,    25,    26,    27,    22,
-      29,    22,    30,    31,    32,    33,    34,    22,    35,    39,
-      40,    84,    84,    84,    39,    39,    38,    38,    38,    38,
-      38,    38,    38,    74,    19,    54,    53,    17,    19,    41,
+      21,    57,    58,    59,    60,    63,    66,    68,    72,    73,
+      74,    75,    76,    77,    78,    38,    38,    38,    38,    38,
+      38,    61,    69,    64,     0,     1,    59,    17,    70,    22,
+      23,    24,    22,    25,    26,    27,    22,    29,    22,    30,
+      31,    32,    33,    34,    22,    35,     3,     4,     5,     6,
+       7,     8,     9,    10,    11,    12,    13,    14,    42,    55,
+      80,    81,    82,    83,    84,    85,    86,    87,    88,    89,
+      90,    91,    92,    80,    46,    71,    18,    20,    41,    41,
       41,    41,    41,    41,    41,    41,    41,    41,    41,    41,
-      41,    41,    41,    41,    41,    41,    44,    43,    45,    42,
-      42,    36,    37,    22,    23,    24,    22,    25,    26,    28,
-      29,    22,    30,    31,    22,    35,    59,    70,    72,    73,
-      70,    70,    42,    43,    50,    42,    49,    44,    44,    42,
-      43,    42,    43,    42,    52,    51,    51,    42,    42,    84,
-      84,    39,    84,    39,    39,    39,    84,    84,    84,    39,
-      84,    39,    39,    39,    70,    20,    18,    20,    20,    47,
-      48,    42,    43,    50,    42,    49,    44,    44,    43,    42,
-      43,    42,    42,    42,    70,    20
+      41,    41,    41,    41,    41,    39,    40,    93,    93,    93,
+      39,    39,    38,    38,    38,    38,    38,    38,    38,    83,
+      62,    54,    53,    65,    59,    79,    67,    42,    43,    50,
+      42,    49,    44,    44,    42,    43,    42,    43,    42,    52,
+      51,    51,    42,    42,    44,    43,    45,    42,    42,    36,
+      37,    22,    23,    24,    22,    25,    26,    28,    29,    22,
+      30,    31,    22,    35,    19,    81,    82,    19,    79,    79,
+      93,    93,    39,    93,    39,    39,    39,    93,    93,    93,
+      39,    93,    39,    39,    39,    79,    79,    20,    47,    48,
+      42,    43,    50,    42,    49,    44,    44,    43,    42,    43,
+      42,    42,    42,    20,    20
 };
 
 /* YYR1[RULE-NUM] -- Symbol kind of the left-hand side of rule RULE-NUM.  */
 static const yytype_int8 yyr1[] =
 {
        0,    56,    57,    58,    58,    58,    58,    59,    59,    59,
-      59,    60,    61,    62,    62,    63,    63,    63,    63,    63,
-      63,    64,    64,    64,    65,    65,    65,    65,    66,    66,
-      67,    67,    67,    67,    67,    68,    68,    69,    70,    70,
-      71,    72,    72,    73,    73,    74,    74,    75,    75,    76,
-      76,    76,    76,    76,    76,    76,    77,    78,    79,    80,
-      81,    82,    82,    83,    83,    83,    83,    83,    83,    83,
-      83,    83,    83,    83,    83,    83,    84,    84
+      59,    61,    62,    60,    64,    65,    63,    66,    67,    66,
+      69,    68,    71,    70,    72,    72,    72,    72,    72,    72,
+      73,    73,    73,    74,    74,    74,    74,    75,    75,    76,
+      76,    76,    76,    76,    77,    77,    78,    79,    79,    80,
+      81,    81,    82,    82,    83,    83,    84,    84,    85,    85,
+      85,    85,    85,    85,    85,    86,    87,    88,    89,    90,
+      91,    91,    92,    92,    92,    92,    92,    92,    92,    92,
+      92,    92,    92,    92,    92,    93,    93
 };
 
 /* YYR2[RULE-NUM] -- Number of symbols on the right-hand side of rule RULE-NUM.  */
 static const yytype_int8 yyr2[] =
 {
        0,     2,     1,     1,     2,     1,     2,     1,     1,     1,
-       1,     5,     5,     7,     5,     1,     1,     1,     1,     1,
-       1,     5,     5,     5,     5,     5,     5,     5,     5,     5,
-       5,     5,     5,     5,     5,     5,     5,     5,     2,     1,
-       1,     3,     1,     3,     1,     2,     1,     1,     1,     1,
-       1,     1,     1,     1,     1,     1,     3,     3,     3,     3,
-       3,     5,     5,     5,     5,     5,     5,     5,     5,     5,
-       5,     5,     5,     5,     5,     5,     1,     1
+       1,     0,     0,     7,     0,     0,     7,     3,     0,     6,
+       0,     3,     0,     3,     1,     1,     1,     1,     1,     1,
+       5,     5,     5,     5,     5,     5,     5,     5,     5,     5,
+       5,     5,     5,     5,     5,     5,     5,     2,     1,     1,
+       3,     1,     3,     1,     2,     1,     1,     1,     1,     1,
+       1,     1,     1,     1,     1,     3,     3,     3,     3,     3,
+       5,     5,     5,     5,     5,     5,     5,     5,     5,     5,
+       5,     5,     5,     5,     5,     1,     1
 };
 
 
@@ -1554,7 +1574,7 @@ yyreduce:
         yyerrok;     /* Le dice a Bison 'ya me recuperé del error' */
         yyclearin;   /* Limpia el token problemático para no ciclarse */
       }
-#line 1558 "Parser.tab.c"
+#line 1578 "Parser.tab.c"
     break;
 
   case 6: /* lista_sentencias: lista_sentencias error  */
@@ -1563,11 +1583,543 @@ yyreduce:
         yyerrok; 
         yyclearin; 
       }
-#line 1567 "Parser.tab.c"
+#line 1587 "Parser.tab.c"
+    break;
+
+  case 11: /* $@1: %empty  */
+#line 63 "Parser.y"
+            { 
+        fprintf(f_html, "<div class='bloque-evento' style='margin-bottom: 30px;'>\n");
+        fprintf(f_html, "  <h3 style='color: #1a73e8;'>⚡ Evento Condicional (WHEN)</h3>\n");
+        fprintf(f_html, "  <div class='condicion'>Si se cumple la condicion:</div>\n"); 
+    }
+#line 1597 "Parser.tab.c"
+    break;
+
+  case 12: /* $@2: %empty  */
+#line 68 "Parser.y"
+              { 
+        fprintf(f_html, "  <div style='margin-top: 15px;'>\n");
+        fprintf(f_html, "    <h4 style='color: #333;'>Acciones a ejecutar (DO):</h4>\n");
+        fprintf(f_html, "    <div class='acciones-lista' style='padding-left: 20px;'>\n"); 
+    }
+#line 1607 "Parser.tab.c"
+    break;
+
+  case 13: /* when: TK_WHEN $@1 condicion $@2 TK_DO bloque TK_END  */
+#line 73 "Parser.y"
+                        { 
+        fprintf(f_html, "    </div>\n"); /* Cierra .acciones-lista */
+        fprintf(f_html, "  </div>\n");
+        fprintf(f_html, "</div>\n");   /* Cierra .bloque-evento */
+    }
+#line 1617 "Parser.tab.c"
+    break;
+
+  case 14: /* $@3: %empty  */
+#line 82 "Parser.y"
+             {
+        fprintf(f_html, "<div class='bloque-every' style='margin-bottom: 30px;'>\n");
+        fprintf(f_html, "  <h3 style='color: #f4b400;'>⏱️ Evento Iterativo (EVERY)</h3>\n");
+    }
+#line 1626 "Parser.tab.c"
+    break;
+
+  case 15: /* $@4: %empty  */
+#line 86 "Parser.y"
+           {
+        /* ¡AHORA ES $3! (porque el bloque {} de arriba cuenta como $2) */
+        fprintf(f_html, "  <div class='condicion'>Repetir cada: <strong>%s</strong></div>\n", (yyvsp[0].str));
+        fprintf(f_html, "  <div style='margin-top: 15px;'>\n");
+        fprintf(f_html, "    <h4 style='color: #333;'>Acciones a ejecutar (DO):</h4>\n");
+        fprintf(f_html, "    <div class='acciones-lista' style='padding-left: 20px;'>\n");
+        free((yyvsp[0].str));
+    }
+#line 1639 "Parser.tab.c"
+    break;
+
+  case 16: /* every: TK_EVERY $@3 TIEMPO $@4 TK_DO bloque TK_END  */
+#line 94 "Parser.y"
+                        {
+        fprintf(f_html, "    </div>\n");
+        fprintf(f_html, "  </div>\n");
+        fprintf(f_html, "</div>\n");
+    }
+#line 1649 "Parser.tab.c"
+    break;
+
+  case 17: /* if_sentencia: if_inicio then_parte TK_END  */
+#line 103 "Parser.y"
+                                  {
+          fprintf(f_html, "  </div>\n"); /* Cierra bloque THEN */
+          fprintf(f_html, "</div>\n");   /* Cierra bloque IF */
+      }
+#line 1658 "Parser.tab.c"
+    break;
+
+  case 18: /* $@5: %empty  */
+#line 107 "Parser.y"
+                                   {
+          fprintf(f_html, "  </div>\n"); /* Cierra bloque THEN */
+          fprintf(f_html, "  <div style='margin-top: 10px;'><strong>ELSE (Sino):</strong></div>\n");
+          fprintf(f_html, "  <div class='bloque-else' style='padding-left: 15px; border-left: 2px solid #ccc; margin-left: 10px;'>\n");
+      }
+#line 1668 "Parser.tab.c"
+    break;
+
+  case 19: /* if_sentencia: if_inicio then_parte TK_ELSE $@5 bloque TK_END  */
+#line 112 "Parser.y"
+                    {
+          fprintf(f_html, "  </div>\n"); /* Cierra bloque ELSE */
+          fprintf(f_html, "</div>\n");   /* Cierra bloque IF */
+      }
+#line 1677 "Parser.tab.c"
+    break;
+
+  case 20: /* $@6: %empty  */
+#line 120 "Parser.y"
+          {
+        fprintf(f_html, "<div class='bloque-if' style='background: #e9ecef; padding: 15px; margin-top: 10px; border-left: 4px solid #17a2b8;'>\n");
+        fprintf(f_html, "  <h4 style='color: #17a2b8; margin-top: 0;'>❓ Sub-Condición (IF)</h4>\n");
+    }
+#line 1686 "Parser.tab.c"
+    break;
+
+  case 22: /* $@7: %empty  */
+#line 128 "Parser.y"
+            {
+        fprintf(f_html, "  <div style='margin-top: 10px;'><strong>THEN (Ejecutar):</strong></div>\n");
+        fprintf(f_html, "  <div class='bloque-then' style='padding-left: 15px; border-left: 2px solid #ccc; margin-left: 10px;'>\n");
+    }
+#line 1695 "Parser.tab.c"
+    break;
+
+  case 30: /* asignacion_foco: FOCO_ID OP_PUNTO TK_COLOR ASIGNACION VALOR_COLOR  */
+#line 145 "Parser.y"
+                                                     {
+        fprintf(f_html, "<div style='border: 1px solid gray; padding: 20px; margin-bottom: 10px;'>\n");
+        fprintf(f_html, "  <label><b>%s</b></label>\n", (yyvsp[-4].str));
+        fprintf(f_html, "  <ul>\n    <li>color = %s</li>\n  </ul>\n", (yyvsp[0].str));
+        fprintf(f_html, "</div>\n");
+        free((yyvsp[-4].str)); free((yyvsp[0].str));
+    }
+#line 1707 "Parser.tab.c"
+    break;
+
+  case 31: /* asignacion_foco: FOCO_ID OP_PUNTO TK_ESTADO ASIGNACION BOOLEANO  */
+#line 152 "Parser.y"
+                                                   {
+        fprintf(f_html, "<div style='border: 1px solid gray; padding: 20px; margin-bottom: 10px;'>\n");
+        fprintf(f_html, "  <label><b>%s</b></label>\n", (yyvsp[-4].str));
+        fprintf(f_html, "  <ul>\n    <li>estado = %s</li>\n  </ul>\n", (yyvsp[0].str));
+        fprintf(f_html, "</div>\n");
+        free((yyvsp[-4].str)); free((yyvsp[0].str));
+    }
+#line 1719 "Parser.tab.c"
+    break;
+
+  case 32: /* asignacion_foco: FOCO_ID OP_PUNTO TK_BRILLO ASIGNACION PORCENTAJE  */
+#line 159 "Parser.y"
+                                                     {
+        fprintf(f_html, "<div style='border: 1px solid gray; padding: 20px; margin-bottom: 10px;'>\n");
+        fprintf(f_html, "  <label><b>%s</b></label>\n", (yyvsp[-4].str));
+        fprintf(f_html, "  <ul>\n    <li>brillo = %s</li>\n  </ul>\n", (yyvsp[0].str));
+        fprintf(f_html, "</div>\n");
+        free((yyvsp[-4].str)); free((yyvsp[0].str));
+    }
+#line 1731 "Parser.tab.c"
+    break;
+
+  case 33: /* asignacion_aire: AIRE_ID OP_PUNTO TK_TEMP_OBJ ASIGNACION TEMPERATURA  */
+#line 169 "Parser.y"
+                                                        {
+        fprintf(f_html, "<div style='border: 1px solid gray; padding: 20px; margin-bottom: 10px;'>\n");
+        fprintf(f_html, "  <label><b>%s</b></label>\n", (yyvsp[-4].str));
+        fprintf(f_html, "  <ul>\n    <li>temp_obj = %s</li>\n  </ul>\n", (yyvsp[0].str));
+        fprintf(f_html, "</div>\n");
+        free((yyvsp[-4].str)); free((yyvsp[0].str));
+    }
+#line 1743 "Parser.tab.c"
+    break;
+
+  case 34: /* asignacion_aire: AIRE_ID OP_PUNTO TK_TEMP_OBJETIVO ASIGNACION TEMPERATURA  */
+#line 176 "Parser.y"
+                                                             {
+        fprintf(f_html, "<div style='border: 1px solid gray; padding: 20px; margin-bottom: 10px;'>\n");
+        fprintf(f_html, "  <label><b>%s</b></label>\n", (yyvsp[-4].str));
+        fprintf(f_html, "  <ul>\n    <li>temp_objetivo = %s</li>\n  </ul>\n", (yyvsp[0].str));
+        fprintf(f_html, "</div>\n");
+        free((yyvsp[-4].str)); free((yyvsp[0].str));
+    }
+#line 1755 "Parser.tab.c"
+    break;
+
+  case 35: /* asignacion_aire: AIRE_ID OP_PUNTO TK_ESTADO ASIGNACION BOOLEANO  */
+#line 183 "Parser.y"
+                                                   {
+        fprintf(f_html, "<div style='border: 1px solid gray; padding: 20px; margin-bottom: 10px;'>\n");
+        fprintf(f_html, "  <label><b>%s</b></label>\n", (yyvsp[-4].str));
+        fprintf(f_html, "  <ul>\n    <li>estado = %s</li>\n  </ul>\n", (yyvsp[0].str));
+        fprintf(f_html, "</div>\n");
+        free((yyvsp[-4].str)); free((yyvsp[0].str));
+    }
+#line 1767 "Parser.tab.c"
+    break;
+
+  case 36: /* asignacion_aire: AIRE_ID OP_PUNTO TK_MODO ASIGNACION MODO_AIRE  */
+#line 190 "Parser.y"
+                                                  {
+        fprintf(f_html, "<div style='border: 1px solid gray; padding: 20px; margin-bottom: 10px;'>\n");
+        fprintf(f_html, "  <label><b>%s</b></label>\n", (yyvsp[-4].str));
+        fprintf(f_html, "  <ul>\n    <li>modo = %s</li>\n  </ul>\n", (yyvsp[0].str));
+        fprintf(f_html, "</div>\n");
+        free((yyvsp[-4].str)); free((yyvsp[0].str));
+    }
+#line 1779 "Parser.tab.c"
+    break;
+
+  case 37: /* asignacion_persiana: PERSIANA_ID OP_PUNTO TK_POSICION ASIGNACION PORCENTAJE  */
+#line 200 "Parser.y"
+                                                           {
+        fprintf(f_html, "<div style='border: 1px solid gray; padding: 20px; margin-bottom: 10px;'>\n");
+        fprintf(f_html, "  <label><b>%s</b></label>\n", (yyvsp[-4].str));
+        fprintf(f_html, "  <ul>\n    <li>posicion = %s</li>\n  </ul>\n", (yyvsp[0].str));
+        fprintf(f_html, "</div>\n");
+        free((yyvsp[-4].str)); free((yyvsp[0].str));
+    }
+#line 1791 "Parser.tab.c"
+    break;
+
+  case 38: /* asignacion_persiana: PERSIANA_ID OP_PUNTO TK_ESTADO ASIGNACION BOOLEANO  */
+#line 207 "Parser.y"
+                                                       {
+        fprintf(f_html, "<div style='border: 1px solid gray; padding: 20px; margin-bottom: 10px;'>\n");
+        fprintf(f_html, "  <label><b>%s</b></label>\n", (yyvsp[-4].str));
+        fprintf(f_html, "  <ul>\n    <li>estado = %s</li>\n  </ul>\n", (yyvsp[0].str));
+        fprintf(f_html, "</div>\n");
+        free((yyvsp[-4].str)); free((yyvsp[0].str));
+    }
+#line 1803 "Parser.tab.c"
+    break;
+
+  case 39: /* asignacion_altavoz: ALTAVOZ_ID OP_PUNTO TK_VOLUMEN ASIGNACION PORCENTAJE  */
+#line 217 "Parser.y"
+                                                         {
+        fprintf(f_html, "<div style='border: 1px solid gray; padding: 20px; margin-bottom: 10px;'>\n");
+        fprintf(f_html, "  <label><b>%s</b></label>\n", (yyvsp[-4].str));
+        fprintf(f_html, "  <ul>\n    <li>volumen = %s</li>\n  </ul>\n", (yyvsp[0].str));
+        fprintf(f_html, "</div>\n");
+        free((yyvsp[-4].str)); free((yyvsp[0].str));
+    }
+#line 1815 "Parser.tab.c"
+    break;
+
+  case 40: /* asignacion_altavoz: ALTAVOZ_ID OP_PUNTO TK_MUTE ASIGNACION BOOLEANO  */
+#line 224 "Parser.y"
+                                                    {
+        fprintf(f_html, "<div style='border: 1px solid gray; padding: 20px; margin-bottom: 10px;'>\n");
+        fprintf(f_html, "  <label><b>%s</b></label>\n", (yyvsp[-4].str));
+        fprintf(f_html, "  <ul>\n    <li>mute = %s</li>\n  </ul>\n", (yyvsp[0].str));
+        fprintf(f_html, "</div>\n");
+        free((yyvsp[-4].str)); free((yyvsp[0].str));
+    }
+#line 1827 "Parser.tab.c"
+    break;
+
+  case 41: /* asignacion_altavoz: ALTAVOZ_ID OP_PUNTO TK_MENSAJE ASIGNACION TEXTO  */
+#line 231 "Parser.y"
+                                                    {
+        fprintf(f_html, "<div style='border: 1px solid gray; padding: 20px; margin-bottom: 10px;'>\n");
+        fprintf(f_html, "  <label><b>%s</b></label>\n", (yyvsp[-4].str));
+        fprintf(f_html, "  <ul>\n    <li>mensaje = %s</li>\n  </ul>\n", (yyvsp[0].str));
+        fprintf(f_html, "</div>\n");
+        free((yyvsp[-4].str)); free((yyvsp[0].str));
+    }
+#line 1839 "Parser.tab.c"
+    break;
+
+  case 42: /* asignacion_altavoz: ALTAVOZ_ID OP_PUNTO TK_EMAIL_NOTIF ASIGNACION EMAIL  */
+#line 238 "Parser.y"
+                                                        {
+        fprintf(f_html, "<div style='border: 1px solid gray; padding: 20px; margin-bottom: 10px;'>\n");
+        fprintf(f_html, "  <label><b>%s</b></label>\n", (yyvsp[-4].str));
+        fprintf(f_html, "  <ul>\n    <li>email_notif = <a href='mailto:%s'>Contactar a %s</a></li>\n  </ul>\n", (yyvsp[0].str), (yyvsp[0].str));
+        fprintf(f_html, "</div>\n");
+        free((yyvsp[-4].str)); free((yyvsp[0].str));
+    }
+#line 1851 "Parser.tab.c"
+    break;
+
+  case 43: /* asignacion_altavoz: ALTAVOZ_ID OP_PUNTO TK_EMAIL ASIGNACION EMAIL  */
+#line 245 "Parser.y"
+                                                  {
+        fprintf(f_html, "<div style='border: 1px solid gray; padding: 20px; margin-bottom: 10px;'>\n");
+        fprintf(f_html, "  <label><b>%s</b></label>\n", (yyvsp[-4].str));
+        fprintf(f_html, "  <ul>\n    <li>email = <a href='mailto:%s'>Contactar a %s</a></li>\n  </ul>\n", (yyvsp[0].str), (yyvsp[0].str));
+        fprintf(f_html, "</div>\n");
+        free((yyvsp[-4].str)); free((yyvsp[0].str));
+    }
+#line 1863 "Parser.tab.c"
+    break;
+
+  case 44: /* asignacion_alarma: ALARMA_ID OP_PUNTO TK_ESTADO ASIGNACION BOOLEANO  */
+#line 255 "Parser.y"
+                                                     {
+        fprintf(f_html, "<div style='border: 1px solid gray; padding: 20px; margin-bottom: 10px;'>\n");
+        fprintf(f_html, "  <label><b>%s</b></label>\n", (yyvsp[-4].str));
+        fprintf(f_html, "  <ul>\n    <li>estado = %s</li>\n  </ul>\n", (yyvsp[0].str));
+        fprintf(f_html, "</div>\n");
+        free((yyvsp[-4].str)); free((yyvsp[0].str));
+    }
+#line 1875 "Parser.tab.c"
+    break;
+
+  case 45: /* asignacion_alarma: ALARMA_ID OP_PUNTO TK_ACTIVADA ASIGNACION BOOLEANO  */
+#line 262 "Parser.y"
+                                                       {
+        fprintf(f_html, "<div style='border: 1px solid gray; padding: 20px; margin-bottom: 10px;'>\n");
+        fprintf(f_html, "  <label><b>%s</b></label>\n", (yyvsp[-4].str));
+        fprintf(f_html, "  <ul>\n    <li>activada = %s</li>\n  </ul>\n", (yyvsp[0].str));
+        fprintf(f_html, "</div>\n");
+        free((yyvsp[-4].str)); free((yyvsp[0].str));
+    }
+#line 1887 "Parser.tab.c"
+    break;
+
+  case 46: /* asignacion_cerradura: CERRADURA_ID OP_PUNTO TK_ESTADO ASIGNACION BOOLEANO  */
+#line 272 "Parser.y"
+                                                        {
+        fprintf(f_html, "<div style='border: 1px solid gray; padding: 20px; margin-bottom: 10px;'>\n");
+        fprintf(f_html, "  <label><b>%s</b></label>\n", (yyvsp[-4].str));
+        fprintf(f_html, "  <ul>\n    <li>estado = %s</li>\n  </ul>\n", (yyvsp[0].str));
+        fprintf(f_html, "</div>\n");
+        free((yyvsp[-4].str)); free((yyvsp[0].str));
+    }
+#line 1899 "Parser.tab.c"
+    break;
+
+  case 65: /* comparacion_temp: SENSOR_TEMPERATURA_ID operador_comp TEMPERATURA  */
+#line 317 "Parser.y"
+                                                    {
+        fprintf(f_html, "<div style='border: 1px solid green; padding: 20px; margin-bottom: 10px;'>\n");
+        fprintf(f_html, "  <label><b>%s</b></label> valor actual frente a: <span>%s</span>\n", (yyvsp[-2].str), (yyvsp[0].str));
+        fprintf(f_html, "</div>\n");
+        free((yyvsp[-2].str)); free((yyvsp[0].str));
+    }
+#line 1910 "Parser.tab.c"
+    break;
+
+  case 66: /* comparacion_hum: SENSOR_HUMEDAD_ID operador_comp PORCENTAJE  */
+#line 326 "Parser.y"
+                                               {
+        fprintf(f_html, "<div style='border: 1px solid green; padding: 20px; margin-bottom: 10px;'>\n");
+        fprintf(f_html, "  <label><b>%s</b></label> valor actual frente a: <span>%s</span>\n", (yyvsp[-2].str), (yyvsp[0].str));
+        fprintf(f_html, "</div>\n");
+        free((yyvsp[-2].str)); free((yyvsp[0].str));
+    }
+#line 1921 "Parser.tab.c"
+    break;
+
+  case 67: /* comparacion_luz: SENSOR_LUZ_ID operador_comp ILUMINANCIA  */
+#line 335 "Parser.y"
+                                            {
+        fprintf(f_html, "<div style='border: 1px solid green; padding: 20px; margin-bottom: 10px;'>\n");
+        fprintf(f_html, "  <label><b>%s</b></label> valor actual frente a: <span>%s</span>\n", (yyvsp[-2].str), (yyvsp[0].str));
+        fprintf(f_html, "</div>\n");
+        free((yyvsp[-2].str)); free((yyvsp[0].str));
+    }
+#line 1932 "Parser.tab.c"
+    break;
+
+  case 68: /* comparacion_mov: SENSOR_MOVIMIENTO_ID OP_IGUALDAD BOOLEANO  */
+#line 344 "Parser.y"
+                                              {
+        fprintf(f_html, "<div style='border: 1px solid green; padding: 20px; margin-bottom: 10px;'>\n");
+        fprintf(f_html, "  <label><b>%s</b></label> valor actual frente a: <span>%s</span>\n", (yyvsp[-2].str), (yyvsp[0].str));
+        fprintf(f_html, "</div>\n");
+        free((yyvsp[-2].str)); free((yyvsp[0].str));
+    }
+#line 1943 "Parser.tab.c"
+    break;
+
+  case 69: /* comparacion_humo: SENSOR_HUMO_ID OP_IGUALDAD BOOLEANO  */
+#line 353 "Parser.y"
+                                        {
+        fprintf(f_html, "<div style='border: 1px solid green; padding: 20px; margin-bottom: 10px;'>\n");
+        fprintf(f_html, "  <label><b>%s</b></label> valor actual frente a: <span>%s</span>\n", (yyvsp[-2].str), (yyvsp[0].str));
+        fprintf(f_html, "</div>\n");
+        free((yyvsp[-2].str)); free((yyvsp[0].str));
+    }
+#line 1954 "Parser.tab.c"
+    break;
+
+  case 70: /* comparacion_reloj: RELOJ_ID OP_PUNTO TK_HORA operador_comp VALOR_HORA  */
+#line 362 "Parser.y"
+                                                       {
+        fprintf(f_html, "<div style='border: 1px solid green; padding: 20px; margin-bottom: 10px;'>\n");
+        fprintf(f_html, "  <label><b>%s</b></label> (hora) valor actual frente a: <span>%s</span>\n", (yyvsp[-4].str), (yyvsp[0].str));
+        fprintf(f_html, "</div>\n");
+        free((yyvsp[-4].str)); free((yyvsp[0].str));
+    }
+#line 1965 "Parser.tab.c"
+    break;
+
+  case 71: /* comparacion_reloj: RELOJ_ID OP_PUNTO TK_FECHA operador_comp VALOR_FECHA  */
+#line 368 "Parser.y"
+                                                         {
+        fprintf(f_html, "<div style='border: 1px solid green; padding: 20px; margin-bottom: 10px;'>\n");
+        fprintf(f_html, "  <label><b>%s</b></label> (fecha) valor actual frente a: <span>%s</span>\n", (yyvsp[-4].str), (yyvsp[0].str));
+        fprintf(f_html, "</div>\n");
+        free((yyvsp[-4].str)); free((yyvsp[0].str));
+    }
+#line 1976 "Parser.tab.c"
+    break;
+
+  case 72: /* comparacion_actuador: FOCO_ID OP_PUNTO TK_ESTADO OP_IGUALDAD BOOLEANO  */
+#line 378 "Parser.y"
+                                                    {
+        fprintf(f_html, "<div style='border: 1px solid green; padding: 20px; margin-bottom: 10px;'>\n");
+        fprintf(f_html, "  <label><b>%s</b></label> (estado) valor actual frente a: <span>%s</span>\n", (yyvsp[-4].str), (yyvsp[0].str));
+        fprintf(f_html, "</div>\n");
+        free((yyvsp[-4].str)); free((yyvsp[0].str));
+    }
+#line 1987 "Parser.tab.c"
+    break;
+
+  case 73: /* comparacion_actuador: FOCO_ID OP_PUNTO TK_BRILLO operador_comp PORCENTAJE  */
+#line 384 "Parser.y"
+                                                        {
+        fprintf(f_html, "<div style='border: 1px solid green; padding: 20px; margin-bottom: 10px;'>\n");
+        fprintf(f_html, "  <label><b>%s</b></label> (brillo) valor actual frente a: <span>%s</span>\n", (yyvsp[-4].str), (yyvsp[0].str));
+        fprintf(f_html, "</div>\n");
+        free((yyvsp[-4].str)); free((yyvsp[0].str));
+    }
+#line 1998 "Parser.tab.c"
+    break;
+
+  case 74: /* comparacion_actuador: FOCO_ID OP_PUNTO TK_COLOR OP_IGUALDAD VALOR_COLOR  */
+#line 390 "Parser.y"
+                                                      {
+        fprintf(f_html, "<div style='border: 1px solid green; padding: 20px; margin-bottom: 10px;'>\n");
+        fprintf(f_html, "  <label><b>%s</b></label> (color) valor actual frente a: <span>%s</span>\n", (yyvsp[-4].str), (yyvsp[0].str));
+        fprintf(f_html, "</div>\n");
+        free((yyvsp[-4].str)); free((yyvsp[0].str));
+    }
+#line 2009 "Parser.tab.c"
+    break;
+
+  case 75: /* comparacion_actuador: AIRE_ID OP_PUNTO TK_ESTADO OP_IGUALDAD BOOLEANO  */
+#line 396 "Parser.y"
+                                                    {
+        fprintf(f_html, "<div style='border: 1px solid green; padding: 20px; margin-bottom: 10px;'>\n");
+        fprintf(f_html, "  <label><b>%s</b></label> (estado) valor actual frente a: <span>%s</span>\n", (yyvsp[-4].str), (yyvsp[0].str));
+        fprintf(f_html, "</div>\n");
+        free((yyvsp[-4].str)); free((yyvsp[0].str));
+    }
+#line 2020 "Parser.tab.c"
+    break;
+
+  case 76: /* comparacion_actuador: AIRE_ID OP_PUNTO TK_MODO OP_IGUALDAD MODO_AIRE  */
+#line 402 "Parser.y"
+                                                   {
+        fprintf(f_html, "<div style='border: 1px solid green; padding: 20px; margin-bottom: 10px;'>\n");
+        fprintf(f_html, "  <label><b>%s</b></label> (modo) valor actual frente a: <span>%s</span>\n", (yyvsp[-4].str), (yyvsp[0].str));
+        fprintf(f_html, "</div>\n");
+        free((yyvsp[-4].str)); free((yyvsp[0].str));
+    }
+#line 2031 "Parser.tab.c"
+    break;
+
+  case 77: /* comparacion_actuador: AIRE_ID OP_PUNTO TK_TEMP_OBJ operador_comp TEMPERATURA  */
+#line 408 "Parser.y"
+                                                           {
+        fprintf(f_html, "<div style='border: 1px solid green; padding: 20px; margin-bottom: 10px;'>\n");
+        fprintf(f_html, "  <label><b>%s</b></label> (temp_obj) valor actual frente a: <span>%s</span>\n", (yyvsp[-4].str), (yyvsp[0].str));
+        fprintf(f_html, "</div>\n");
+        free((yyvsp[-4].str)); free((yyvsp[0].str));
+    }
+#line 2042 "Parser.tab.c"
+    break;
+
+  case 78: /* comparacion_actuador: AIRE_ID OP_PUNTO TK_TEMP_ACT operador_comp TEMPERATURA  */
+#line 414 "Parser.y"
+                                                           {
+        fprintf(f_html, "<div style='border: 1px solid green; padding: 20px; margin-bottom: 10px;'>\n");
+        fprintf(f_html, "  <label><b>%s</b></label> (temp_act) valor actual frente a: <span>%s</span>\n", (yyvsp[-4].str), (yyvsp[0].str));
+        fprintf(f_html, "</div>\n");
+        free((yyvsp[-4].str)); free((yyvsp[0].str));
+    }
+#line 2053 "Parser.tab.c"
+    break;
+
+  case 79: /* comparacion_actuador: PERSIANA_ID OP_PUNTO TK_POSICION operador_comp PORCENTAJE  */
+#line 420 "Parser.y"
+                                                              {
+        fprintf(f_html, "<div style='border: 1px solid green; padding: 20px; margin-bottom: 10px;'>\n");
+        fprintf(f_html, "  <label><b>%s</b></label> (posicion) valor actual frente a: <span>%s</span>\n", (yyvsp[-4].str), (yyvsp[0].str));
+        fprintf(f_html, "</div>\n");
+        free((yyvsp[-4].str)); free((yyvsp[0].str));
+    }
+#line 2064 "Parser.tab.c"
+    break;
+
+  case 80: /* comparacion_actuador: CERRADURA_ID OP_PUNTO TK_ESTADO OP_IGUALDAD BOOLEANO  */
+#line 426 "Parser.y"
+                                                         {
+        fprintf(f_html, "<div style='border: 1px solid green; padding: 20px; margin-bottom: 10px;'>\n");
+        fprintf(f_html, "  <label><b>%s</b></label> (estado) valor actual frente a: <span>%s</span>\n", (yyvsp[-4].str), (yyvsp[0].str));
+        fprintf(f_html, "</div>\n");
+        free((yyvsp[-4].str)); free((yyvsp[0].str));
+    }
+#line 2075 "Parser.tab.c"
+    break;
+
+  case 81: /* comparacion_actuador: ALTAVOZ_ID OP_PUNTO TK_VOLUMEN operador_comp PORCENTAJE  */
+#line 432 "Parser.y"
+                                                            {
+        fprintf(f_html, "<div style='border: 1px solid green; padding: 20px; margin-bottom: 10px;'>\n");
+        fprintf(f_html, "  <label><b>%s</b></label> (volumen) valor actual frente a: <span>%s</span>\n", (yyvsp[-4].str), (yyvsp[0].str));
+        fprintf(f_html, "</div>\n");
+        free((yyvsp[-4].str)); free((yyvsp[0].str));
+    }
+#line 2086 "Parser.tab.c"
+    break;
+
+  case 82: /* comparacion_actuador: ALTAVOZ_ID OP_PUNTO TK_MUTE OP_IGUALDAD BOOLEANO  */
+#line 438 "Parser.y"
+                                                     {
+        fprintf(f_html, "<div style='border: 1px solid green; padding: 20px; margin-bottom: 10px;'>\n");
+        fprintf(f_html, "  <label><b>%s</b></label> (mute) valor actual frente a: <span>%s</span>\n", (yyvsp[-4].str), (yyvsp[0].str));
+        fprintf(f_html, "</div>\n");
+        free((yyvsp[-4].str)); free((yyvsp[0].str));
+    }
+#line 2097 "Parser.tab.c"
+    break;
+
+  case 83: /* comparacion_actuador: ALARMA_ID OP_PUNTO TK_ESTADO OP_IGUALDAD BOOLEANO  */
+#line 444 "Parser.y"
+                                                      {
+        fprintf(f_html, "<div style='border: 1px solid green; padding: 20px; margin-bottom: 10px;'>\n");
+        fprintf(f_html, "  <label><b>%s</b></label> (estado) valor actual frente a: <span>%s</span>\n", (yyvsp[-4].str), (yyvsp[0].str));
+        fprintf(f_html, "</div>\n");
+        free((yyvsp[-4].str)); free((yyvsp[0].str));
+    }
+#line 2108 "Parser.tab.c"
+    break;
+
+  case 84: /* comparacion_actuador: ALARMA_ID OP_PUNTO TK_ACTIVADA OP_IGUALDAD BOOLEANO  */
+#line 450 "Parser.y"
+                                                        {
+        fprintf(f_html, "<div style='border: 1px solid green; padding: 20px; margin-bottom: 10px;'>\n");
+        fprintf(f_html, "  <label><b>%s</b></label> (activada) valor actual frente a: <span>%s</span>\n", (yyvsp[-4].str), (yyvsp[0].str));
+        fprintf(f_html, "</div>\n");
+        free((yyvsp[-4].str)); free((yyvsp[0].str));
+    }
+#line 2119 "Parser.tab.c"
     break;
 
 
-#line 1571 "Parser.tab.c"
+#line 2123 "Parser.tab.c"
 
       default: break;
     }
@@ -1791,7 +2343,7 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 183 "Parser.y"
+#line 464 "Parser.y"
 
 
 /* --- Implementación de yyerror --- */
