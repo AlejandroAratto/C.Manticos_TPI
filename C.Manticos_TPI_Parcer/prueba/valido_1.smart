@@ -1,0 +1,13 @@
+// Control de clima y luces automatico (Valido)
+WHEN sensor_temp_living > 25°C DO
+    aire_living.estado = ON
+    aire_living.modo = FRIO
+    aire_living.temp_obj = 22°C
+END
+
+EVERY 10m DO
+    IF reloj.hora == 19:30 THEN
+        foco_entrada.estado = ON
+        foco_entrada.color = blanco
+    END
+END

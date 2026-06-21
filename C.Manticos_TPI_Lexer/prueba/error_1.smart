@@ -1,0 +1,8 @@
+// Errores de palabras reservadas y símbolos inválidos (Con Errores)
+WHENN sensor_temp_pieza > 24°C DO  // ERROR: 'WHENN' no es una palabra reservada válida
+    aire_pieza.estado = ON
+END
+
+WHEN sensor_luz_sala < 200lux DO
+    foco_sala.estado = ON $  // ERROR: El símbolo '$' es completamente inválido en el lenguaje
+END

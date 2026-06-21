@@ -1,0 +1,8 @@
+// Múltiples errores de caracteres y literales rotos (Con Errores)
+WHEN sensor_humedad_planta < 30& DO  // ERROR: Carácter '&' no reconocido
+    regador_jardin.estado = ON       // ERROR: 'regador' no es un identificador de actuador válido
+END
+
+IF reloj.hora == 25:00 THEN          // ERROR: '25:00' rompe la expresión regular estricta de HORA (máximo 23:59)
+    foco_pasillo.estado = OFF @      // ERROR: Carácter '@' inválido
+END

@@ -1,0 +1,10 @@
+// Dispositivo inválido y temperatura mal formada (Con Errores)
+WHEN sensor_temp_cocina > °CC DO  // ERROR: Falta el dígito numérico antes del símbolo de grado
+    licuadora_cocina.estado = ON  // ERROR: 'licuadora' no es un prefijo de actuador permitido (foco, aire, etc.)
+END
+
+EVERY 5m DO
+    IF reloj.hora == 12:00 THEN
+        foco_comedor.brillo = 50#  // ERROR: El carácter '#' es inválido para el porcentaje
+    END
+END
