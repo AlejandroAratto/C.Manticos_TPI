@@ -1223,12 +1223,15 @@ char *yytext;
 
 #include "Parser.tab.h"
 
+char linea_actual[1024] = ""; // Buffer para guardar el texto de la línea
 int linea = 1;
-#line 1227 "lex.yy.c"
+// Esta macro concatena el token actual al buffer
+#define YY_USER_ACTION strncat(linea_actual, yytext, sizeof(linea_actual) - strlen(linea_actual) - 1);
+#line 1230 "lex.yy.c"
 /*----- Definiciones Regulares Básicas -----*/
 /*----- Literales y Unidades -----*/
 /*----- Identificadores de Actuadores (Prefijos Obligatorios, sufijos opcionales) -----*/
-#line 1231 "lex.yy.c"
+#line 1234 "lex.yy.c"
 
 #define INITIAL 0
 
@@ -1445,12 +1448,12 @@ YY_DECL
 		}
 
 	{
-#line 47 "Lexer.l"
+#line 50 "Lexer.l"
 
-#line 49 "Lexer.l"
+#line 52 "Lexer.l"
 	/*----- Sección de Reglas ----------------*/
 
-#line 1453 "lex.yy.c"
+#line 1456 "lex.yy.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -1509,302 +1512,302 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 51 "Lexer.l"
+#line 54 "Lexer.l"
 { /* Ignoramos comentarios de una linea */ }
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 52 "Lexer.l"
+#line 55 "Lexer.l"
 { /* Ignoramos espacios en blanco */ }
 	YY_BREAK
 case 3:
 /* rule 3 can match eol */
 YY_RULE_SETUP
-#line 53 "Lexer.l"
-{ linea++; }
+#line 56 "Lexer.l"
+{ linea++; linea_actual[0] = '\0';}
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 54 "Lexer.l"
+#line 57 "Lexer.l"
 { printf("Terminando modo interactivo\n"); exit(0); }
 	YY_BREAK
 /* Palabras Reservadas */
 case 5:
 YY_RULE_SETUP
-#line 57 "Lexer.l"
+#line 60 "Lexer.l"
 { return TK_WHEN; }
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 58 "Lexer.l"
+#line 61 "Lexer.l"
 { return TK_IF; }
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 59 "Lexer.l"
+#line 62 "Lexer.l"
 { return TK_THEN; }
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 60 "Lexer.l"
+#line 63 "Lexer.l"
 { return TK_ELSE; }
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 61 "Lexer.l"
+#line 64 "Lexer.l"
 { return TK_DO; }
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 62 "Lexer.l"
+#line 65 "Lexer.l"
 { return TK_END; }
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 63 "Lexer.l"
+#line 66 "Lexer.l"
 { return TK_EVERY; }
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 64 "Lexer.l"
+#line 67 "Lexer.l"
 { return TK_AND; }
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 65 "Lexer.l"
+#line 68 "Lexer.l"
 { return TK_OR; }
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 66 "Lexer.l"
+#line 69 "Lexer.l"
 { return TK_NOT; }
 	YY_BREAK
 /* Booleanos, Modos y Colores */
 case 15:
 YY_RULE_SETUP
-#line 69 "Lexer.l"
+#line 72 "Lexer.l"
 { return BOOLEANO; }
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 70 "Lexer.l"
+#line 73 "Lexer.l"
 { return MODO_AIRE; }
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 71 "Lexer.l"
+#line 74 "Lexer.l"
 { return VALOR_COLOR; }
 	YY_BREAK
 /* Atributos Dispositivos (Notación de punto) */
 case 18:
 YY_RULE_SETUP
-#line 74 "Lexer.l"
+#line 77 "Lexer.l"
 { return TK_ESTADO; }
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 75 "Lexer.l"
+#line 78 "Lexer.l"
 { return TK_BRILLO; }
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 76 "Lexer.l"
+#line 79 "Lexer.l"
 { return TK_COLOR; }
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 77 "Lexer.l"
+#line 80 "Lexer.l"
 { return TK_MODO; }
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 78 "Lexer.l"
+#line 81 "Lexer.l"
 { return TK_TEMP_OBJ; }
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 79 "Lexer.l"
+#line 82 "Lexer.l"
 { return TK_TEMP_OBJETIVO; }
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 80 "Lexer.l"
+#line 83 "Lexer.l"
 { return TK_TEMP_ACT; }
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 81 "Lexer.l"
+#line 84 "Lexer.l"
 { return TK_POSICION; }
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 82 "Lexer.l"
+#line 85 "Lexer.l"
 { return TK_VOLUMEN; }
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 83 "Lexer.l"
+#line 86 "Lexer.l"
 { return TK_MUTE; }
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 84 "Lexer.l"
+#line 87 "Lexer.l"
 { return TK_MENSAJE; }
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 85 "Lexer.l"
+#line 88 "Lexer.l"
 { return TK_EMAIL_NOTIF; }
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 86 "Lexer.l"
+#line 89 "Lexer.l"
 { return TK_EMAIL; }
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 87 "Lexer.l"
+#line 90 "Lexer.l"
 { return TK_ACTIVADA; }
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
-#line 88 "Lexer.l"
+#line 91 "Lexer.l"
 { return TK_HORA; }
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
-#line 89 "Lexer.l"
+#line 92 "Lexer.l"
 { return TK_FECHA; }
 	YY_BREAK
 /* Sensores (Dispositivos de Entrada) */
 case 34:
 YY_RULE_SETUP
-#line 92 "Lexer.l"
+#line 95 "Lexer.l"
 { return SENSOR_TEMPERATURA_ID; }
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
-#line 93 "Lexer.l"
+#line 96 "Lexer.l"
 { return SENSOR_HUMEDAD_ID; }
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
-#line 94 "Lexer.l"
+#line 97 "Lexer.l"
 { return SENSOR_LUZ_ID; }
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
-#line 95 "Lexer.l"
+#line 98 "Lexer.l"
 { return SENSOR_MOVIMIENTO_ID; }
 	YY_BREAK
 case 38:
 YY_RULE_SETUP
-#line 96 "Lexer.l"
+#line 99 "Lexer.l"
 { return SENSOR_HUMO_ID; }
 	YY_BREAK
 case 39:
 YY_RULE_SETUP
-#line 97 "Lexer.l"
+#line 100 "Lexer.l"
 { return RELOJ_ID; }
 	YY_BREAK
 /* Actuadores (Dispositivos de Salida) */
 case 40:
 YY_RULE_SETUP
-#line 100 "Lexer.l"
+#line 103 "Lexer.l"
 { return FOCO_ID; }
 	YY_BREAK
 case 41:
 YY_RULE_SETUP
-#line 101 "Lexer.l"
+#line 104 "Lexer.l"
 { return AIRE_ID; }
 	YY_BREAK
 case 42:
 YY_RULE_SETUP
-#line 102 "Lexer.l"
+#line 105 "Lexer.l"
 { return PERSIANA_ID; }
 	YY_BREAK
 case 43:
 YY_RULE_SETUP
-#line 103 "Lexer.l"
+#line 106 "Lexer.l"
 { return CERRADURA_ID; }
 	YY_BREAK
 case 44:
 YY_RULE_SETUP
-#line 104 "Lexer.l"
+#line 107 "Lexer.l"
 { return ALTAVOZ_ID; }
 	YY_BREAK
 case 45:
 YY_RULE_SETUP
-#line 105 "Lexer.l"
+#line 108 "Lexer.l"
 { return ALARMA_ID; }
 	YY_BREAK
 /* Literales y Unidades Compuestas */
 case 46:
 YY_RULE_SETUP
-#line 108 "Lexer.l"
+#line 111 "Lexer.l"
 { return TEMPERATURA; }
 	YY_BREAK
 case 47:
 YY_RULE_SETUP
-#line 109 "Lexer.l"
+#line 112 "Lexer.l"
 { return PORCENTAJE; }
 	YY_BREAK
 case 48:
 YY_RULE_SETUP
-#line 110 "Lexer.l"
+#line 113 "Lexer.l"
 { return ILUMINANCIA; }
 	YY_BREAK
 case 49:
 YY_RULE_SETUP
-#line 111 "Lexer.l"
+#line 114 "Lexer.l"
 { return TIEMPO; }
 	YY_BREAK
 case 50:
 YY_RULE_SETUP
-#line 112 "Lexer.l"
+#line 115 "Lexer.l"
 { return VALOR_HORA; }
 	YY_BREAK
 case 51:
 YY_RULE_SETUP
-#line 113 "Lexer.l"
+#line 116 "Lexer.l"
 { return VALOR_FECHA; }
 	YY_BREAK
 case 52:
 YY_RULE_SETUP
-#line 114 "Lexer.l"
+#line 117 "Lexer.l"
 { return EMAIL; }
 	YY_BREAK
 case 53:
 /* rule 53 can match eol */
 YY_RULE_SETUP
-#line 115 "Lexer.l"
+#line 118 "Lexer.l"
 { return TEXTO; }
 	YY_BREAK
 /* Operadores y Delimitadores */
 case 54:
 YY_RULE_SETUP
-#line 118 "Lexer.l"
+#line 121 "Lexer.l"
 { return OP_PUNTO; }
 	YY_BREAK
 case 55:
 YY_RULE_SETUP
-#line 119 "Lexer.l"
+#line 122 "Lexer.l"
 { return OP_IGUALDAD; }
 	YY_BREAK
 case 56:
 YY_RULE_SETUP
-#line 120 "Lexer.l"
+#line 123 "Lexer.l"
 { return OP_RELACIONAL; }
 	YY_BREAK
 case 57:
 YY_RULE_SETUP
-#line 121 "Lexer.l"
+#line 124 "Lexer.l"
 { return ASIGNACION; }
 	YY_BREAK
 /* Control de errores léxicos unificado */
 case 58:
 YY_RULE_SETUP
-#line 124 "Lexer.l"
+#line 127 "Lexer.l"
 { 
 #ifdef _WIN32
     /* Tu código de Windows para errores... */
@@ -1820,10 +1823,10 @@ YY_RULE_SETUP
 	YY_BREAK
 case 59:
 YY_RULE_SETUP
-#line 137 "Lexer.l"
+#line 140 "Lexer.l"
 ECHO;
 	YY_BREAK
-#line 1826 "lex.yy.c"
+#line 1829 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -2828,5 +2831,5 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 137 "Lexer.l"
+#line 140 "Lexer.l"
 

@@ -9,5 +9,4 @@ END
 
 WHEN sensor_luz_terraza < 150lux DO
     foco_terraza.estado = ON
-    foco_terraza.email_notif = "notificaciones@smarthome.com"
 END

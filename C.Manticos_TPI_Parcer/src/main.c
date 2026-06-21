@@ -5,6 +5,8 @@
 /* Declaraciones externas necesarias */
 extern int yyparse();
 extern FILE *yyin;
+extern int cant_errores;
+int cant_errores = 0;
 
 /* Función para validar la extensión .smart */
 int es_archivo_valido(const char *nombre) {
@@ -38,15 +40,20 @@ int main(int argc, char *argv[]) {
     printf("--- Analizando archivo: %s ---\n", argv[1]);
 
     // 3. Iniciar el parseo
-    // yyparse() utilizará automáticamente yyin, que ahora apunta al archivo
-    if (yyparse() == 0) {
-        printf("¡Compilacion exitosa!\n");
+    printf("--- Analizando archivo: %s ---\n", argv[1]);
+
+    // Ejecutamos el parser guardando su resultado
+    int resultado_parseo = yyparse(); 
+
+    // Evaluamos el resultado final
+    if (resultado_parseo == 0 && cant_errores == 0) {
+        // Exito total: Bison devolvió 0 (llegó al final) y nuestro contador está en 0
+        printf("\n[OK] Compilacion exitosa: El archivo script es valido.\n");
     } else {
-        printf("Error: Fallo en la compilacion.\n");
+        // Hubo errores: Ya sea porque Bison abortó o porque nuestro contador sumó errores
+        printf("\n[FAIL] La compilacion finalizo con %d errores.\n", cant_errores);
     }
 
-    // 4. Cerrar el archivo
     fclose(yyin);
-
     return 0;
 }

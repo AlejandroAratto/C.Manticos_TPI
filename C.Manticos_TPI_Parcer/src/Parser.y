@@ -2,8 +2,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 extern int yylex();
-extern int linea; // Asegúrate de tener esto para acceder a la variable del Lexer
-void yyerror(const char *s); // <--- SOLO EL PROTOTIPO AQUÍ
+extern int linea;
+extern char linea_actual[];
+extern int cant_errores;
+
+void yyerror(const char *s);
 %}
 
 /* Tokens de Sensores y Actuadores */
@@ -26,13 +29,21 @@ void yyerror(const char *s); // <--- SOLO EL PROTOTIPO AQUÍ
 %%
 
 /* 4.3.1 Regla inicial */
-programa: lista_sentencias { printf("Compilacion exitosa: Gramatica valida.\n"); }
+programa: lista_sentencias
         ;
 
 /* 4.3.2 Lista de sentencias */
-lista_sentencias: sentencia lista_sentencias
-                | sentencia
-                ;
+lista_sentencias: sentencia
+    | lista_sentencias sentencia
+    | error { 
+        yyerrok;     /* Le dice a Bison 'ya me recuperé del error' */
+        yyclearin;   /* Limpia el token problemático para no ciclarse */
+      }
+    | lista_sentencias error { 
+        yyerrok; 
+        yyclearin; 
+      }
+    ;
 
 /* 4.3.3 Tipos de sentencia */
 sentencia: when
@@ -167,5 +178,7 @@ operador_comp: OP_IGUALDAD
 
 /* --- Implementación de yyerror --- */
 void yyerror(const char *s) {
-    fprintf(stderr, "Error de sintaxis en la linea %d: %s\n", linea, s);
+    cant_errores++;
+    fprintf(stderr, "\n[X] Error de sintaxis en la linea %d: %s\n", linea, s);
+    fprintf(stderr, "    Codigo: %s\n", linea_actual); // Imprime la línea problemática
 }

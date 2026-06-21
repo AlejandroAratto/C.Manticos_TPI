@@ -18,7 +18,10 @@
 
 #include "Parser.tab.h"
 
+char linea_actual[1024] = ""; // Buffer para guardar el texto de la línea
 int linea = 1;
+// Esta macro concatena el token actual al buffer
+#define YY_USER_ACTION strncat(linea_actual, yytext, sizeof(linea_actual) - strlen(linea_actual) - 1);
 %}
 
 /*----- Definiciones Regulares Básicas -----*/
@@ -49,7 +52,7 @@ ALARMA      alarma(_[a-zA-Z0-9_]+)?
 
 "//".* { /* Ignoramos comentarios de una linea */ }
 [ \t\r]+                { /* Ignoramos espacios en blanco */ }
-\n                      { linea++; }
+\n                      { linea++; linea_actual[0] = '\0';}
 "salir"|"quit"|"q"      { printf("Terminando modo interactivo\n"); exit(0); }
 
 	/* Palabras Reservadas */

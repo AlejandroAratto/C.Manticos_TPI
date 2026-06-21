@@ -3,7 +3,7 @@ WHEN sensor_movimiento_patio == TRUE AND reloj.hora > 22:00 DO
     alarma_casa.activada = TRUE
     foco_patio.estado = ON
     foco_patio.brillo = 100%
-    altavoz_alerta.estado = ON
+    altavoz_alerta.mute = ON
     altavoz_alerta.volumen = 80%
 END
 
