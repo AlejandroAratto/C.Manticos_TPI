@@ -1,12 +1,9 @@
 %{
 #include <stdio.h>
 #include <stdlib.h>
-
-// Declaracion de funciones necesarias para el Lexer
 extern int yylex();
-extern int yyparse();
-void yyerror(const char *s);
-
+extern int linea; // Asegúrate de tener esto para acceder a la variable del Lexer
+void yyerror(const char *s); // <--- SOLO EL PROTOTIPO AQUÍ
 %}
 
 /* Tokens de Sensores y Actuadores */
@@ -23,6 +20,8 @@ void yyerror(const char *s);
 %token BOOLEANO PORCENTAJE TEMPERATURA ILUMINANCIA TIEMPO
 %token VALOR_HORA VALOR_FECHA MODO_AIRE VALOR_COLOR EMAIL TEXTO
 %token TK_AND TK_OR TK_NOT
+
+%define parse.error verbose
 
 %%
 
@@ -166,7 +165,7 @@ operador_comp: OP_IGUALDAD
 
 %%
 
+/* --- Implementación de yyerror --- */
 void yyerror(const char *s) {
-    extern int linea;
-    fprintf(stderr, "Error Sintactico en linea %d: %s\n", linea, s);
+    fprintf(stderr, "Error de sintaxis en la linea %d: %s\n", linea, s);
 }
