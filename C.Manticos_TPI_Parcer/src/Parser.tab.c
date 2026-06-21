@@ -75,10 +75,12 @@ extern int yylex();
 extern int linea;
 extern char linea_actual[];
 extern int cant_errores;
+extern FILE *f_html;
+int cant_errores = 0;
 
 void yyerror(const char *s);
 
-#line 82 "Parser.tab.c"
+#line 84 "Parser.tab.c"
 
 # ifndef YY_CAST
 #  ifdef __cplusplus
@@ -582,14 +584,14 @@ static const yytype_int8 yytranslate[] =
 /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    32,    32,    36,    37,    38,    42,    49,    50,    51,
-      52,    56,    60,    64,    65,    69,    70,    71,    72,    73,
-      74,    77,    78,    79,    82,    83,    84,    85,    88,    89,
-      92,    93,    94,    95,    96,    99,   100,   103,   107,   108,
-     112,   114,   115,   118,   119,   122,   123,   127,   128,   133,
-     134,   135,   136,   137,   138,   139,   142,   144,   146,   148,
-     150,   152,   153,   156,   157,   158,   159,   160,   161,   162,
-     163,   164,   165,   166,   167,   168,   172,   173
+       0,    38,    38,    42,    43,    44,    48,    55,    56,    57,
+      58,    62,    66,    70,    71,    75,    76,    77,    78,    79,
+      80,    83,    84,    85,    88,    89,    90,    91,    94,    95,
+      98,    99,   100,   101,   102,   105,   106,   109,   113,   114,
+     118,   120,   121,   124,   125,   128,   129,   133,   134,   139,
+     140,   141,   142,   143,   144,   145,   148,   150,   152,   154,
+     156,   158,   159,   162,   163,   164,   165,   166,   167,   168,
+     169,   170,   171,   172,   173,   174,   178,   179
 };
 #endif
 
@@ -1547,25 +1549,25 @@ yyreduce:
   switch (yyn)
     {
   case 5: /* lista_sentencias: error  */
-#line 38 "Parser.y"
+#line 44 "Parser.y"
             { 
         yyerrok;     /* Le dice a Bison 'ya me recuperé del error' */
         yyclearin;   /* Limpia el token problemático para no ciclarse */
       }
-#line 1556 "Parser.tab.c"
+#line 1558 "Parser.tab.c"
     break;
 
   case 6: /* lista_sentencias: lista_sentencias error  */
-#line 42 "Parser.y"
+#line 48 "Parser.y"
                              { 
         yyerrok; 
         yyclearin; 
       }
-#line 1565 "Parser.tab.c"
+#line 1567 "Parser.tab.c"
     break;
 
 
-#line 1569 "Parser.tab.c"
+#line 1571 "Parser.tab.c"
 
       default: break;
     }
@@ -1789,7 +1791,7 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 177 "Parser.y"
+#line 183 "Parser.y"
 
 
 /* --- Implementación de yyerror --- */

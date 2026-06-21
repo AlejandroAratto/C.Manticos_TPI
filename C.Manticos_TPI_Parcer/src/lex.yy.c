@@ -1586,17 +1586,17 @@ YY_RULE_SETUP
 case 15:
 YY_RULE_SETUP
 #line 72 "Lexer.l"
-{ return BOOLEANO; }
+{ yylval.str = strdup(yytext); return BOOLEANO; }
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
 #line 73 "Lexer.l"
-{ return MODO_AIRE; }
+{ yylval.str = strdup(yytext); return MODO_AIRE; }
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
 #line 74 "Lexer.l"
-{ return VALOR_COLOR; }
+{ yylval.str = strdup(yytext); return VALOR_COLOR; }
 	YY_BREAK
 /* Atributos Dispositivos (Notación de punto) */
 case 18:
@@ -1683,105 +1683,105 @@ YY_RULE_SETUP
 case 34:
 YY_RULE_SETUP
 #line 95 "Lexer.l"
-{ return SENSOR_TEMPERATURA_ID; }
+{ yylval.str = strdup(yytext); return SENSOR_TEMPERATURA_ID; }
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
 #line 96 "Lexer.l"
-{ return SENSOR_HUMEDAD_ID; }
+{ yylval.str = strdup(yytext); return SENSOR_HUMEDAD_ID; }
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
 #line 97 "Lexer.l"
-{ return SENSOR_LUZ_ID; }
+{ yylval.str = strdup(yytext); return SENSOR_LUZ_ID; }
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
 #line 98 "Lexer.l"
-{ return SENSOR_MOVIMIENTO_ID; }
+{ yylval.str = strdup(yytext); return SENSOR_MOVIMIENTO_ID; }
 	YY_BREAK
 case 38:
 YY_RULE_SETUP
 #line 99 "Lexer.l"
-{ return SENSOR_HUMO_ID; }
+{ yylval.str = strdup(yytext); return SENSOR_HUMO_ID; }
 	YY_BREAK
 case 39:
 YY_RULE_SETUP
 #line 100 "Lexer.l"
-{ return RELOJ_ID; }
+{ yylval.str = strdup(yytext); return RELOJ_ID; }
 	YY_BREAK
 /* Actuadores (Dispositivos de Salida) */
 case 40:
 YY_RULE_SETUP
 #line 103 "Lexer.l"
-{ return FOCO_ID; }
+{ yylval.str = strdup(yytext); return FOCO_ID; }
 	YY_BREAK
 case 41:
 YY_RULE_SETUP
 #line 104 "Lexer.l"
-{ return AIRE_ID; }
+{ yylval.str = strdup(yytext); return AIRE_ID; }
 	YY_BREAK
 case 42:
 YY_RULE_SETUP
 #line 105 "Lexer.l"
-{ return PERSIANA_ID; }
+{ yylval.str = strdup(yytext); return PERSIANA_ID; }
 	YY_BREAK
 case 43:
 YY_RULE_SETUP
 #line 106 "Lexer.l"
-{ return CERRADURA_ID; }
+{ yylval.str = strdup(yytext); return CERRADURA_ID; }
 	YY_BREAK
 case 44:
 YY_RULE_SETUP
 #line 107 "Lexer.l"
-{ return ALTAVOZ_ID; }
+{ yylval.str = strdup(yytext); return ALTAVOZ_ID; }
 	YY_BREAK
 case 45:
 YY_RULE_SETUP
 #line 108 "Lexer.l"
-{ return ALARMA_ID; }
+{ yylval.str = strdup(yytext); return ALARMA_ID; }
 	YY_BREAK
 /* Literales y Unidades Compuestas */
 case 46:
 YY_RULE_SETUP
 #line 111 "Lexer.l"
-{ return TEMPERATURA; }
+{ yylval.str = strdup(yytext); return TEMPERATURA; }
 	YY_BREAK
 case 47:
 YY_RULE_SETUP
 #line 112 "Lexer.l"
-{ return PORCENTAJE; }
+{ yylval.str = strdup(yytext); return PORCENTAJE; }
 	YY_BREAK
 case 48:
 YY_RULE_SETUP
 #line 113 "Lexer.l"
-{ return ILUMINANCIA; }
+{ yylval.str = strdup(yytext); return ILUMINANCIA; }
 	YY_BREAK
 case 49:
 YY_RULE_SETUP
 #line 114 "Lexer.l"
-{ return TIEMPO; }
+{ yylval.str = strdup(yytext); return TIEMPO; }
 	YY_BREAK
 case 50:
 YY_RULE_SETUP
 #line 115 "Lexer.l"
-{ return VALOR_HORA; }
+{ yylval.str = strdup(yytext); return VALOR_HORA; }
 	YY_BREAK
 case 51:
 YY_RULE_SETUP
 #line 116 "Lexer.l"
-{ return VALOR_FECHA; }
+{ yylval.str = strdup(yytext); return VALOR_FECHA; }
 	YY_BREAK
 case 52:
 YY_RULE_SETUP
 #line 117 "Lexer.l"
-{ return EMAIL; }
+{ yylval.str = strdup(yytext); return EMAIL; }
 	YY_BREAK
 case 53:
 /* rule 53 can match eol */
 YY_RULE_SETUP
 #line 118 "Lexer.l"
-{ return TEXTO; }
+{ yylval.str = strdup(yytext); return TEXTO; }
 	YY_BREAK
 /* Operadores y Delimitadores */
 case 54:

@@ -5,9 +5,15 @@ extern int yylex();
 extern int linea;
 extern char linea_actual[];
 extern int cant_errores;
+extern FILE *f_html;
+int cant_errores = 0;
 
 void yyerror(const char *s);
 %}
+
+%union {
+    char* str;  /* Variable para guardar el lexema (texto) */
+}
 
 /* Tokens de Sensores y Actuadores */
 %token SENSOR_TEMPERATURA_ID SENSOR_HUMEDAD_ID SENSOR_LUZ_ID 

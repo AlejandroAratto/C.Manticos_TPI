@@ -68,9 +68,9 @@ ALARMA      alarma(_[a-zA-Z0-9_]+)?
 "NOT"                   { return TK_NOT; }
 
 	/* Booleanos, Modos y Colores */
-"TRUE"|"FALSE"|"ON"|"OFF" { return BOOLEANO; }
-"FRIO"|"CALOR"|"VENT"     { return MODO_AIRE; }
-"blanco"|"rojo"|"azul"    { return VALOR_COLOR; }
+"TRUE"|"FALSE"|"ON"|"OFF" { yylval.str = strdup(yytext); return BOOLEANO; }
+"FRIO"|"CALOR"|"VENT"     { yylval.str = strdup(yytext); return MODO_AIRE; }
+"blanco"|"rojo"|"azul"    { yylval.str = strdup(yytext); return VALOR_COLOR; }
 
 	/* Atributos Dispositivos (Notación de punto) */
 "estado"                { return TK_ESTADO; }
@@ -91,30 +91,30 @@ ALARMA      alarma(_[a-zA-Z0-9_]+)?
 "fecha"                 { return TK_FECHA; }
 
     /* Sensores (Dispositivos de Entrada) */
-"sensor_temp"(_[a-zA-Z0-9_]+)?          { return SENSOR_TEMPERATURA_ID; }
-"sensor_humedad"(_[a-zA-Z0-9_]+)?       { return SENSOR_HUMEDAD_ID; }
-"sensor_luz"(_[a-zA-Z0-9_]+)?           { return SENSOR_LUZ_ID; }
-"sensor_movimiento"(_[a-zA-Z0-9_]+)?    { return SENSOR_MOVIMIENTO_ID; }
-"sensor_humo"(_[a-zA-Z0-9_]+)?          { return SENSOR_HUMO_ID; }
-"reloj"(_[a-zA-Z0-9_]+)?                { return RELOJ_ID; }
+"sensor_temp"(_[a-zA-Z0-9_]+)?          { yylval.str = strdup(yytext); return SENSOR_TEMPERATURA_ID; }
+"sensor_humedad"(_[a-zA-Z0-9_]+)?       { yylval.str = strdup(yytext); return SENSOR_HUMEDAD_ID; }
+"sensor_luz"(_[a-zA-Z0-9_]+)?           { yylval.str = strdup(yytext); return SENSOR_LUZ_ID; }
+"sensor_movimiento"(_[a-zA-Z0-9_]+)?    { yylval.str = strdup(yytext); return SENSOR_MOVIMIENTO_ID; }
+"sensor_humo"(_[a-zA-Z0-9_]+)?          { yylval.str = strdup(yytext); return SENSOR_HUMO_ID; }
+"reloj"(_[a-zA-Z0-9_]+)?                { yylval.str = strdup(yytext); return RELOJ_ID; }
 
 	/* Actuadores (Dispositivos de Salida) */
-{FOCO}                    { return FOCO_ID; }
-{AIRE}                    { return AIRE_ID; }
-{PERSIANA}                { return PERSIANA_ID; }
-{CERRADURA}               { return CERRADURA_ID; }
-{ALTAVOZ}                 { return ALTAVOZ_ID; }
-{ALARMA}                  { return ALARMA_ID; }
+{FOCO}                    { yylval.str = strdup(yytext); return FOCO_ID; }
+{AIRE}                    { yylval.str = strdup(yytext); return AIRE_ID; }
+{PERSIANA}                { yylval.str = strdup(yytext); return PERSIANA_ID; }
+{CERRADURA}               { yylval.str = strdup(yytext); return CERRADURA_ID; }
+{ALTAVOZ}                 { yylval.str = strdup(yytext); return ALTAVOZ_ID; }
+{ALARMA}                  { yylval.str = strdup(yytext); return ALARMA_ID; }
 
 	/* Literales y Unidades Compuestas */
-{TEMPERATURA}             { return TEMPERATURA; }
-{PORCENTAJE}              { return PORCENTAJE; }
-{ILUMINANCIA}             { return ILUMINANCIA; }
-{TIEMPO}                  { return TIEMPO; }
-{HORA}                    { return VALOR_HORA; }
-{FECHA}                   { return VALOR_FECHA; }
-{EMAIL}                   { return EMAIL; }
-{TEXTO}                   { return TEXTO; }
+{TEMPERATURA}             { yylval.str = strdup(yytext); return TEMPERATURA; }
+{PORCENTAJE}              { yylval.str = strdup(yytext); return PORCENTAJE; }
+{ILUMINANCIA}             { yylval.str = strdup(yytext); return ILUMINANCIA; }
+{TIEMPO}                  { yylval.str = strdup(yytext); return TIEMPO; }
+{HORA}                    { yylval.str = strdup(yytext); return VALOR_HORA; }
+{FECHA}                   { yylval.str = strdup(yytext); return VALOR_FECHA; }
+{EMAIL}                   { yylval.str = strdup(yytext); return EMAIL; }
+{TEXTO}                   { yylval.str = strdup(yytext); return TEXTO; }
 
 	/* Operadores y Delimitadores */
 "."                     { return OP_PUNTO; }
