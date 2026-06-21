@@ -1,3 +1,4 @@
+/* Declaraciones y puentes */
 %{
 #include <stdio.h>
 #include <stdlib.h>
@@ -15,6 +16,7 @@ void yyerror(const char *s);
     char* str;  /* Variable para guardar el lexema (texto) */
 }
 
+/* Definicion de Tokens */
 /* Tokens de Sensores y Actuadores */
 %token <str> SENSOR_TEMPERATURA_ID SENSOR_HUMEDAD_ID SENSOR_LUZ_ID 
 %token <str> SENSOR_MOVIMIENTO_ID SENSOR_HUMO_ID RELOJ_ID
@@ -33,6 +35,9 @@ void yyerror(const char *s);
 %define parse.error verbose
 
 %%
+
+/* Definicion de reglas de produccion */
+/* Traduccion a HTML y CSS automaticamente */
 
 /* 4.3.1 Regla inicial */
 programa: lista_sentencias
@@ -132,7 +137,7 @@ then_parte:
     bloque
     ;
 
-/* 4.3.7 Reglas de asignación (ACTUADORES - DIV GRIS) */
+/* 4.3.7 Reglas de asignación */
 asignacion: asignacion_foco
           | asignacion_aire
           | asignacion_persiana
@@ -303,7 +308,7 @@ primaria_condicion: comparacion
                   | BOOLEANO
                   ;
 
-/* 4.3.14 Reglas de comparacion (SENSORES - DIV VERDE) */
+/* 4.3.14 Reglas de comparacion */
 comparacion: comparacion_temp
            | comparacion_hum
            | comparacion_luz
@@ -373,7 +378,6 @@ comparacion_reloj:
     }
 ;
 
-/* NOTA: Para las comparaciones de actuadores, también les aplico el formato de borde verde (ya que actúan como sensores/condición en este contexto) */
 comparacion_actuador: 
     FOCO_ID OP_PUNTO TK_ESTADO OP_IGUALDAD BOOLEANO {
         fprintf(f_html, "<div style='border: 1px solid green; padding: 20px; margin-bottom: 10px;'>\n");
