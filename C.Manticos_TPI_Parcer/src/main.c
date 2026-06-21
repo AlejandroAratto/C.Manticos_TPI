@@ -84,19 +84,26 @@ int main(int argc, char *argv[]) {
     // 5. Iniciar el parseo sintáctico
     int resultado_parseo = yyparse(); 
 
-    // 6. Evaluar estrictamente el resultado final
-    if (resultado_parseo == 0 && cant_errores == 0) {
-        printf("\n[OK] Compilacion exitosa: El archivo script es valido.\n");
-    } else {
-        printf("\n[FAIL] La compilacion finalizo con %d errores detectados.\n", cant_errores);
-    }
-
-    // 7. Cerrar las etiquetas del documento HTML y liberar recursos
+    // 6. Cerrar las etiquetas del documento HTML y liberar recursos
     fprintf(f_html, "</body>\n</html>\n");
-    
     fclose(f_html);
     fclose(yyin);
-    
-    printf("Traduccion finalizada. Archivo de salida generado: 'resultado.html'\n");
+
+    // 7. Evaluar estrictamente el resultado final y decidir qué hacer con el archivo
+    if (resultado_parseo == 0 && cant_errores == 0) {
+        printf("\n[OK] Compilacion exitosa: El archivo script es valido.\n");
+        printf("Traduccion finalizada. Archivo de salida conservado: '%s'\n", nombre_salida);
+    } else {
+        printf("\n[FAIL] La compilacion finalizo con %d errores detectados.\n", cant_errores);
+        printf("Se aborto la traduccion. Eliminando el archivo HTML incompleto...\n");
+        
+        // Eliminamos el archivo que se estaba generando para no dejar "basura"
+        if (remove(nombre_salida) == 0) {
+            printf("[INFO] Archivo '%s' eliminado correctamente.\n", nombre_salida);
+        } else {
+            perror("[ERROR] No se pudo eliminar el archivo HTML temporal");
+        }
+    }
+
     return 0;
 }
