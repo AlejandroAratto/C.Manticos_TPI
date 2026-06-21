@@ -67,7 +67,7 @@
 
 
 /* First part of user prologue.  */
-#line 1 "Parser.y"
+#line 2 "Parser.y"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -593,15 +593,15 @@ static const yytype_int8 yytranslate[] =
 /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int16 yyrline[] =
 {
-       0,    38,    38,    42,    43,    44,    48,    55,    56,    57,
-      58,    63,    68,    63,    82,    86,    82,   103,   107,   107,
-     120,   120,   128,   128,   136,   137,   138,   139,   140,   141,
-     145,   152,   159,   169,   176,   183,   190,   200,   207,   217,
-     224,   231,   238,   245,   255,   262,   272,   282,   283,   287,
-     289,   290,   293,   294,   297,   298,   302,   303,   307,   308,
-     309,   310,   311,   312,   313,   317,   326,   335,   344,   353,
-     362,   368,   378,   384,   390,   396,   402,   408,   414,   420,
-     426,   432,   438,   444,   450,   459,   460
+       0,    43,    43,    47,    48,    49,    53,    60,    61,    62,
+      63,    68,    73,    68,    87,    91,    87,   108,   112,   112,
+     125,   125,   133,   133,   141,   142,   143,   144,   145,   146,
+     150,   157,   164,   174,   181,   188,   195,   205,   212,   222,
+     229,   236,   243,   250,   260,   267,   277,   287,   288,   292,
+     294,   295,   298,   299,   302,   303,   307,   308,   312,   313,
+     314,   315,   316,   317,   318,   322,   331,   340,   349,   358,
+     367,   373,   382,   388,   394,   400,   406,   412,   418,   424,
+     430,   436,   442,   448,   454,   463,   464
 };
 #endif
 
@@ -1569,7 +1569,7 @@ yyreduce:
   switch (yyn)
     {
   case 5: /* lista_sentencias: error  */
-#line 44 "Parser.y"
+#line 49 "Parser.y"
             { 
         yyerrok;     /* Le dice a Bison 'ya me recuperé del error' */
         yyclearin;   /* Limpia el token problemático para no ciclarse */
@@ -1578,7 +1578,7 @@ yyreduce:
     break;
 
   case 6: /* lista_sentencias: lista_sentencias error  */
-#line 48 "Parser.y"
+#line 53 "Parser.y"
                              { 
         yyerrok; 
         yyclearin; 
@@ -1587,7 +1587,7 @@ yyreduce:
     break;
 
   case 11: /* $@1: %empty  */
-#line 63 "Parser.y"
+#line 68 "Parser.y"
             { 
         fprintf(f_html, "<div class='bloque-evento' style='margin-bottom: 30px;'>\n");
         fprintf(f_html, "  <h3 style='color: #1a73e8;'>⚡ Evento Condicional (WHEN)</h3>\n");
@@ -1597,7 +1597,7 @@ yyreduce:
     break;
 
   case 12: /* $@2: %empty  */
-#line 68 "Parser.y"
+#line 73 "Parser.y"
               { 
         fprintf(f_html, "  <div style='margin-top: 15px;'>\n");
         fprintf(f_html, "    <h4 style='color: #333;'>Acciones a ejecutar (DO):</h4>\n");
@@ -1607,7 +1607,7 @@ yyreduce:
     break;
 
   case 13: /* when: TK_WHEN $@1 condicion $@2 TK_DO bloque TK_END  */
-#line 73 "Parser.y"
+#line 78 "Parser.y"
                         { 
         fprintf(f_html, "    </div>\n"); /* Cierra .acciones-lista */
         fprintf(f_html, "  </div>\n");
@@ -1617,7 +1617,7 @@ yyreduce:
     break;
 
   case 14: /* $@3: %empty  */
-#line 82 "Parser.y"
+#line 87 "Parser.y"
              {
         fprintf(f_html, "<div class='bloque-every' style='margin-bottom: 30px;'>\n");
         fprintf(f_html, "  <h3 style='color: #f4b400;'>⏱️ Evento Iterativo (EVERY)</h3>\n");
@@ -1626,7 +1626,7 @@ yyreduce:
     break;
 
   case 15: /* $@4: %empty  */
-#line 86 "Parser.y"
+#line 91 "Parser.y"
            {
         /* ¡AHORA ES $3! (porque el bloque {} de arriba cuenta como $2) */
         fprintf(f_html, "  <div class='condicion'>Repetir cada: <strong>%s</strong></div>\n", (yyvsp[0].str));
@@ -1639,7 +1639,7 @@ yyreduce:
     break;
 
   case 16: /* every: TK_EVERY $@3 TIEMPO $@4 TK_DO bloque TK_END  */
-#line 94 "Parser.y"
+#line 99 "Parser.y"
                         {
         fprintf(f_html, "    </div>\n");
         fprintf(f_html, "  </div>\n");
@@ -1649,7 +1649,7 @@ yyreduce:
     break;
 
   case 17: /* if_sentencia: if_inicio then_parte TK_END  */
-#line 103 "Parser.y"
+#line 108 "Parser.y"
                                   {
           fprintf(f_html, "  </div>\n"); /* Cierra bloque THEN */
           fprintf(f_html, "</div>\n");   /* Cierra bloque IF */
@@ -1658,7 +1658,7 @@ yyreduce:
     break;
 
   case 18: /* $@5: %empty  */
-#line 107 "Parser.y"
+#line 112 "Parser.y"
                                    {
           fprintf(f_html, "  </div>\n"); /* Cierra bloque THEN */
           fprintf(f_html, "  <div style='margin-top: 10px;'><strong>ELSE (Sino):</strong></div>\n");
@@ -1668,7 +1668,7 @@ yyreduce:
     break;
 
   case 19: /* if_sentencia: if_inicio then_parte TK_ELSE $@5 bloque TK_END  */
-#line 112 "Parser.y"
+#line 117 "Parser.y"
                     {
           fprintf(f_html, "  </div>\n"); /* Cierra bloque ELSE */
           fprintf(f_html, "</div>\n");   /* Cierra bloque IF */
@@ -1677,7 +1677,7 @@ yyreduce:
     break;
 
   case 20: /* $@6: %empty  */
-#line 120 "Parser.y"
+#line 125 "Parser.y"
           {
         fprintf(f_html, "<div class='bloque-if' style='background: #e9ecef; padding: 15px; margin-top: 10px; border-left: 4px solid #17a2b8;'>\n");
         fprintf(f_html, "  <h4 style='color: #17a2b8; margin-top: 0;'>❓ Sub-Condición (IF)</h4>\n");
@@ -1686,7 +1686,7 @@ yyreduce:
     break;
 
   case 22: /* $@7: %empty  */
-#line 128 "Parser.y"
+#line 133 "Parser.y"
             {
         fprintf(f_html, "  <div style='margin-top: 10px;'><strong>THEN (Ejecutar):</strong></div>\n");
         fprintf(f_html, "  <div class='bloque-then' style='padding-left: 15px; border-left: 2px solid #ccc; margin-left: 10px;'>\n");
@@ -1695,7 +1695,7 @@ yyreduce:
     break;
 
   case 30: /* asignacion_foco: FOCO_ID OP_PUNTO TK_COLOR ASIGNACION VALOR_COLOR  */
-#line 145 "Parser.y"
+#line 150 "Parser.y"
                                                      {
         fprintf(f_html, "<div style='border: 1px solid gray; padding: 20px; margin-bottom: 10px;'>\n");
         fprintf(f_html, "  <label><b>%s</b></label>\n", (yyvsp[-4].str));
@@ -1707,7 +1707,7 @@ yyreduce:
     break;
 
   case 31: /* asignacion_foco: FOCO_ID OP_PUNTO TK_ESTADO ASIGNACION BOOLEANO  */
-#line 152 "Parser.y"
+#line 157 "Parser.y"
                                                    {
         fprintf(f_html, "<div style='border: 1px solid gray; padding: 20px; margin-bottom: 10px;'>\n");
         fprintf(f_html, "  <label><b>%s</b></label>\n", (yyvsp[-4].str));
@@ -1719,7 +1719,7 @@ yyreduce:
     break;
 
   case 32: /* asignacion_foco: FOCO_ID OP_PUNTO TK_BRILLO ASIGNACION PORCENTAJE  */
-#line 159 "Parser.y"
+#line 164 "Parser.y"
                                                      {
         fprintf(f_html, "<div style='border: 1px solid gray; padding: 20px; margin-bottom: 10px;'>\n");
         fprintf(f_html, "  <label><b>%s</b></label>\n", (yyvsp[-4].str));
@@ -1731,7 +1731,7 @@ yyreduce:
     break;
 
   case 33: /* asignacion_aire: AIRE_ID OP_PUNTO TK_TEMP_OBJ ASIGNACION TEMPERATURA  */
-#line 169 "Parser.y"
+#line 174 "Parser.y"
                                                         {
         fprintf(f_html, "<div style='border: 1px solid gray; padding: 20px; margin-bottom: 10px;'>\n");
         fprintf(f_html, "  <label><b>%s</b></label>\n", (yyvsp[-4].str));
@@ -1743,7 +1743,7 @@ yyreduce:
     break;
 
   case 34: /* asignacion_aire: AIRE_ID OP_PUNTO TK_TEMP_OBJETIVO ASIGNACION TEMPERATURA  */
-#line 176 "Parser.y"
+#line 181 "Parser.y"
                                                              {
         fprintf(f_html, "<div style='border: 1px solid gray; padding: 20px; margin-bottom: 10px;'>\n");
         fprintf(f_html, "  <label><b>%s</b></label>\n", (yyvsp[-4].str));
@@ -1755,7 +1755,7 @@ yyreduce:
     break;
 
   case 35: /* asignacion_aire: AIRE_ID OP_PUNTO TK_ESTADO ASIGNACION BOOLEANO  */
-#line 183 "Parser.y"
+#line 188 "Parser.y"
                                                    {
         fprintf(f_html, "<div style='border: 1px solid gray; padding: 20px; margin-bottom: 10px;'>\n");
         fprintf(f_html, "  <label><b>%s</b></label>\n", (yyvsp[-4].str));
@@ -1767,7 +1767,7 @@ yyreduce:
     break;
 
   case 36: /* asignacion_aire: AIRE_ID OP_PUNTO TK_MODO ASIGNACION MODO_AIRE  */
-#line 190 "Parser.y"
+#line 195 "Parser.y"
                                                   {
         fprintf(f_html, "<div style='border: 1px solid gray; padding: 20px; margin-bottom: 10px;'>\n");
         fprintf(f_html, "  <label><b>%s</b></label>\n", (yyvsp[-4].str));
@@ -1779,7 +1779,7 @@ yyreduce:
     break;
 
   case 37: /* asignacion_persiana: PERSIANA_ID OP_PUNTO TK_POSICION ASIGNACION PORCENTAJE  */
-#line 200 "Parser.y"
+#line 205 "Parser.y"
                                                            {
         fprintf(f_html, "<div style='border: 1px solid gray; padding: 20px; margin-bottom: 10px;'>\n");
         fprintf(f_html, "  <label><b>%s</b></label>\n", (yyvsp[-4].str));
@@ -1791,7 +1791,7 @@ yyreduce:
     break;
 
   case 38: /* asignacion_persiana: PERSIANA_ID OP_PUNTO TK_ESTADO ASIGNACION BOOLEANO  */
-#line 207 "Parser.y"
+#line 212 "Parser.y"
                                                        {
         fprintf(f_html, "<div style='border: 1px solid gray; padding: 20px; margin-bottom: 10px;'>\n");
         fprintf(f_html, "  <label><b>%s</b></label>\n", (yyvsp[-4].str));
@@ -1803,7 +1803,7 @@ yyreduce:
     break;
 
   case 39: /* asignacion_altavoz: ALTAVOZ_ID OP_PUNTO TK_VOLUMEN ASIGNACION PORCENTAJE  */
-#line 217 "Parser.y"
+#line 222 "Parser.y"
                                                          {
         fprintf(f_html, "<div style='border: 1px solid gray; padding: 20px; margin-bottom: 10px;'>\n");
         fprintf(f_html, "  <label><b>%s</b></label>\n", (yyvsp[-4].str));
@@ -1815,7 +1815,7 @@ yyreduce:
     break;
 
   case 40: /* asignacion_altavoz: ALTAVOZ_ID OP_PUNTO TK_MUTE ASIGNACION BOOLEANO  */
-#line 224 "Parser.y"
+#line 229 "Parser.y"
                                                     {
         fprintf(f_html, "<div style='border: 1px solid gray; padding: 20px; margin-bottom: 10px;'>\n");
         fprintf(f_html, "  <label><b>%s</b></label>\n", (yyvsp[-4].str));
@@ -1827,7 +1827,7 @@ yyreduce:
     break;
 
   case 41: /* asignacion_altavoz: ALTAVOZ_ID OP_PUNTO TK_MENSAJE ASIGNACION TEXTO  */
-#line 231 "Parser.y"
+#line 236 "Parser.y"
                                                     {
         fprintf(f_html, "<div style='border: 1px solid gray; padding: 20px; margin-bottom: 10px;'>\n");
         fprintf(f_html, "  <label><b>%s</b></label>\n", (yyvsp[-4].str));
@@ -1839,7 +1839,7 @@ yyreduce:
     break;
 
   case 42: /* asignacion_altavoz: ALTAVOZ_ID OP_PUNTO TK_EMAIL_NOTIF ASIGNACION EMAIL  */
-#line 238 "Parser.y"
+#line 243 "Parser.y"
                                                         {
         fprintf(f_html, "<div style='border: 1px solid gray; padding: 20px; margin-bottom: 10px;'>\n");
         fprintf(f_html, "  <label><b>%s</b></label>\n", (yyvsp[-4].str));
@@ -1851,7 +1851,7 @@ yyreduce:
     break;
 
   case 43: /* asignacion_altavoz: ALTAVOZ_ID OP_PUNTO TK_EMAIL ASIGNACION EMAIL  */
-#line 245 "Parser.y"
+#line 250 "Parser.y"
                                                   {
         fprintf(f_html, "<div style='border: 1px solid gray; padding: 20px; margin-bottom: 10px;'>\n");
         fprintf(f_html, "  <label><b>%s</b></label>\n", (yyvsp[-4].str));
@@ -1863,7 +1863,7 @@ yyreduce:
     break;
 
   case 44: /* asignacion_alarma: ALARMA_ID OP_PUNTO TK_ESTADO ASIGNACION BOOLEANO  */
-#line 255 "Parser.y"
+#line 260 "Parser.y"
                                                      {
         fprintf(f_html, "<div style='border: 1px solid gray; padding: 20px; margin-bottom: 10px;'>\n");
         fprintf(f_html, "  <label><b>%s</b></label>\n", (yyvsp[-4].str));
@@ -1875,7 +1875,7 @@ yyreduce:
     break;
 
   case 45: /* asignacion_alarma: ALARMA_ID OP_PUNTO TK_ACTIVADA ASIGNACION BOOLEANO  */
-#line 262 "Parser.y"
+#line 267 "Parser.y"
                                                        {
         fprintf(f_html, "<div style='border: 1px solid gray; padding: 20px; margin-bottom: 10px;'>\n");
         fprintf(f_html, "  <label><b>%s</b></label>\n", (yyvsp[-4].str));
@@ -1887,7 +1887,7 @@ yyreduce:
     break;
 
   case 46: /* asignacion_cerradura: CERRADURA_ID OP_PUNTO TK_ESTADO ASIGNACION BOOLEANO  */
-#line 272 "Parser.y"
+#line 277 "Parser.y"
                                                         {
         fprintf(f_html, "<div style='border: 1px solid gray; padding: 20px; margin-bottom: 10px;'>\n");
         fprintf(f_html, "  <label><b>%s</b></label>\n", (yyvsp[-4].str));
@@ -1899,7 +1899,7 @@ yyreduce:
     break;
 
   case 65: /* comparacion_temp: SENSOR_TEMPERATURA_ID operador_comp TEMPERATURA  */
-#line 317 "Parser.y"
+#line 322 "Parser.y"
                                                     {
         fprintf(f_html, "<div style='border: 1px solid green; padding: 20px; margin-bottom: 10px;'>\n");
         fprintf(f_html, "  <label><b>%s</b></label> valor actual frente a: <span>%s</span>\n", (yyvsp[-2].str), (yyvsp[0].str));
@@ -1910,7 +1910,7 @@ yyreduce:
     break;
 
   case 66: /* comparacion_hum: SENSOR_HUMEDAD_ID operador_comp PORCENTAJE  */
-#line 326 "Parser.y"
+#line 331 "Parser.y"
                                                {
         fprintf(f_html, "<div style='border: 1px solid green; padding: 20px; margin-bottom: 10px;'>\n");
         fprintf(f_html, "  <label><b>%s</b></label> valor actual frente a: <span>%s</span>\n", (yyvsp[-2].str), (yyvsp[0].str));
@@ -1921,7 +1921,7 @@ yyreduce:
     break;
 
   case 67: /* comparacion_luz: SENSOR_LUZ_ID operador_comp ILUMINANCIA  */
-#line 335 "Parser.y"
+#line 340 "Parser.y"
                                             {
         fprintf(f_html, "<div style='border: 1px solid green; padding: 20px; margin-bottom: 10px;'>\n");
         fprintf(f_html, "  <label><b>%s</b></label> valor actual frente a: <span>%s</span>\n", (yyvsp[-2].str), (yyvsp[0].str));
@@ -1932,7 +1932,7 @@ yyreduce:
     break;
 
   case 68: /* comparacion_mov: SENSOR_MOVIMIENTO_ID OP_IGUALDAD BOOLEANO  */
-#line 344 "Parser.y"
+#line 349 "Parser.y"
                                               {
         fprintf(f_html, "<div style='border: 1px solid green; padding: 20px; margin-bottom: 10px;'>\n");
         fprintf(f_html, "  <label><b>%s</b></label> valor actual frente a: <span>%s</span>\n", (yyvsp[-2].str), (yyvsp[0].str));
@@ -1943,7 +1943,7 @@ yyreduce:
     break;
 
   case 69: /* comparacion_humo: SENSOR_HUMO_ID OP_IGUALDAD BOOLEANO  */
-#line 353 "Parser.y"
+#line 358 "Parser.y"
                                         {
         fprintf(f_html, "<div style='border: 1px solid green; padding: 20px; margin-bottom: 10px;'>\n");
         fprintf(f_html, "  <label><b>%s</b></label> valor actual frente a: <span>%s</span>\n", (yyvsp[-2].str), (yyvsp[0].str));
@@ -1954,7 +1954,7 @@ yyreduce:
     break;
 
   case 70: /* comparacion_reloj: RELOJ_ID OP_PUNTO TK_HORA operador_comp VALOR_HORA  */
-#line 362 "Parser.y"
+#line 367 "Parser.y"
                                                        {
         fprintf(f_html, "<div style='border: 1px solid green; padding: 20px; margin-bottom: 10px;'>\n");
         fprintf(f_html, "  <label><b>%s</b></label> (hora) valor actual frente a: <span>%s</span>\n", (yyvsp[-4].str), (yyvsp[0].str));
@@ -1965,7 +1965,7 @@ yyreduce:
     break;
 
   case 71: /* comparacion_reloj: RELOJ_ID OP_PUNTO TK_FECHA operador_comp VALOR_FECHA  */
-#line 368 "Parser.y"
+#line 373 "Parser.y"
                                                          {
         fprintf(f_html, "<div style='border: 1px solid green; padding: 20px; margin-bottom: 10px;'>\n");
         fprintf(f_html, "  <label><b>%s</b></label> (fecha) valor actual frente a: <span>%s</span>\n", (yyvsp[-4].str), (yyvsp[0].str));
@@ -1976,7 +1976,7 @@ yyreduce:
     break;
 
   case 72: /* comparacion_actuador: FOCO_ID OP_PUNTO TK_ESTADO OP_IGUALDAD BOOLEANO  */
-#line 378 "Parser.y"
+#line 382 "Parser.y"
                                                     {
         fprintf(f_html, "<div style='border: 1px solid green; padding: 20px; margin-bottom: 10px;'>\n");
         fprintf(f_html, "  <label><b>%s</b></label> (estado) valor actual frente a: <span>%s</span>\n", (yyvsp[-4].str), (yyvsp[0].str));
@@ -1987,7 +1987,7 @@ yyreduce:
     break;
 
   case 73: /* comparacion_actuador: FOCO_ID OP_PUNTO TK_BRILLO operador_comp PORCENTAJE  */
-#line 384 "Parser.y"
+#line 388 "Parser.y"
                                                         {
         fprintf(f_html, "<div style='border: 1px solid green; padding: 20px; margin-bottom: 10px;'>\n");
         fprintf(f_html, "  <label><b>%s</b></label> (brillo) valor actual frente a: <span>%s</span>\n", (yyvsp[-4].str), (yyvsp[0].str));
@@ -1998,7 +1998,7 @@ yyreduce:
     break;
 
   case 74: /* comparacion_actuador: FOCO_ID OP_PUNTO TK_COLOR OP_IGUALDAD VALOR_COLOR  */
-#line 390 "Parser.y"
+#line 394 "Parser.y"
                                                       {
         fprintf(f_html, "<div style='border: 1px solid green; padding: 20px; margin-bottom: 10px;'>\n");
         fprintf(f_html, "  <label><b>%s</b></label> (color) valor actual frente a: <span>%s</span>\n", (yyvsp[-4].str), (yyvsp[0].str));
@@ -2009,7 +2009,7 @@ yyreduce:
     break;
 
   case 75: /* comparacion_actuador: AIRE_ID OP_PUNTO TK_ESTADO OP_IGUALDAD BOOLEANO  */
-#line 396 "Parser.y"
+#line 400 "Parser.y"
                                                     {
         fprintf(f_html, "<div style='border: 1px solid green; padding: 20px; margin-bottom: 10px;'>\n");
         fprintf(f_html, "  <label><b>%s</b></label> (estado) valor actual frente a: <span>%s</span>\n", (yyvsp[-4].str), (yyvsp[0].str));
@@ -2020,7 +2020,7 @@ yyreduce:
     break;
 
   case 76: /* comparacion_actuador: AIRE_ID OP_PUNTO TK_MODO OP_IGUALDAD MODO_AIRE  */
-#line 402 "Parser.y"
+#line 406 "Parser.y"
                                                    {
         fprintf(f_html, "<div style='border: 1px solid green; padding: 20px; margin-bottom: 10px;'>\n");
         fprintf(f_html, "  <label><b>%s</b></label> (modo) valor actual frente a: <span>%s</span>\n", (yyvsp[-4].str), (yyvsp[0].str));
@@ -2031,7 +2031,7 @@ yyreduce:
     break;
 
   case 77: /* comparacion_actuador: AIRE_ID OP_PUNTO TK_TEMP_OBJ operador_comp TEMPERATURA  */
-#line 408 "Parser.y"
+#line 412 "Parser.y"
                                                            {
         fprintf(f_html, "<div style='border: 1px solid green; padding: 20px; margin-bottom: 10px;'>\n");
         fprintf(f_html, "  <label><b>%s</b></label> (temp_obj) valor actual frente a: <span>%s</span>\n", (yyvsp[-4].str), (yyvsp[0].str));
@@ -2042,7 +2042,7 @@ yyreduce:
     break;
 
   case 78: /* comparacion_actuador: AIRE_ID OP_PUNTO TK_TEMP_ACT operador_comp TEMPERATURA  */
-#line 414 "Parser.y"
+#line 418 "Parser.y"
                                                            {
         fprintf(f_html, "<div style='border: 1px solid green; padding: 20px; margin-bottom: 10px;'>\n");
         fprintf(f_html, "  <label><b>%s</b></label> (temp_act) valor actual frente a: <span>%s</span>\n", (yyvsp[-4].str), (yyvsp[0].str));
@@ -2053,7 +2053,7 @@ yyreduce:
     break;
 
   case 79: /* comparacion_actuador: PERSIANA_ID OP_PUNTO TK_POSICION operador_comp PORCENTAJE  */
-#line 420 "Parser.y"
+#line 424 "Parser.y"
                                                               {
         fprintf(f_html, "<div style='border: 1px solid green; padding: 20px; margin-bottom: 10px;'>\n");
         fprintf(f_html, "  <label><b>%s</b></label> (posicion) valor actual frente a: <span>%s</span>\n", (yyvsp[-4].str), (yyvsp[0].str));
@@ -2064,7 +2064,7 @@ yyreduce:
     break;
 
   case 80: /* comparacion_actuador: CERRADURA_ID OP_PUNTO TK_ESTADO OP_IGUALDAD BOOLEANO  */
-#line 426 "Parser.y"
+#line 430 "Parser.y"
                                                          {
         fprintf(f_html, "<div style='border: 1px solid green; padding: 20px; margin-bottom: 10px;'>\n");
         fprintf(f_html, "  <label><b>%s</b></label> (estado) valor actual frente a: <span>%s</span>\n", (yyvsp[-4].str), (yyvsp[0].str));
@@ -2075,7 +2075,7 @@ yyreduce:
     break;
 
   case 81: /* comparacion_actuador: ALTAVOZ_ID OP_PUNTO TK_VOLUMEN operador_comp PORCENTAJE  */
-#line 432 "Parser.y"
+#line 436 "Parser.y"
                                                             {
         fprintf(f_html, "<div style='border: 1px solid green; padding: 20px; margin-bottom: 10px;'>\n");
         fprintf(f_html, "  <label><b>%s</b></label> (volumen) valor actual frente a: <span>%s</span>\n", (yyvsp[-4].str), (yyvsp[0].str));
@@ -2086,7 +2086,7 @@ yyreduce:
     break;
 
   case 82: /* comparacion_actuador: ALTAVOZ_ID OP_PUNTO TK_MUTE OP_IGUALDAD BOOLEANO  */
-#line 438 "Parser.y"
+#line 442 "Parser.y"
                                                      {
         fprintf(f_html, "<div style='border: 1px solid green; padding: 20px; margin-bottom: 10px;'>\n");
         fprintf(f_html, "  <label><b>%s</b></label> (mute) valor actual frente a: <span>%s</span>\n", (yyvsp[-4].str), (yyvsp[0].str));
@@ -2097,7 +2097,7 @@ yyreduce:
     break;
 
   case 83: /* comparacion_actuador: ALARMA_ID OP_PUNTO TK_ESTADO OP_IGUALDAD BOOLEANO  */
-#line 444 "Parser.y"
+#line 448 "Parser.y"
                                                       {
         fprintf(f_html, "<div style='border: 1px solid green; padding: 20px; margin-bottom: 10px;'>\n");
         fprintf(f_html, "  <label><b>%s</b></label> (estado) valor actual frente a: <span>%s</span>\n", (yyvsp[-4].str), (yyvsp[0].str));
@@ -2108,7 +2108,7 @@ yyreduce:
     break;
 
   case 84: /* comparacion_actuador: ALARMA_ID OP_PUNTO TK_ACTIVADA OP_IGUALDAD BOOLEANO  */
-#line 450 "Parser.y"
+#line 454 "Parser.y"
                                                         {
         fprintf(f_html, "<div style='border: 1px solid green; padding: 20px; margin-bottom: 10px;'>\n");
         fprintf(f_html, "  <label><b>%s</b></label> (activada) valor actual frente a: <span>%s</span>\n", (yyvsp[-4].str), (yyvsp[0].str));
@@ -2343,7 +2343,7 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 464 "Parser.y"
+#line 468 "Parser.y"
 
 
 /* --- Implementación de yyerror --- */

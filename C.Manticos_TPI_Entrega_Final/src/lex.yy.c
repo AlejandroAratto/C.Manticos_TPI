@@ -1,5 +1,5 @@
 
-#line 2 "lex.yy.c"
+#line 3 "lex.yy.c"
 
 #define  YY_INT_ALIGNED short int
 
@@ -1227,11 +1227,11 @@ char linea_actual[1024] = ""; // Buffer para guardar el texto de la línea
 int linea = 1;
 // Esta macro concatena el token actual al buffer
 #define YY_USER_ACTION strncat(linea_actual, yytext, sizeof(linea_actual) - strlen(linea_actual) - 1);
-#line 1230 "lex.yy.c"
+#line 1231 "lex.yy.c"
 /*----- Definiciones Regulares Básicas -----*/
 /*----- Literales y Unidades -----*/
 /*----- Identificadores de Actuadores (Prefijos Obligatorios, sufijos opcionales) -----*/
-#line 1234 "lex.yy.c"
+#line 1235 "lex.yy.c"
 
 #define INITIAL 0
 
@@ -1453,7 +1453,7 @@ YY_DECL
 #line 52 "Lexer.l"
 	/*----- Sección de Reglas ----------------*/
 
-#line 1456 "lex.yy.c"
+#line 1457 "lex.yy.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -1826,7 +1826,7 @@ YY_RULE_SETUP
 #line 140 "Lexer.l"
 ECHO;
 	YY_BREAK
-#line 1829 "lex.yy.c"
+#line 1830 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
