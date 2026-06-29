@@ -1,14 +1,19 @@
 /* Lexer - Equipo C.mánticos
    UTN FRRE - SSL 2026
 */ 
+    /* Configuraciones */
+/* Se finaliza al llegar al EOF */
 %option noyywrap
-%option case-insensitive
-%option 8bit
+/* Hace que el lenguaje no distinga entre mayusculas y minusculas */
+%option case-insensitive 
+/* Soporte para caracteres extendidos */
+%option 8bit                    
 
 %{
 #include <stdio.h>
 #include <stdlib.h>
 #include <locale.h>
+
 #ifdef _WIN32
 #include <windows.h>
 #include <fcntl.h>
@@ -18,23 +23,24 @@
 int linea = 1;
 %}
 
-/*----- Definiciones Regulares Básicas -----*/
+/* ---------- Definiciones Regulares ---------- */
 DIGITO      [0-9]
 LETRA       [a-zA-Z]
-ALFANUM     [a-zA-Z0-9_]
+ALFANUM     [a-zA-Z0-9]
 
-/*----- Literales y Unidades -----*/
-GRADO       "\302\260"
-TEMPERATURA -?{DIGITO}+(\.{DIGITO}+)?{GRADO}"C"
-PORCENTAJE  {DIGITO}+"%"
-ILUMINANCIA {DIGITO}+"lux"
-TIEMPO      {DIGITO}+[smh]
+/* ----- Rangos ----- */
+PORCENTAJE  ([0-9]|[1-9][0-9]|100)"%"
+ILUMINANCIA ([0-9]{1,3}|1000)"lux"
 HORA        ([01][0-9]|2[0-3])":"[0-5][0-9]
-FECHA       (0[1-9]|[12][0-9]|3[01])"/"(0[1-9]|1[0-2])"/"(19[0-9]{2}|20[0-9]{2})
+FECHA       (0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/(19[0-9]{2}|20[0-9]{2})
+
+/* ----- otros ----- */
+TEMPERATURA -?{DIGITO}+(\.{DIGITO}+)?"\302\260""C"
+TIEMPO      {DIGITO}+[smh]
 EMAIL       [a-zA-Z0-9_\.\+\-]+@[a-zA-Z0-9_\.\+\-]+\.[a-zA-Z]{2,4}
 TEXTO       \"[^\"]*\"
 
-/*----- Identificadores de Actuadores (Prefijos Obligatorios, sufijos opcionales) -----*/
+/* ----- Identificadores de Actuadores ----- */
 FOCO        foco(_[a-zA-Z0-9_]+)?
 AIRE        aire(_[a-zA-Z0-9_]+)?
 PERSIANA    persiana(_[a-zA-Z0-9_]+)?
@@ -43,14 +49,15 @@ ALTAVOZ     altavoz(_[a-zA-Z0-9_]+)?
 ALARMA      alarma(_[a-zA-Z0-9_]+)?
 
 %%
-	/*----- Sección de Reglas ----------------*/
 
-"//".* { /* Ignoramos comentarios de una linea */ }
+    /* ---------- Sección de Reglas ---------- */
+
+"//".*                  { /* Ignoramos comentarios */ }
 [ \t\r]+                { /* Ignoramos espacios en blanco */ }
 \n                      { linea++; }
-"salir"|"quit"|"q"      { printf("Terminando modo interactivo\n"); exit(0); }
+"salir"|"quit"|"q"      { printf("Terminando el analizador lexico.\n"); exit(0); }
 
-	/* Palabras Reservadas */
+    /* ----- Palabras Reservadas ----- */
 "WHEN"                  { printf("Token: TK_WHEN | Lexema: WHEN\n"); /* return WHEN; */ }
 "IF"                    { printf("Token: TK_IF | Lexema: IF\n"); /* return IF; */ }
 "THEN"                  { printf("Token: TK_THEN | Lexema: THEN\n"); /* return THEN; */ }
@@ -62,12 +69,12 @@ ALARMA      alarma(_[a-zA-Z0-9_]+)?
 "OR"                    { printf("Token: OP_LOGICO | Lexema: OR\n"); /* return OR; */ }
 "NOT"                   { printf("Token: OP_LOGICO | Lexema: NOT\n"); /* return NOT; */ }
 
-	/* Booleanos, Modos y Colores */
+    /* ----- Constantes y valores ----- */
 "TRUE"|"FALSE"|"ON"|"OFF" { printf("Token: BOOLEANO | Lexema:  %s\n", yytext); /* return BOOLEANO; */ }
 "FRIO"|"CALOR"|"VENT"     { printf("Token: MODO_AIRE | Lexema:  %s\n", yytext); /* return MODO_AIRE; */ }
 "blanco"|"rojo"|"azul"    { printf("Token: VALOR_COLOR | Lexema:  %s\n", yytext); /* return VALOR_COLOR; */ }
 
-	/* Atributos Dispositivos (Notación de punto) */
+    /* ----- Atributos ----- */
 ".estado"               { printf("Token: ATRIBUTO | Lexema:  estado\n"); /* return ESTADO; */ }
 ".brillo"               { printf("Token: ATRIBUTO | Lexema:  brillo\n"); /* return BRILLO; */ }
 ".color"                { printf("Token: ATRIBUTO | Lexema:  color\n"); /* return COLOR; */ }
@@ -85,7 +92,7 @@ ALARMA      alarma(_[a-zA-Z0-9_]+)?
 ".hora"                 { printf("Token: ATRIBUTO | Lexema:  hora\n"); /* return ATTR_HORA; */ }
 ".fecha"                { printf("Token: ATRIBUTO | Lexema:  fecha\n"); /* return ATTR_FECHA; */ }
 
-    /* Sensores (Dispositivos de Entrada) */
+    /* ----- Identificadores de Sensores ----- */
 "sensor_temp"(_[a-zA-Z0-9_]+)?           { printf("Token: SENSOR_TEMPERATURA_ID | Lexema: %s\n", yytext); }
 "sensor_humedad"(_[a-zA-Z0-9_]+)?        { printf("Token: SENSOR_HUMEDAD_ID | Lexema: %s\n", yytext); }
 "sensor_luz"(_[a-zA-Z0-9_]+)?            { printf("Token: SENSOR_LUZ_ID | Lexema: %s\n", yytext); }
@@ -93,7 +100,7 @@ ALARMA      alarma(_[a-zA-Z0-9_]+)?
 "sensor_humo"(_[a-zA-Z0-9_]+)?           { printf("Token: SENSOR_HUMO_ID | Lexema: %s\n", yytext); }
 "reloj"(_[a-zA-Z0-9_]+)?                 { printf("Token: RELOJ_ID | Lexema: %s\n", yytext); }
 
-	/* Actuadores (Dispositivos de Salida) */
+    /* ----- Actuadores  ----- */
 {FOCO}                  { printf("Token: FOCO_ID | Lexema: %s\n", yytext); }
 {AIRE}                  { printf("Token: AIRE_ID | Lexema: %s\n", yytext); }
 {PERSIANA}              { printf("Token: PERSIANA_ID | Lexema: %s\n", yytext); }
@@ -101,7 +108,7 @@ ALARMA      alarma(_[a-zA-Z0-9_]+)?
 {ALTAVOZ}               { printf("Token: ALTAVOZ_ID | Lexema: %s\n", yytext); }
 {ALARMA}                { printf("Token: ALARMA_ID | Lexema: %s\n", yytext); }
 
-	/* Literales y Unidades Compuestas */
+    /* ----- Tipos de datos ----- */
 {TEMPERATURA}           { printf("Token: TEMPERATURA | Lexema: %s\n", yytext); }
 {PORCENTAJE}            { printf("Token: PORCENTAJE | Lexema: %s\n", yytext); }
 {ILUMINANCIA}           { printf("Token: ILUMINANCIA | Lexema: %s\n", yytext); }
@@ -111,26 +118,19 @@ ALARMA      alarma(_[a-zA-Z0-9_]+)?
 {EMAIL}                 { printf("Token: EMAIL | Lexema: %s\n", yytext); }
 {TEXTO}                 { printf("Token: TEXTO | Lexema: %s\n", yytext); }
 
-	/* Operadores y Delimitadores */
+    /* ----- Operadores ----- */
 "=="|"!="               { printf("Token: OP_IGUALDAD | Lexema: %s\n", yytext); }
 ">"|"<"|">="|"<="       { printf("Token: OP_RELACIONAL | Lexema: %s\n", yytext); }
 "="                     { printf("Token: ASIGNACION | Lexema: =\n"); }
 
-    /* Control de errores léxicos unificado */
+    /* ----- Control de errores léxicos unificado ----- */
 [a-zA-Z0-9_]+|[\xC2-\xDF][\x80-\xBF]|. { 
-#ifdef _WIN32
-    DWORD written;
-    HANDLE hOut = GetStdHandle(STD_OUTPUT_HANDLE);
-    char msg[512];
-    int len = snprintf(msg, sizeof(msg), "TOKEN_ERROR: %s (En linea %d)\n", yytext, linea);
-    WriteConsoleA(hOut, msg, len, &written, NULL);
-#else
-    printf("TOKEN_ERROR: %s (En linea %d)\n", yytext, linea);
-#endif
+    printf("LINEA %d - ERROR: %s\n", linea, yytext);
 }
 
 %%
-	/*----- Sección de Procedimientos --------*/
+
+    /* ----- Sección de Procedimientos -------- */
 
 /* Función auxiliar para que main.c pueda mandarle texto al autómata en Windows */
 void analizar_cadena_windows(const char* buffer, int longitud) {

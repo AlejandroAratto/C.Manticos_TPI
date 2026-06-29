@@ -16,7 +16,8 @@ extern YY_BUFFER_STATE yy_scan_string(const char *str);
 extern void yy_delete_buffer(YY_BUFFER_STATE b);
 
 FILE *f_html = NULL;
-char linea_actual[2048] = "";
+#define MAX_LINE_SIZE 1024
+char linea_actual[MAX_LINE_SIZE] = {0};
 
 int main(int argc, char *argv[])
 {

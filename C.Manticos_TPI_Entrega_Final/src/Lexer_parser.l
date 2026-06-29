@@ -1,9 +1,14 @@
 /* Lexer - Equipo C.mánticos
-   UTN FRRE - SSL 2026
+   UTN FRRE - 2026
 */ 
-%option noyywrap
-%option case-insensitive
-%option 8bit
+
+/* Configuraciones */
+/* Se finaliza al llegar al EOF */
+%option noyywrap                
+/* Hace que el lenguaje no distinga entre mayusculas y minusculas */
+%option case-insensitive        
+/* Soporte para caracteres extendidos */
+%option 8bit                    
 
 %{
 #include <stdio.h>
@@ -11,32 +16,35 @@
 #include <string.h>
 #include "Parser.tab.h" /* definiciones de tokens generadas por Bison */
 
-extern char linea_actual[]; /* Traemos la variable global del main */
+#define MAX_LINE_SIZE 1024
+
+extern char linea_actual[MAX_LINE_SIZE]; /* Traemos la variable global del main para errores*/
 
 #define YY_USER_ACTION \
     if (strchr(linea_actual, '\n')) linea_actual[0] = '\0'; \
-    strcat(linea_actual, yytext);
+    strncat(linea_actual, yytext, MAX_LINE_SIZE - strlen(linea_actual) - 1);
 
 int linea = 1;
 %}
 
-/*----- Definiciones Regulares -----*/
+    /*---------- Definiciones Regulares ----------*/
 DIGITO      [0-9]
 LETRA       [a-zA-Z]
 ALFANUM     [a-zA-Z0-9_]
 
-/*----- Tipo de dato -----*/
-GRADO       "\302\260"
-TEMPERATURA -?{DIGITO}+(\.{DIGITO}+)?{GRADO}"C"
+    /*----- Rangos -----*/
 PORCENTAJE  ([0-9]|[1-9][0-9]|100)"%"
-ILUMINANCIA {DIGITO}+"lux"
-TIEMPO      {DIGITO}+[smh]
+ILUMINANCIA ([0-9]{1,3}|1000)"lux"
 HORA        ([01][0-9]|2[0-3])":"[0-5][0-9]
-FECHA       (0[1-9]|[12][0-9]|3[01])"/"(0[1-9]|1[0-2])"/"(19[0-9]{2}|20[0-9]{2})
+FECHA       (0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/(19[0-9]{2}|20[0-9]{2})
+
+    /*----- otros -----*/
+TEMPERATURA -?{DIGITO}+(\.{DIGITO}+)?"\302\260""C"
+TIEMPO      {DIGITO}+[smh]
 EMAIL       [a-zA-Z0-9_\.\+\-]+@[a-zA-Z0-9_\.\+\-]+\.[a-zA-Z]{2,4}
 TEXTO       \"[^\"]*\"
 
-/*----- Identificadores de Actuadores (Prefijos Obligatorios) -----*/
+    /*----- Identificadores de Actuadores -----*/
 FOCO        foco(_[a-zA-Z0-9_]+)?
 AIRE        aire(_[a-zA-Z0-9_]+)?
 PERSIANA    persiana(_[a-zA-Z0-9_]+)?
@@ -45,14 +53,15 @@ ALTAVOZ     altavoz(_[a-zA-Z0-9_]+)?
 ALARMA      alarma(_[a-zA-Z0-9_]+)?
 
 %%
-	/*----- Sección de Reglas ----------------*/
 
-"//".*                  { /* Ignoramos comentarios de una linea */ }
+    /*---------- Sección de Reglas ----------*/
+
+"//".*                  { /* Ignoramos comentarios */ }
 [ \t\r]+                { /* Ignoramos espacios en blanco */ }
 \n                      { linea++; }
 "salir"|"quit"|"q"      { printf("Terminando intérprete Smart Home.\n"); exit(0); }
 
-	/* Palabras Reservadas */
+    /*----- Palabras Reservadas -----*/
 "WHEN"                  { return TK_WHEN; }
 "IF"                    { return TK_IF; }
 "THEN"                  { return TK_THEN; }
@@ -64,12 +73,12 @@ ALARMA      alarma(_[a-zA-Z0-9_]+)?
 "OR"                    { return TK_OR; }
 "NOT"                   { return TK_NOT; }
 
-	/* Booleanos, Modos y Colores (Pasan su valor a la unión semántica) */
+    /*----- Constantes y valores -----*/
 "TRUE"|"FALSE"|"ON"|"OFF" { yylval.str = strdup(yytext); return BOOLEANO; }
 "FRIO"|"CALOR"|"VENT"     { yylval.str = strdup(yytext); return MODO_AIRE; }
 "blanco"|"rojo"|"azul"    { yylval.str = strdup(yytext); return VALOR_COLOR; }
 
-	/* Atributos Dispositivos (Mapeados directo a los tokens del Parser) */
+    /*----- Atributos -----*/
 "estado"               { return TK_ESTADO; }
 "brillo"               { return TK_BRILLO; }
 "color"                { return TK_COLOR; }
@@ -87,7 +96,7 @@ ALARMA      alarma(_[a-zA-Z0-9_]+)?
 "hora"                 { return TK_HORA; }
 "fecha"                { return TK_FECHA; }
 
-    /* Identificadores de Sensores (Cargan el lexema en yylval) */
+    /*----- Identificadores de Sensores -----*/
 "sensor_temp"(_[a-zA-Z0-9_]+)?           { yylval.str = strdup(yytext); return SENSOR_TEMPERATURA_ID; }
 "sensor_humedad"(_[a-zA-Z0-9_]+)?        { yylval.str = strdup(yytext); return SENSOR_HUMEDAD_ID; }
 "sensor_luz"(_[a-zA-Z0-9_]+)?            { yylval.str = strdup(yytext); return SENSOR_LUZ_ID; }
@@ -95,7 +104,7 @@ ALARMA      alarma(_[a-zA-Z0-9_]+)?
 "sensor_humo"(_[a-zA-Z0-9_]+)?           { yylval.str = strdup(yytext); return SENSOR_HUMO_ID; }
 "reloj"(_[a-zA-Z0-9_]+)?                 { yylval.str = strdup(yytext); return RELOJ_ID; }
 
-	/* Identificadores de Actuadores (Cargan el lexema en yylval) */
+    /*----- Actuadores  -----*/
 {FOCO}                  { yylval.str = strdup(yytext); return FOCO_ID; }
 {AIRE}                  { yylval.str = strdup(yytext); return AIRE_ID; }
 {PERSIANA}              { yylval.str = strdup(yytext); return PERSIANA_ID; }
@@ -103,7 +112,7 @@ ALARMA      alarma(_[a-zA-Z0-9_]+)?
 {ALTAVOZ}               { yylval.str = strdup(yytext); return ALTAVOZ_ID; }
 {ALARMA}                { yylval.str = strdup(yytext); return ALARMA_ID; }
 
-	/* Literales y Unidades Compuestas */
+    /*----- Tipos de datos -----*/
 {TEMPERATURA}           { yylval.str = strdup(yytext); return TEMPERATURA; }
 {PORCENTAJE}            { yylval.str = strdup(yytext); return PORCENTAJE; }
 {ILUMINANCIA}           { yylval.str = strdup(yytext); return ILUMINANCIA; }
@@ -113,13 +122,13 @@ ALARMA      alarma(_[a-zA-Z0-9_]+)?
 {EMAIL}                 { yylval.str = strdup(yytext); return EMAIL; }
 {TEXTO}                 { yylval.str = strdup(yytext); return TEXTO; }
 
-	/* Operadores y Delimitadores */
+    /*----- Operadores -----*/
 "."                     { return OP_PUNTO; }
 "=="|"!="               { return OP_IGUALDAD; }
 ">"|"<"|">="|"<="       { return OP_RELACIONAL; }
 "="                     { return ASIGNACION; }
 
-    /* Control de errores léxicos unificado */
+    /*----- Control de errores léxicos unificado -----*/
 [a-zA-Z0-9_]+|[\xC2-\xDF][\x80-\xBF]|. { 
     printf("LINEA %d - ERROR: %s\n", linea, yytext);
 }
