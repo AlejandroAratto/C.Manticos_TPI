@@ -1,11 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <locale.h>
+#include <string.h>
+
 #ifdef _WIN32
 #include <windows.h>
 #endif
 
-/* Importamos únicamente punteros estándar de C */
 extern FILE *yyin;
 extern void analizar_cadena_windows(const char *buffer, int longitud);
 extern void ejecutar_analisis_archivo();
@@ -37,7 +38,7 @@ int main(int argc, char *argv[])
     }
     else
     {
-        printf("--- Modo Interactivo Smart Home ---\n");
+        printf("------------ Modo Interactivo Smart Home ------------\n");
         printf("Escribe comandos 'quit', 'q' o 'salir' para terminar.\n");
 #ifdef _WIN32
         HANDLE hIn = GetStdHandle(STD_INPUT_HANDLE);

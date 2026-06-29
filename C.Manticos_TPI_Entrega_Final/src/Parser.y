@@ -11,23 +11,6 @@ extern char linea_actual[];
 extern int cant_errores;
 extern FILE *f_html;
 
-extern char buffer_staging[];
-
-/* Función que intercepta los textos y los guarda en la sala de espera */
-void acumular_html(const char *format, ...) {
-    char temp[4096];
-    va_list args;
-    va_start(args, format);
-    vsnprintf(temp, sizeof(temp), format, args);
-    va_end(args);
-    
-    /* Validamos no desbordar el búfer de la sala de espera */
-    if (strlen(buffer_staging) + strlen(temp) < 65535) {
-        strcat(buffer_staging, temp);
-    }
-}
-
-
 void yyerror(const char *s);
 %}
 
@@ -64,15 +47,7 @@ programa: lista_sentencias
 
 /* 4.3.2 Lista de sentencias */
 lista_sentencias: sentencia
-    | lista_sentencias sentencia
-    | error { 
-        yyerrok;     /* Le dice a Bison 'ya me recuperé del error' */
-        yyclearin;   /* Limpia el token problemático para no ciclarse */
-      }
-    | lista_sentencias error { 
-        yyerrok; 
-        yyclearin; 
-      }
+    | lista_sentencias sentencia 
     ;
 
 /* 4.3.3 Tipos de sentencia */
@@ -86,7 +61,7 @@ sentencia: when
 when:
     TK_WHEN { 
         fprintf(f_html, "<div class='bloque-evento' style='margin-bottom: 30px;'>\n");
-        fprintf(f_html, "  <h3 style='color: #1a73e8;'>⚡ Evento Condicional (WHEN)</h3>\n");
+        fprintf(f_html, "  <h3 style='color: #1a73e8;'> -Evento Condicional (WHEN)</h3>\n");
         fprintf(f_html, "  <div class='condicion'>Si se cumple la condicion:</div>\n"); 
     }
     condicion { 
@@ -105,10 +80,9 @@ when:
 every:
     TK_EVERY {
         fprintf(f_html, "<div class='bloque-every' style='margin-bottom: 30px;'>\n");
-        fprintf(f_html, "  <h3 style='color: #f4b400;'>⏱️ Evento Iterativo (EVERY)</h3>\n");
+        fprintf(f_html, "  <h3 style='color: #f4b400;'> -Evento Iterativo (EVERY)</h3>\n");
     }
     TIEMPO {
-        /* ¡AHORA ES $3! (porque el bloque {} de arriba cuenta como $2) */
         fprintf(f_html, "  <div class='condicion'>Repetir cada: <strong>%s</strong></div>\n", $3);
         fprintf(f_html, "  <div style='margin-top: 15px;'>\n");
         fprintf(f_html, "    <h4 style='color: #333;'>Acciones a ejecutar (DO):</h4>\n");
@@ -143,7 +117,7 @@ if_sentencia:
 if_inicio:
     TK_IF {
         fprintf(f_html, "<div class='bloque-if' style='background: #e9ecef; padding: 15px; margin-top: 10px; border-left: 4px solid #17a2b8;'>\n");
-        fprintf(f_html, "  <h4 style='color: #17a2b8; margin-top: 0;'>❓ Sub-Condición (IF)</h4>\n");
+        fprintf(f_html, "  <h4 style='color: #17a2b8; margin-top: 0;'> Sub-Condición (IF)</h4>\n");
     } 
     condicion
     ;

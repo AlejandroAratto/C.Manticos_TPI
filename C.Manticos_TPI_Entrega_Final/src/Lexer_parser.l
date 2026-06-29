@@ -20,15 +20,15 @@ extern char linea_actual[]; /* Traemos la variable global del main */
 int linea = 1;
 %}
 
-/*----- Definiciones Regulares Básicas -----*/
+/*----- Definiciones Regulares -----*/
 DIGITO      [0-9]
 LETRA       [a-zA-Z]
 ALFANUM     [a-zA-Z0-9_]
 
-/*----- Literales y Unidades -----*/
+/*----- Tipo de dato -----*/
 GRADO       "\302\260"
 TEMPERATURA -?{DIGITO}+(\.{DIGITO}+)?{GRADO}"C"
-PORCENTAJE  {DIGITO}+"%"
+PORCENTAJE  ([0-9]|[1-9][0-9]|100)"%"
 ILUMINANCIA {DIGITO}+"lux"
 TIEMPO      {DIGITO}+[smh]
 HORA        ([01][0-9]|2[0-3])":"[0-5][0-9]
@@ -121,7 +121,7 @@ ALARMA      alarma(_[a-zA-Z0-9_]+)?
 
     /* Control de errores léxicos unificado */
 [a-zA-Z0-9_]+|[\xC2-\xDF][\x80-\xBF]|. { 
-    printf("LINEA %d - TOKEN_ERROR: %s\n", linea, yytext);
+    printf("LINEA %d - ERROR: %s\n", linea, yytext);
 }
 
 %%

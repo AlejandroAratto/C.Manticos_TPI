@@ -10,8 +10,6 @@ extern FILE *yyin;
 extern int yyparse();
 int cant_errores = 0;
 
-char buffer_staging[65536] = "";
-
 /* --- para el modo interactivo --- */
 typedef struct yy_buffer_state *YY_BUFFER_STATE;
 extern YY_BUFFER_STATE yy_scan_string(const char *str);
@@ -37,52 +35,94 @@ int main(int argc, char *argv[])
             return -1;
         }
 
-        /* para evitar errores abrimos el HTML antes del parser */
-        f_html = fopen("rutinas_hogar.html", "wt");
+        /* 1. CREAMOS LA VARIABLE PARA EL NOMBRE DINÁMICO */
+        char nombre_html[1024];
+        strncpy(nombre_html, argv[1], sizeof(nombre_html) - 1);
+        nombre_html[sizeof(nombre_html) - 1] = '\0'; /* Garantía de cierre de cadena */
+
+        /* Buscamos la última aparición del punto (ej: de "rutina.smart" encuentra el punto) */
+        char *punto = strrchr(nombre_html, '.');
+        if (punto != NULL)
+        {
+            *punto = '\0'; /* Cortamos la palabra ahí: "rutina.smart" -> "rutina" */
+        }
+        strcat(nombre_html, ".html"); /* Le pegamos la nueva extensión: "rutina" -> "rutina.html" */
+
+        /* 2. EL PARSER ESCRIBE TEMPORALMENTE EN EL BORRADOR OCULTO */
+        f_html = fopen("borrador.tmp", "wt");
         if (f_html == NULL)
         {
-            printf("Error crítico: No se pudo crear el archivo HTML de salida.\n");
+            printf("Error: No se pudo crear el bufer temporal de salida.\n");
             fclose(yyin);
             return -1;
         }
 
+        printf("--------------------------------------------------------\n");
         printf("Iniciando Analizador Sintáctico de: %s\n", argv[1]);
-        printf("--------------------------------------------------\n");
+        printf("--------------------------------------------------------\n");
 
-        /* Inyectamos la cabecera del HTML */
         fprintf(f_html, "<!DOCTYPE html>\n<html lang=\"es\">\n<head>\n");
-        fprintf(f_html, "  <meta charset=\"UTF-8\">\n  <title>Smart Home - Rutinas</title>\n</head>\n<body>\n");
+        fprintf(f_html, "  <meta charset=\"UTF-8\">\n  <title>Smart Home - Interprete</title>\n</head>\n<body>\n");
 
-        /* Retorna 0 si el archivo es gramaticalmente correcto. */
+        cant_errores = 0;
+
         yyparse();
 
+        fclose(f_html);
+
+        /* 3. EL VEREDICTO FINAL */
         if (cant_errores == 0)
         {
-            printf("\n[COMPILACIÓN EXITOSA]: El código .smart no contiene errores.\n");
+            /* COMPILACIÓN EXITOSA: Usamos nuestra variable dinámica 'nombre_html' */
+            FILE *oficial = fopen(nombre_html, "wt");
+            FILE *tmp = fopen("borrador.tmp", "rt");
+
+            if (oficial != NULL && tmp != NULL)
+            {
+                int c;
+                while ((c = fgetc(tmp)) != EOF)
+                {
+                    fputc(c, oficial);
+                }
+
+                fprintf(oficial, "\n</body>\n</html>");
+
+                fclose(tmp);
+                fclose(oficial);
+
+                printf("\n[COMPILACION EXITOSA]: Traducido con exito a '%s'.\n", nombre_html);
+            }
+            else
+            {
+                printf("\n[ERROR]: Al crear archivo HTML\n");
+            }
         }
         else
         {
-            printf("\n[FALLA DE COMPILACIÓN]: Se detectaron %d errores sintácticos.\n", cant_errores);
+            printf("\n[FALLA DE COMPILACION]: Se detectaron %d errores sintácticos.\n", cant_errores);
+            printf("[INFO]: El archivo '%s' no fue generado.\n", nombre_html);
         }
 
+        remove("borrador.tmp");
         fclose(yyin);
     }
     else
     {
         /* 1. Nace el HTML oficial con su cabecera */
-        FILE *oficial = fopen("rutinas_hogar.html", "wt");
-        fprintf(oficial, "<!DOCTYPE html><html lang=\"es\"><head><meta charset=\"UTF-8\"><title>Smart Home</title></head><body>\n");
+        FILE *oficial = fopen("Resultado.html", "wt");
+        fprintf(oficial, "<!DOCTYPE html><html lang=\"es\"><head><meta charset=\"UTF-8\"><title>Smart Home - Interprete</title></head><body>\n");
         fclose(oficial);
 
-        printf("--- Modo Interactivo Smart Home ---\n");
-        printf("Escriba sentencias. Tipee 'salir' para finalizar.\n");
-        printf("-------------------------------------------------------------\n\n");
+        printf("------------------ Modo Interactivo Smart Home ------------------\n");
+        printf("Escriba sentencias y precionar ENTER para evaluar. Tipee 'salir' para finalizar.\n");
+        printf("Tipee 'salir' o 'quit' para finalizar.\n");
+        printf("-----------------------------------------------------------------\n\n");
 
         char linea_repl[2048];
 
         while (1)
         {
-            printf("smart-home> ");
+            printf("> ");
 
             if (!fgets(linea_repl, sizeof(linea_repl), stdin))
                 break;
@@ -91,9 +131,9 @@ int main(int argc, char *argv[])
 
             if (strncmp(linea_repl, "salir", 5) == 0 || strncmp(linea_repl, "quit", 4) == 0)
             {
-                printf("Guardando archivo HTML oficial y saliendo...\n");
+                printf("Generando archivo HTML y saliendo...\n");
 
-                oficial = fopen("rutinas_hogar.html", "at"); /* "at" = Append Text (Añadir al final) */
+                oficial = fopen("Resultado.html", "at"); /* "at" = Append Text (Añadir al final) */
                 fprintf(oficial, "\n</body></html>");
                 fclose(oficial);
                 break;
@@ -113,7 +153,7 @@ int main(int argc, char *argv[])
             if (cant_errores == 0)
             {
                 /* ES VÁLIDA: Copiamos el borrador adentro del HTML oficial */
-                oficial = fopen("rutinas_hogar.html", "at");
+                oficial = fopen("Resultado.html", "at");
                 FILE *tmp = fopen("borrador.tmp", "rt");
 
                 int c;
@@ -125,15 +165,14 @@ int main(int argc, char *argv[])
                 fclose(tmp);
                 fclose(oficial);
 
-                printf("  [✔ Sentencia correcta - Guardada en rutinas_hogar.html]\n\n");
+                printf("  [Sentencia correcta --> Traduccion a HTML]\n\n");
             }
             else
             {
-                /* HUBO ERROR: No tocamos el archivo oficial */
-                printf("  [✘ Error de sintaxis - Línea descartada]\n\n");
+                printf("  [Error de sintaxis - Linea descartada]\n\n");
             }
 
-            remove("borrador.tmp"); /* Destruimos la evidencia */
+            remove("borrador.tmp");
         }
     }
 }

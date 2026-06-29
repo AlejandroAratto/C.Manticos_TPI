@@ -1907,7 +1907,7 @@ case 58:
 YY_RULE_SETUP
 #line 124 "Lexer_parser.l"
 { 
-    printf("LINEA %d - TOKEN_ERROR: %s\n", linea, yytext);
+    printf("LINEA %d - ERROR: %s\n", linea, yytext);
 }
 	YY_BREAK
 case 59:

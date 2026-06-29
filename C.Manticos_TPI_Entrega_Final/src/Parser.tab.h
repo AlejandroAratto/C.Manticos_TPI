@@ -115,7 +115,7 @@ extern int yydebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 34 "Parser.y"
+#line 17 "Parser.y"
 
     char* str;  /* Variable para guardar el lexema (texto) */
 
