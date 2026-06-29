@@ -9,19 +9,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <locale.h>
-
 #ifdef _WIN32
 #include <windows.h>
 #include <fcntl.h>
 #include <io.h>
 #endif
 
-#include "Parser.tab.h"
-
-char linea_actual[1024] = ""; // Buffer para guardar el texto de la línea
 int linea = 1;
-// Esta macro concatena el token actual al buffer
-#define YY_USER_ACTION strncat(linea_actual, yytext, sizeof(linea_actual) - strlen(linea_actual) - 1);
 %}
 
 /*----- Definiciones Regulares Básicas -----*/
@@ -52,80 +46,88 @@ ALARMA      alarma(_[a-zA-Z0-9_]+)?
 
 "//".* { /* Ignoramos comentarios de una linea */ }
 [ \t\r]+                { /* Ignoramos espacios en blanco */ }
-\n                      { linea++; linea_actual[0] = '\0';}
+\n                      { linea++; }
 "salir"|"quit"|"q"      { printf("Terminando modo interactivo\n"); exit(0); }
 
 	/* Palabras Reservadas */
-"WHEN"                  { return TK_WHEN; }
-"IF"                    { return TK_IF; }
-"THEN"                  { return TK_THEN; }
-"ELSE"                  { return TK_ELSE; }
-"DO"                    { return TK_DO; }
-"END"                   { return TK_END; }
-"EVERY"                 { return TK_EVERY; }
-"AND"                   { return TK_AND; }
-"OR"                    { return TK_OR; }
-"NOT"                   { return TK_NOT; }
+"WHEN"                  { printf("Token: TK_WHEN | Lexema: WHEN\n"); /* return WHEN; */ }
+"IF"                    { printf("Token: TK_IF | Lexema: IF\n"); /* return IF; */ }
+"THEN"                  { printf("Token: TK_THEN | Lexema: THEN\n"); /* return THEN; */ }
+"ELSE"                  { printf("Token: TK_ELSE | Lexema: ELSE\n"); /* return ELSE; */ }
+"DO"                    { printf("Token: TK_DO | Lexema: DO\n"); /* return DO; */ }
+"END"                   { printf("Token: TK_END | Lexema: END\n"); /* return END; */ }
+"EVERY"                 { printf("Token: TK_EVERY | Lexema: EVERY\n"); /* return EVERY; */ }
+"AND"                   { printf("Token: OP_LOGICO | Lexema: AND\n"); /* return AND; */ }
+"OR"                    { printf("Token: OP_LOGICO | Lexema: OR\n"); /* return OR; */ }
+"NOT"                   { printf("Token: OP_LOGICO | Lexema: NOT\n"); /* return NOT; */ }
 
 	/* Booleanos, Modos y Colores */
-"TRUE"|"FALSE"|"ON"|"OFF" { yylval.str = strdup(yytext); return BOOLEANO; }
-"FRIO"|"CALOR"|"VENT"     { yylval.str = strdup(yytext); return MODO_AIRE; }
-"blanco"|"rojo"|"azul"    { yylval.str = strdup(yytext); return VALOR_COLOR; }
+"TRUE"|"FALSE"|"ON"|"OFF" { printf("Token: BOOLEANO | Lexema:  %s\n", yytext); /* return BOOLEANO; */ }
+"FRIO"|"CALOR"|"VENT"     { printf("Token: MODO_AIRE | Lexema:  %s\n", yytext); /* return MODO_AIRE; */ }
+"blanco"|"rojo"|"azul"    { printf("Token: VALOR_COLOR | Lexema:  %s\n", yytext); /* return VALOR_COLOR; */ }
 
 	/* Atributos Dispositivos (Notación de punto) */
-"estado"                { return TK_ESTADO; }
-"brillo"                { return TK_BRILLO; }
-"color"                 { return TK_COLOR; }
-"modo"                  { return TK_MODO; }
-"temp_obj"              { return TK_TEMP_OBJ; }
-"temp_objetivo"         { return TK_TEMP_OBJETIVO; }
-"temp_act"              { return TK_TEMP_ACT; }
-"posicion"              { return TK_POSICION; }
-"volumen"               { return TK_VOLUMEN; }
-"mute"                  { return TK_MUTE; }
-"mensaje"               { return TK_MENSAJE; }
-"email_notif"           { return TK_EMAIL_NOTIF; }
-"email"                 { return TK_EMAIL; }
-"activada"              { return TK_ACTIVADA; }
-"hora"                  { return TK_HORA; }
-"fecha"                 { return TK_FECHA; }
+".estado"               { printf("Token: ATRIBUTO | Lexema:  estado\n"); /* return ESTADO; */ }
+".brillo"               { printf("Token: ATRIBUTO | Lexema:  brillo\n"); /* return BRILLO; */ }
+".color"                { printf("Token: ATRIBUTO | Lexema:  color\n"); /* return COLOR; */ }
+".modo"                 { printf("Token: ATRIBUTO | Lexema:  modo\n"); /* return MODO; */ }
+".temp_obj"             { printf("Token: ATRIBUTO | Lexema:  temp_obj\n"); /* return TEMP_OBJ; */ }
+".temp_objetivo"        { printf("Token: ATRIBUTO | Lexema:  temp_objetivo\n"); /* return TEMP_OBJETIVO; */ }
+".temp_act"             { printf("Token: ATRIBUTO | Lexema:  temp_act\n"); /* return TEMP_ACT; */ }
+".posicion"             { printf("Token: ATRIBUTO | Lexema:  posicion\n"); /* return POSICION; */ }
+".volumen"              { printf("Token: ATRIBUTO | Lexema:  volumen\n"); /* return VOLUMEN; */ }
+".mute"                 { printf("Token: ATRIBUTO | Lexema:  mute\n"); /* return MUTE; */ }
+".mensaje"              { printf("Token: ATRIBUTO | Lexema:  mensaje\n"); /* return MENSAJE; */ }
+".email_notif"          { printf("Token: ATRIBUTO | Lexema:  email_notif\n"); /* return EMAIL_NOTIF; */ }
+".email"                { printf("Token: ATRIBUTO | Lexema:  email\n"); /* return ATTR_EMAIL; */ }
+".activada"             { printf("Token: ATRIBUTO | Lexema:  activada\n"); /* return ACTIVADA; */ }
+".hora"                 { printf("Token: ATRIBUTO | Lexema:  hora\n"); /* return ATTR_HORA; */ }
+".fecha"                { printf("Token: ATRIBUTO | Lexema:  fecha\n"); /* return ATTR_FECHA; */ }
 
     /* Sensores (Dispositivos de Entrada) */
-"sensor_temp"(_[a-zA-Z0-9_]+)?          { yylval.str = strdup(yytext); return SENSOR_TEMPERATURA_ID; }
-"sensor_humedad"(_[a-zA-Z0-9_]+)?       { yylval.str = strdup(yytext); return SENSOR_HUMEDAD_ID; }
-"sensor_luz"(_[a-zA-Z0-9_]+)?           { yylval.str = strdup(yytext); return SENSOR_LUZ_ID; }
-"sensor_movimiento"(_[a-zA-Z0-9_]+)?    { yylval.str = strdup(yytext); return SENSOR_MOVIMIENTO_ID; }
-"sensor_humo"(_[a-zA-Z0-9_]+)?          { yylval.str = strdup(yytext); return SENSOR_HUMO_ID; }
-"reloj"(_[a-zA-Z0-9_]+)?                { yylval.str = strdup(yytext); return RELOJ_ID; }
+"sensor_temp"(_[a-zA-Z0-9_]+)?           { printf("Token: SENSOR_TEMPERATURA_ID | Lexema: %s\n", yytext); }
+"sensor_humedad"(_[a-zA-Z0-9_]+)?        { printf("Token: SENSOR_HUMEDAD_ID | Lexema: %s\n", yytext); }
+"sensor_luz"(_[a-zA-Z0-9_]+)?            { printf("Token: SENSOR_LUZ_ID | Lexema: %s\n", yytext); }
+"sensor_movimiento"(_[a-zA-Z0-9_]+)?     { printf("Token: SENSOR_MOVIMIENTO_ID | Lexema: %s\n", yytext); }
+"sensor_humo"(_[a-zA-Z0-9_]+)?           { printf("Token: SENSOR_HUMO_ID | Lexema: %s\n", yytext); }
+"reloj"(_[a-zA-Z0-9_]+)?                 { printf("Token: RELOJ_ID | Lexema: %s\n", yytext); }
 
 	/* Actuadores (Dispositivos de Salida) */
-{FOCO}                    { yylval.str = strdup(yytext); return FOCO_ID; }
-{AIRE}                    { yylval.str = strdup(yytext); return AIRE_ID; }
-{PERSIANA}                { yylval.str = strdup(yytext); return PERSIANA_ID; }
-{CERRADURA}               { yylval.str = strdup(yytext); return CERRADURA_ID; }
-{ALTAVOZ}                 { yylval.str = strdup(yytext); return ALTAVOZ_ID; }
-{ALARMA}                  { yylval.str = strdup(yytext); return ALARMA_ID; }
+{FOCO}                  { printf("Token: FOCO_ID | Lexema: %s\n", yytext); }
+{AIRE}                  { printf("Token: AIRE_ID | Lexema: %s\n", yytext); }
+{PERSIANA}              { printf("Token: PERSIANA_ID | Lexema: %s\n", yytext); }
+{CERRADURA}             { printf("Token: CERRADURA_ID | Lexema: %s\n", yytext); }
+{ALTAVOZ}               { printf("Token: ALTAVOZ_ID | Lexema: %s\n", yytext); }
+{ALARMA}                { printf("Token: ALARMA_ID | Lexema: %s\n", yytext); }
 
 	/* Literales y Unidades Compuestas */
-{TEMPERATURA}             { yylval.str = strdup(yytext); return TEMPERATURA; }
-{PORCENTAJE}              { yylval.str = strdup(yytext); return PORCENTAJE; }
-{ILUMINANCIA}             { yylval.str = strdup(yytext); return ILUMINANCIA; }
-{TIEMPO}                  { yylval.str = strdup(yytext); return TIEMPO; }
-{HORA}                    { yylval.str = strdup(yytext); return VALOR_HORA; }
-{FECHA}                   { yylval.str = strdup(yytext); return VALOR_FECHA; }
-{EMAIL}                   { yylval.str = strdup(yytext); return EMAIL; }
-{TEXTO}                   { yylval.str = strdup(yytext); return TEXTO; }
+{TEMPERATURA} { 
+#ifdef _WIN32
+    DWORD written;
+    HANDLE hOut = GetStdHandle(STD_OUTPUT_HANDLE);
+    char msg[512];
+    int len = snprintf(msg, sizeof(msg), "Token: TEMPERATURA | Lexema: %s\n", yytext);
+    WriteConsoleA(hOut, msg, len, &written, NULL);
+#else
+    printf("Token: TEMPERATURA | Lexema: %s\n", yytext);
+#endif
+}
+{PORCENTAJE}            { printf("Token: PORCENTAJE | Lexema: %s\n", yytext); }
+{ILUMINANCIA}           { printf("Token: ILUMINANCIA | Lexema: %s\n", yytext); }
+{TIEMPO}                { printf("Token: TIEMPO | Lexema: %s\n", yytext); }
+{HORA}                  { printf("Token: VALOR_HORA | Lexema: %s\n", yytext); }
+{FECHA}                 { printf("Token: VALOR_FECHA | Lexema: %s\n", yytext); }
+{EMAIL}                 { printf("Token: EMAIL | Lexema: %s\n", yytext); }
+{TEXTO}                 { printf("Token: TEXTO | Lexema: %s\n", yytext); }
 
 	/* Operadores y Delimitadores */
-"."                     { return OP_PUNTO; }
-"=="|"!="               { return OP_IGUALDAD; }
-">"|"<"|">="|"<="       { return OP_RELACIONAL; }
-"="                     { return ASIGNACION; }
+"=="|"!="               { printf("Token: OP_IGUALDAD | Lexema: %s\n", yytext); }
+">"|"<"|">="|"<="       { printf("Token: OP_RELACIONAL | Lexema: %s\n", yytext); }
+"="                     { printf("Token: ASIGNACION | Lexema: =\n"); }
 
     /* Control de errores léxicos unificado */
 [a-zA-Z0-9_]+|[\xC2-\xDF][\x80-\xBF]|. { 
 #ifdef _WIN32
-    /* Tu código de Windows para errores... */
     DWORD written;
     HANDLE hOut = GetStdHandle(STD_OUTPUT_HANDLE);
     char msg[512];
@@ -137,3 +139,55 @@ ALARMA      alarma(_[a-zA-Z0-9_]+)?
 }
 
 %%
+	/*----- Sección de Procedimientos --------*/
+
+int main(int argc, char *argv[]) {
+#ifdef _WIN32
+    SetConsoleOutputCP(65001);
+    SetConsoleCP(65001);
+#endif
+    setlocale(LC_ALL, "");
+
+    if (argc == 2) {
+        yyin = fopen(argv[1], "rt");
+        if (yyin == NULL) {
+            printf("Error: El archivo %s no se puede abrir\n", argv[1]);
+            exit(-1);
+        }
+        printf("Analizando archivo: %s\n\n", argv[1]);
+        yylex();
+    } else {
+        printf("--- Modo Interactivo Smart Home ---\n");
+        printf("Escribe comandos o escribe 'quit', 'q' o 'salir' para terminar.\n");
+
+#ifdef _WIN32
+        HANDLE hIn = GetStdHandle(STD_INPUT_HANDLE);
+        wchar_t wbuf[1024];
+        char    ubuf[4096];
+        SetConsoleOutputCP(65001);
+        while (1) {
+            DWORD nread = 0;
+            if (!ReadConsoleW(hIn, wbuf, 1023, &nread, NULL) || nread == 0)
+                break;
+            wbuf[nread] = L'\0';
+
+            /* Convertir UTF-16 a UTF-8 */
+            int ulen = WideCharToMultiByte(CP_UTF8, 0, wbuf, -1,
+                                           ubuf, sizeof(ubuf), NULL, NULL);
+            if (ulen <= 0) continue;
+            /* ulen incluye el \0 final, lo descartamos */
+            ulen--;
+
+            /* Pasarle el buffer a Flex */
+            YY_BUFFER_STATE bs = yy_scan_bytes(ubuf, ulen);
+            yylex();
+            yy_delete_buffer(bs);
+        }
+#else
+        yyin = stdin;
+        yylex();
+#endif
+    }
+
+    return 0;
+}
