@@ -1,5 +1,5 @@
 
-#line 2 "lex.yy.c"
+#line 3 "lex.yy.c"
 
 #define  YY_INT_ALIGNED short int
 
@@ -1340,13 +1340,13 @@ extern char linea_actual[MAX_LINE_SIZE]; /* Traemos la variable global del main 
     strncat(linea_actual, yytext, MAX_LINE_SIZE - strlen(linea_actual) - 1);
 
 int linea = 1;
-#line 1343 "lex.yy.c"
+#line 1344 "lex.yy.c"
 #line 31 "Lexer_parser.l"
     /*---------- Definiciones Regulares ----------*/
     /*----- Rangos -----*/
     /*----- otros -----*/
     /*----- Identificadores de Actuadores -----*/
-#line 1349 "lex.yy.c"
+#line 1350 "lex.yy.c"
 
 #define INITIAL 0
 
@@ -1568,7 +1568,7 @@ YY_DECL
 
     /*---------- Sección de Reglas ----------*/
 
-#line 1571 "lex.yy.c"
+#line 1572 "lex.yy.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -1932,7 +1932,7 @@ YY_RULE_SETUP
 #line 137 "Lexer_parser.l"
 ECHO;
 	YY_BREAK
-#line 1935 "lex.yy.c"
+#line 1936 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 

@@ -1,10 +1,15 @@
-/* Declaraciones y puentes */
+/* 
+   Parser - Smart Home Interpreter
+   UTN FRRe - SSL 2026
+ */
+
 %{
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <stdarg.h>
 
+/* Declaraciones necesarias para el enlace con el Lexer */
 extern int yylex();
 extern int linea;
 extern char linea_actual[];
@@ -14,19 +19,22 @@ extern FILE *f_html;
 void yyerror(const char *s);
 %}
 
+/* Union para definir los tipos de datos de los valores semánticos.
 %union {
     char* str;  /* Variable para guardar el lexema (texto) */
 }
 
-/* Definicion de Tokens */
-/* Tokens de Sensores y Actuadores */
-%define parse.error verbose
+/* -------- Definicion de Tokens -------- */
+
+%define parse.error verbose     /* Bison reportará errores detallados de sintaxis */
+
+/* ----Tokens de Sensores y Actuadores---- */
 
 %token <str> SENSOR_TEMPERATURA_ID SENSOR_HUMEDAD_ID SENSOR_LUZ_ID 
 %token <str> SENSOR_MOVIMIENTO_ID SENSOR_HUMO_ID RELOJ_ID
 %token <str> FOCO_ID AIRE_ID PERSIANA_ID CERRADURA_ID ALTAVOZ_ID ALARMA_ID
 
-/* Tokens de Control y Lógica */
+/* ----Tokens de Control y Lógica---- */
 %token TK_WHEN TK_IF TK_THEN TK_ELSE TK_DO TK_END TK_EVERY
 %token TK_ESTADO TK_BRILLO TK_COLOR TK_MODO TK_TEMP_OBJ TK_TEMP_OBJETIVO 
 %token TK_TEMP_ACT TK_POSICION TK_VOLUMEN TK_MUTE TK_MENSAJE 
@@ -38,7 +46,7 @@ void yyerror(const char *s);
 
 %%
 
-/* Definicion de reglas de produccion */
+/* --------Definicion de reglas de produccion-------- */
 /* Traduccion a HTML y CSS automaticamente */
 
 /* 4.3.1 Regla inicial */
