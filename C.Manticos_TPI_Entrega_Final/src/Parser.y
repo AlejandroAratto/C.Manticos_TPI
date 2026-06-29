@@ -2,12 +2,31 @@
 %{
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+#include <stdarg.h>
+
 extern int yylex();
 extern int linea;
 extern char linea_actual[];
 extern int cant_errores;
 extern FILE *f_html;
-int cant_errores = 0;
+
+extern char buffer_staging[];
+
+/* Función que intercepta los textos y los guarda en la sala de espera */
+void acumular_html(const char *format, ...) {
+    char temp[4096];
+    va_list args;
+    va_start(args, format);
+    vsnprintf(temp, sizeof(temp), format, args);
+    va_end(args);
+    
+    /* Validamos no desbordar el búfer de la sala de espera */
+    if (strlen(buffer_staging) + strlen(temp) < 65535) {
+        strcat(buffer_staging, temp);
+    }
+}
+
 
 void yyerror(const char *s);
 %}
@@ -18,6 +37,8 @@ void yyerror(const char *s);
 
 /* Definicion de Tokens */
 /* Tokens de Sensores y Actuadores */
+%define parse.error verbose
+
 %token <str> SENSOR_TEMPERATURA_ID SENSOR_HUMEDAD_ID SENSOR_LUZ_ID 
 %token <str> SENSOR_MOVIMIENTO_ID SENSOR_HUMO_ID RELOJ_ID
 %token <str> FOCO_ID AIRE_ID PERSIANA_ID CERRADURA_ID ALTAVOZ_ID ALARMA_ID
@@ -31,8 +52,6 @@ void yyerror(const char *s);
 %token <str> BOOLEANO PORCENTAJE TEMPERATURA ILUMINANCIA TIEMPO
 %token <str> VALOR_HORA VALOR_FECHA MODO_AIRE VALOR_COLOR EMAIL TEXTO
 %token TK_AND TK_OR TK_NOT
-
-%define parse.error verbose
 
 %%
 
@@ -469,7 +488,7 @@ operador_comp: OP_IGUALDAD
 
 /* --- Implementación de yyerror --- */
 void yyerror(const char *s) {
-    cant_errores++;
-    fprintf(stderr, "\n[X] Error de sintaxis en la linea %d: %s\n", linea, s);
-    fprintf(stderr, "    Codigo: %s\n", linea_actual); // Imprime la línea problemática
+    cant_errores++; /* <--- SUMAMOS EL ERROR REAL */
+    printf("[-]: Error sintáctico en línea %d: %s\n", linea, s);
+    printf("[-]: Código: %s\n", linea_actual);
 }
