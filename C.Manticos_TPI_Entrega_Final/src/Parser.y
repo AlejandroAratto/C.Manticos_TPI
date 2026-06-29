@@ -19,9 +19,9 @@ extern FILE *f_html;
 void yyerror(const char *s);
 %}
 
-/* Union para definir los tipos de datos de los valores semánticos.
+/* Union para definir los tipos de datos de los valores semánticos. */
 %union {
-    char* str;  /* Variable para guardar el lexema (texto) */
+    char* str;  
 }
 
 /* -------- Definicion de Tokens -------- */

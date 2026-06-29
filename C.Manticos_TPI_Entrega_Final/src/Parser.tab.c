@@ -67,13 +67,14 @@
 
 
 /* First part of user prologue.  */
-#line 2 "Parser.y"
+#line 6 "Parser.y"
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <stdarg.h>
 
+/* Declaraciones necesarias para el enlace con el Lexer */
 extern int yylex();
 extern int linea;
 extern char linea_actual[];
@@ -82,7 +83,7 @@ extern FILE *f_html;
 
 void yyerror(const char *s);
 
-#line 86 "Parser.tab.c"
+#line 87 "Parser.tab.c"
 
 # ifndef YY_CAST
 #  ifdef __cplusplus
@@ -595,15 +596,15 @@ static const yytype_int8 yytranslate[] =
 /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int16 yyrline[] =
 {
-       0,    45,    45,    49,    50,    54,    55,    56,    57,    62,
-      67,    62,    81,    85,    81,   101,   105,   105,   118,   118,
-     126,   126,   134,   135,   136,   137,   138,   139,   143,   150,
-     157,   167,   174,   181,   188,   198,   205,   215,   222,   229,
-     236,   243,   253,   260,   270,   280,   281,   285,   287,   288,
-     291,   292,   295,   296,   300,   301,   305,   306,   307,   308,
-     309,   310,   311,   315,   324,   333,   342,   351,   360,   366,
-     375,   381,   387,   393,   399,   405,   411,   417,   423,   429,
-     435,   441,   447,   456,   457
+       0,    53,    53,    57,    58,    62,    63,    64,    65,    70,
+      75,    70,    89,    93,    89,   109,   113,   113,   126,   126,
+     134,   134,   142,   143,   144,   145,   146,   147,   151,   158,
+     165,   175,   182,   189,   196,   206,   213,   223,   230,   237,
+     244,   251,   261,   268,   278,   288,   289,   293,   295,   296,
+     299,   300,   303,   304,   308,   309,   313,   314,   315,   316,
+     317,   318,   319,   323,   332,   341,   350,   359,   368,   374,
+     383,   389,   395,   401,   407,   413,   419,   425,   431,   437,
+     443,   449,   455,   464,   465
 };
 #endif
 
@@ -1565,46 +1566,46 @@ yyreduce:
   switch (yyn)
     {
   case 9: /* $@1: %empty  */
-#line 62 "Parser.y"
+#line 70 "Parser.y"
             { 
         fprintf(f_html, "<div class='bloque-evento' style='margin-bottom: 30px;'>\n");
         fprintf(f_html, "  <h3 style='color: #1a73e8;'> -Evento Condicional (WHEN)</h3>\n");
         fprintf(f_html, "  <div class='condicion'>Si se cumple la condicion:</div>\n"); 
     }
-#line 1575 "Parser.tab.c"
+#line 1576 "Parser.tab.c"
     break;
 
   case 10: /* $@2: %empty  */
-#line 67 "Parser.y"
+#line 75 "Parser.y"
               { 
         fprintf(f_html, "  <div style='margin-top: 15px;'>\n");
         fprintf(f_html, "    <h4 style='color: #333;'>Acciones a ejecutar (DO):</h4>\n");
         fprintf(f_html, "    <div class='acciones-lista' style='padding-left: 20px;'>\n"); 
     }
-#line 1585 "Parser.tab.c"
+#line 1586 "Parser.tab.c"
     break;
 
   case 11: /* when: TK_WHEN $@1 condicion $@2 TK_DO bloque TK_END  */
-#line 72 "Parser.y"
+#line 80 "Parser.y"
                         { 
         fprintf(f_html, "    </div>\n"); /* Cierra .acciones-lista */
         fprintf(f_html, "  </div>\n");
         fprintf(f_html, "</div>\n");   /* Cierra .bloque-evento */
     }
-#line 1595 "Parser.tab.c"
+#line 1596 "Parser.tab.c"
     break;
 
   case 12: /* $@3: %empty  */
-#line 81 "Parser.y"
+#line 89 "Parser.y"
              {
         fprintf(f_html, "<div class='bloque-every' style='margin-bottom: 30px;'>\n");
         fprintf(f_html, "  <h3 style='color: #f4b400;'> -Evento Iterativo (EVERY)</h3>\n");
     }
-#line 1604 "Parser.tab.c"
+#line 1605 "Parser.tab.c"
     break;
 
   case 13: /* $@4: %empty  */
-#line 85 "Parser.y"
+#line 93 "Parser.y"
            {
         fprintf(f_html, "  <div class='condicion'>Repetir cada: <strong>%s</strong></div>\n", (yyvsp[0].str));
         fprintf(f_html, "  <div style='margin-top: 15px;'>\n");
@@ -1612,67 +1613,67 @@ yyreduce:
         fprintf(f_html, "    <div class='acciones-lista' style='padding-left: 20px;'>\n");
         free((yyvsp[0].str));
     }
-#line 1616 "Parser.tab.c"
+#line 1617 "Parser.tab.c"
     break;
 
   case 14: /* every: TK_EVERY $@3 TIEMPO $@4 TK_DO bloque TK_END  */
-#line 92 "Parser.y"
+#line 100 "Parser.y"
                         {
         fprintf(f_html, "    </div>\n");
         fprintf(f_html, "  </div>\n");
         fprintf(f_html, "</div>\n");
     }
-#line 1626 "Parser.tab.c"
+#line 1627 "Parser.tab.c"
     break;
 
   case 15: /* if_sentencia: if_inicio then_parte TK_END  */
-#line 101 "Parser.y"
+#line 109 "Parser.y"
                                   {
           fprintf(f_html, "  </div>\n"); /* Cierra bloque THEN */
           fprintf(f_html, "</div>\n");   /* Cierra bloque IF */
       }
-#line 1635 "Parser.tab.c"
+#line 1636 "Parser.tab.c"
     break;
 
   case 16: /* $@5: %empty  */
-#line 105 "Parser.y"
+#line 113 "Parser.y"
                                    {
           fprintf(f_html, "  </div>\n"); /* Cierra bloque THEN */
           fprintf(f_html, "  <div style='margin-top: 10px;'><strong>ELSE (Sino):</strong></div>\n");
           fprintf(f_html, "  <div class='bloque-else' style='padding-left: 15px; border-left: 2px solid #ccc; margin-left: 10px;'>\n");
       }
-#line 1645 "Parser.tab.c"
+#line 1646 "Parser.tab.c"
     break;
 
   case 17: /* if_sentencia: if_inicio then_parte TK_ELSE $@5 bloque TK_END  */
-#line 110 "Parser.y"
+#line 118 "Parser.y"
                     {
           fprintf(f_html, "  </div>\n"); /* Cierra bloque ELSE */
           fprintf(f_html, "</div>\n");   /* Cierra bloque IF */
       }
-#line 1654 "Parser.tab.c"
+#line 1655 "Parser.tab.c"
     break;
 
   case 18: /* $@6: %empty  */
-#line 118 "Parser.y"
+#line 126 "Parser.y"
           {
         fprintf(f_html, "<div class='bloque-if' style='background: #e9ecef; padding: 15px; margin-top: 10px; border-left: 4px solid #17a2b8;'>\n");
         fprintf(f_html, "  <h4 style='color: #17a2b8; margin-top: 0;'> Sub-Condición (IF)</h4>\n");
     }
-#line 1663 "Parser.tab.c"
+#line 1664 "Parser.tab.c"
     break;
 
   case 20: /* $@7: %empty  */
-#line 126 "Parser.y"
+#line 134 "Parser.y"
             {
         fprintf(f_html, "  <div style='margin-top: 10px;'><strong>THEN (Ejecutar):</strong></div>\n");
         fprintf(f_html, "  <div class='bloque-then' style='padding-left: 15px; border-left: 2px solid #ccc; margin-left: 10px;'>\n");
     }
-#line 1672 "Parser.tab.c"
+#line 1673 "Parser.tab.c"
     break;
 
   case 28: /* asignacion_foco: FOCO_ID OP_PUNTO TK_COLOR ASIGNACION VALOR_COLOR  */
-#line 143 "Parser.y"
+#line 151 "Parser.y"
                                                      {
         fprintf(f_html, "<div style='border: 1px solid gray; padding: 20px; margin-bottom: 10px;'>\n");
         fprintf(f_html, "  <label><b>%s</b></label>\n", (yyvsp[-4].str));
@@ -1680,11 +1681,11 @@ yyreduce:
         fprintf(f_html, "</div>\n");
         free((yyvsp[-4].str)); free((yyvsp[0].str));
     }
-#line 1684 "Parser.tab.c"
+#line 1685 "Parser.tab.c"
     break;
 
   case 29: /* asignacion_foco: FOCO_ID OP_PUNTO TK_ESTADO ASIGNACION BOOLEANO  */
-#line 150 "Parser.y"
+#line 158 "Parser.y"
                                                    {
         fprintf(f_html, "<div style='border: 1px solid gray; padding: 20px; margin-bottom: 10px;'>\n");
         fprintf(f_html, "  <label><b>%s</b></label>\n", (yyvsp[-4].str));
@@ -1692,11 +1693,11 @@ yyreduce:
         fprintf(f_html, "</div>\n");
         free((yyvsp[-4].str)); free((yyvsp[0].str));
     }
-#line 1696 "Parser.tab.c"
+#line 1697 "Parser.tab.c"
     break;
 
   case 30: /* asignacion_foco: FOCO_ID OP_PUNTO TK_BRILLO ASIGNACION PORCENTAJE  */
-#line 157 "Parser.y"
+#line 165 "Parser.y"
                                                      {
         fprintf(f_html, "<div style='border: 1px solid gray; padding: 20px; margin-bottom: 10px;'>\n");
         fprintf(f_html, "  <label><b>%s</b></label>\n", (yyvsp[-4].str));
@@ -1704,11 +1705,11 @@ yyreduce:
         fprintf(f_html, "</div>\n");
         free((yyvsp[-4].str)); free((yyvsp[0].str));
     }
-#line 1708 "Parser.tab.c"
+#line 1709 "Parser.tab.c"
     break;
 
   case 31: /* asignacion_aire: AIRE_ID OP_PUNTO TK_TEMP_OBJ ASIGNACION TEMPERATURA  */
-#line 167 "Parser.y"
+#line 175 "Parser.y"
                                                         {
         fprintf(f_html, "<div style='border: 1px solid gray; padding: 20px; margin-bottom: 10px;'>\n");
         fprintf(f_html, "  <label><b>%s</b></label>\n", (yyvsp[-4].str));
@@ -1716,11 +1717,11 @@ yyreduce:
         fprintf(f_html, "</div>\n");
         free((yyvsp[-4].str)); free((yyvsp[0].str));
     }
-#line 1720 "Parser.tab.c"
+#line 1721 "Parser.tab.c"
     break;
 
   case 32: /* asignacion_aire: AIRE_ID OP_PUNTO TK_TEMP_OBJETIVO ASIGNACION TEMPERATURA  */
-#line 174 "Parser.y"
+#line 182 "Parser.y"
                                                              {
         fprintf(f_html, "<div style='border: 1px solid gray; padding: 20px; margin-bottom: 10px;'>\n");
         fprintf(f_html, "  <label><b>%s</b></label>\n", (yyvsp[-4].str));
@@ -1728,11 +1729,11 @@ yyreduce:
         fprintf(f_html, "</div>\n");
         free((yyvsp[-4].str)); free((yyvsp[0].str));
     }
-#line 1732 "Parser.tab.c"
+#line 1733 "Parser.tab.c"
     break;
 
   case 33: /* asignacion_aire: AIRE_ID OP_PUNTO TK_ESTADO ASIGNACION BOOLEANO  */
-#line 181 "Parser.y"
+#line 189 "Parser.y"
                                                    {
         fprintf(f_html, "<div style='border: 1px solid gray; padding: 20px; margin-bottom: 10px;'>\n");
         fprintf(f_html, "  <label><b>%s</b></label>\n", (yyvsp[-4].str));
@@ -1740,11 +1741,11 @@ yyreduce:
         fprintf(f_html, "</div>\n");
         free((yyvsp[-4].str)); free((yyvsp[0].str));
     }
-#line 1744 "Parser.tab.c"
+#line 1745 "Parser.tab.c"
     break;
 
   case 34: /* asignacion_aire: AIRE_ID OP_PUNTO TK_MODO ASIGNACION MODO_AIRE  */
-#line 188 "Parser.y"
+#line 196 "Parser.y"
                                                   {
         fprintf(f_html, "<div style='border: 1px solid gray; padding: 20px; margin-bottom: 10px;'>\n");
         fprintf(f_html, "  <label><b>%s</b></label>\n", (yyvsp[-4].str));
@@ -1752,11 +1753,11 @@ yyreduce:
         fprintf(f_html, "</div>\n");
         free((yyvsp[-4].str)); free((yyvsp[0].str));
     }
-#line 1756 "Parser.tab.c"
+#line 1757 "Parser.tab.c"
     break;
 
   case 35: /* asignacion_persiana: PERSIANA_ID OP_PUNTO TK_POSICION ASIGNACION PORCENTAJE  */
-#line 198 "Parser.y"
+#line 206 "Parser.y"
                                                            {
         fprintf(f_html, "<div style='border: 1px solid gray; padding: 20px; margin-bottom: 10px;'>\n");
         fprintf(f_html, "  <label><b>%s</b></label>\n", (yyvsp[-4].str));
@@ -1764,11 +1765,11 @@ yyreduce:
         fprintf(f_html, "</div>\n");
         free((yyvsp[-4].str)); free((yyvsp[0].str));
     }
-#line 1768 "Parser.tab.c"
+#line 1769 "Parser.tab.c"
     break;
 
   case 36: /* asignacion_persiana: PERSIANA_ID OP_PUNTO TK_ESTADO ASIGNACION BOOLEANO  */
-#line 205 "Parser.y"
+#line 213 "Parser.y"
                                                        {
         fprintf(f_html, "<div style='border: 1px solid gray; padding: 20px; margin-bottom: 10px;'>\n");
         fprintf(f_html, "  <label><b>%s</b></label>\n", (yyvsp[-4].str));
@@ -1776,11 +1777,11 @@ yyreduce:
         fprintf(f_html, "</div>\n");
         free((yyvsp[-4].str)); free((yyvsp[0].str));
     }
-#line 1780 "Parser.tab.c"
+#line 1781 "Parser.tab.c"
     break;
 
   case 37: /* asignacion_altavoz: ALTAVOZ_ID OP_PUNTO TK_VOLUMEN ASIGNACION PORCENTAJE  */
-#line 215 "Parser.y"
+#line 223 "Parser.y"
                                                          {
         fprintf(f_html, "<div style='border: 1px solid gray; padding: 20px; margin-bottom: 10px;'>\n");
         fprintf(f_html, "  <label><b>%s</b></label>\n", (yyvsp[-4].str));
@@ -1788,11 +1789,11 @@ yyreduce:
         fprintf(f_html, "</div>\n");
         free((yyvsp[-4].str)); free((yyvsp[0].str));
     }
-#line 1792 "Parser.tab.c"
+#line 1793 "Parser.tab.c"
     break;
 
   case 38: /* asignacion_altavoz: ALTAVOZ_ID OP_PUNTO TK_MUTE ASIGNACION BOOLEANO  */
-#line 222 "Parser.y"
+#line 230 "Parser.y"
                                                     {
         fprintf(f_html, "<div style='border: 1px solid gray; padding: 20px; margin-bottom: 10px;'>\n");
         fprintf(f_html, "  <label><b>%s</b></label>\n", (yyvsp[-4].str));
@@ -1800,11 +1801,11 @@ yyreduce:
         fprintf(f_html, "</div>\n");
         free((yyvsp[-4].str)); free((yyvsp[0].str));
     }
-#line 1804 "Parser.tab.c"
+#line 1805 "Parser.tab.c"
     break;
 
   case 39: /* asignacion_altavoz: ALTAVOZ_ID OP_PUNTO TK_MENSAJE ASIGNACION TEXTO  */
-#line 229 "Parser.y"
+#line 237 "Parser.y"
                                                     {
         fprintf(f_html, "<div style='border: 1px solid gray; padding: 20px; margin-bottom: 10px;'>\n");
         fprintf(f_html, "  <label><b>%s</b></label>\n", (yyvsp[-4].str));
@@ -1812,11 +1813,11 @@ yyreduce:
         fprintf(f_html, "</div>\n");
         free((yyvsp[-4].str)); free((yyvsp[0].str));
     }
-#line 1816 "Parser.tab.c"
+#line 1817 "Parser.tab.c"
     break;
 
   case 40: /* asignacion_altavoz: ALTAVOZ_ID OP_PUNTO TK_EMAIL_NOTIF ASIGNACION EMAIL  */
-#line 236 "Parser.y"
+#line 244 "Parser.y"
                                                         {
         fprintf(f_html, "<div style='border: 1px solid gray; padding: 20px; margin-bottom: 10px;'>\n");
         fprintf(f_html, "  <label><b>%s</b></label>\n", (yyvsp[-4].str));
@@ -1824,11 +1825,11 @@ yyreduce:
         fprintf(f_html, "</div>\n");
         free((yyvsp[-4].str)); free((yyvsp[0].str));
     }
-#line 1828 "Parser.tab.c"
+#line 1829 "Parser.tab.c"
     break;
 
   case 41: /* asignacion_altavoz: ALTAVOZ_ID OP_PUNTO TK_EMAIL ASIGNACION EMAIL  */
-#line 243 "Parser.y"
+#line 251 "Parser.y"
                                                   {
         fprintf(f_html, "<div style='border: 1px solid gray; padding: 20px; margin-bottom: 10px;'>\n");
         fprintf(f_html, "  <label><b>%s</b></label>\n", (yyvsp[-4].str));
@@ -1836,11 +1837,11 @@ yyreduce:
         fprintf(f_html, "</div>\n");
         free((yyvsp[-4].str)); free((yyvsp[0].str));
     }
-#line 1840 "Parser.tab.c"
+#line 1841 "Parser.tab.c"
     break;
 
   case 42: /* asignacion_alarma: ALARMA_ID OP_PUNTO TK_ESTADO ASIGNACION BOOLEANO  */
-#line 253 "Parser.y"
+#line 261 "Parser.y"
                                                      {
         fprintf(f_html, "<div style='border: 1px solid gray; padding: 20px; margin-bottom: 10px;'>\n");
         fprintf(f_html, "  <label><b>%s</b></label>\n", (yyvsp[-4].str));
@@ -1848,11 +1849,11 @@ yyreduce:
         fprintf(f_html, "</div>\n");
         free((yyvsp[-4].str)); free((yyvsp[0].str));
     }
-#line 1852 "Parser.tab.c"
+#line 1853 "Parser.tab.c"
     break;
 
   case 43: /* asignacion_alarma: ALARMA_ID OP_PUNTO TK_ACTIVADA ASIGNACION BOOLEANO  */
-#line 260 "Parser.y"
+#line 268 "Parser.y"
                                                        {
         fprintf(f_html, "<div style='border: 1px solid gray; padding: 20px; margin-bottom: 10px;'>\n");
         fprintf(f_html, "  <label><b>%s</b></label>\n", (yyvsp[-4].str));
@@ -1860,11 +1861,11 @@ yyreduce:
         fprintf(f_html, "</div>\n");
         free((yyvsp[-4].str)); free((yyvsp[0].str));
     }
-#line 1864 "Parser.tab.c"
+#line 1865 "Parser.tab.c"
     break;
 
   case 44: /* asignacion_cerradura: CERRADURA_ID OP_PUNTO TK_ESTADO ASIGNACION BOOLEANO  */
-#line 270 "Parser.y"
+#line 278 "Parser.y"
                                                         {
         fprintf(f_html, "<div style='border: 1px solid gray; padding: 20px; margin-bottom: 10px;'>\n");
         fprintf(f_html, "  <label><b>%s</b></label>\n", (yyvsp[-4].str));
@@ -1872,231 +1873,231 @@ yyreduce:
         fprintf(f_html, "</div>\n");
         free((yyvsp[-4].str)); free((yyvsp[0].str));
     }
-#line 1876 "Parser.tab.c"
+#line 1877 "Parser.tab.c"
     break;
 
   case 63: /* comparacion_temp: SENSOR_TEMPERATURA_ID operador_comp TEMPERATURA  */
-#line 315 "Parser.y"
+#line 323 "Parser.y"
                                                     {
         fprintf(f_html, "<div style='border: 1px solid green; padding: 20px; margin-bottom: 10px;'>\n");
         fprintf(f_html, "  <label><b>%s</b></label> valor actual frente a: <span>%s</span>\n", (yyvsp[-2].str), (yyvsp[0].str));
         fprintf(f_html, "</div>\n");
         free((yyvsp[-2].str)); free((yyvsp[0].str));
     }
-#line 1887 "Parser.tab.c"
+#line 1888 "Parser.tab.c"
     break;
 
   case 64: /* comparacion_hum: SENSOR_HUMEDAD_ID operador_comp PORCENTAJE  */
-#line 324 "Parser.y"
+#line 332 "Parser.y"
                                                {
         fprintf(f_html, "<div style='border: 1px solid green; padding: 20px; margin-bottom: 10px;'>\n");
         fprintf(f_html, "  <label><b>%s</b></label> valor actual frente a: <span>%s</span>\n", (yyvsp[-2].str), (yyvsp[0].str));
         fprintf(f_html, "</div>\n");
         free((yyvsp[-2].str)); free((yyvsp[0].str));
     }
-#line 1898 "Parser.tab.c"
+#line 1899 "Parser.tab.c"
     break;
 
   case 65: /* comparacion_luz: SENSOR_LUZ_ID operador_comp ILUMINANCIA  */
-#line 333 "Parser.y"
+#line 341 "Parser.y"
                                             {
         fprintf(f_html, "<div style='border: 1px solid green; padding: 20px; margin-bottom: 10px;'>\n");
         fprintf(f_html, "  <label><b>%s</b></label> valor actual frente a: <span>%s</span>\n", (yyvsp[-2].str), (yyvsp[0].str));
         fprintf(f_html, "</div>\n");
         free((yyvsp[-2].str)); free((yyvsp[0].str));
     }
-#line 1909 "Parser.tab.c"
+#line 1910 "Parser.tab.c"
     break;
 
   case 66: /* comparacion_mov: SENSOR_MOVIMIENTO_ID OP_IGUALDAD BOOLEANO  */
-#line 342 "Parser.y"
+#line 350 "Parser.y"
                                               {
         fprintf(f_html, "<div style='border: 1px solid green; padding: 20px; margin-bottom: 10px;'>\n");
         fprintf(f_html, "  <label><b>%s</b></label> valor actual frente a: <span>%s</span>\n", (yyvsp[-2].str), (yyvsp[0].str));
         fprintf(f_html, "</div>\n");
         free((yyvsp[-2].str)); free((yyvsp[0].str));
     }
-#line 1920 "Parser.tab.c"
+#line 1921 "Parser.tab.c"
     break;
 
   case 67: /* comparacion_humo: SENSOR_HUMO_ID OP_IGUALDAD BOOLEANO  */
-#line 351 "Parser.y"
+#line 359 "Parser.y"
                                         {
         fprintf(f_html, "<div style='border: 1px solid green; padding: 20px; margin-bottom: 10px;'>\n");
         fprintf(f_html, "  <label><b>%s</b></label> valor actual frente a: <span>%s</span>\n", (yyvsp[-2].str), (yyvsp[0].str));
         fprintf(f_html, "</div>\n");
         free((yyvsp[-2].str)); free((yyvsp[0].str));
     }
-#line 1931 "Parser.tab.c"
+#line 1932 "Parser.tab.c"
     break;
 
   case 68: /* comparacion_reloj: RELOJ_ID OP_PUNTO TK_HORA operador_comp VALOR_HORA  */
-#line 360 "Parser.y"
+#line 368 "Parser.y"
                                                        {
         fprintf(f_html, "<div style='border: 1px solid green; padding: 20px; margin-bottom: 10px;'>\n");
         fprintf(f_html, "  <label><b>%s</b></label> (hora) valor actual frente a: <span>%s</span>\n", (yyvsp[-4].str), (yyvsp[0].str));
         fprintf(f_html, "</div>\n");
         free((yyvsp[-4].str)); free((yyvsp[0].str));
     }
-#line 1942 "Parser.tab.c"
+#line 1943 "Parser.tab.c"
     break;
 
   case 69: /* comparacion_reloj: RELOJ_ID OP_PUNTO TK_FECHA operador_comp VALOR_FECHA  */
-#line 366 "Parser.y"
+#line 374 "Parser.y"
                                                          {
         fprintf(f_html, "<div style='border: 1px solid green; padding: 20px; margin-bottom: 10px;'>\n");
         fprintf(f_html, "  <label><b>%s</b></label> (fecha) valor actual frente a: <span>%s</span>\n", (yyvsp[-4].str), (yyvsp[0].str));
         fprintf(f_html, "</div>\n");
         free((yyvsp[-4].str)); free((yyvsp[0].str));
     }
-#line 1953 "Parser.tab.c"
+#line 1954 "Parser.tab.c"
     break;
 
   case 70: /* comparacion_actuador: FOCO_ID OP_PUNTO TK_ESTADO OP_IGUALDAD BOOLEANO  */
-#line 375 "Parser.y"
+#line 383 "Parser.y"
                                                     {
         fprintf(f_html, "<div style='border: 1px solid green; padding: 20px; margin-bottom: 10px;'>\n");
         fprintf(f_html, "  <label><b>%s</b></label> (estado) valor actual frente a: <span>%s</span>\n", (yyvsp[-4].str), (yyvsp[0].str));
         fprintf(f_html, "</div>\n");
         free((yyvsp[-4].str)); free((yyvsp[0].str));
     }
-#line 1964 "Parser.tab.c"
+#line 1965 "Parser.tab.c"
     break;
 
   case 71: /* comparacion_actuador: FOCO_ID OP_PUNTO TK_BRILLO operador_comp PORCENTAJE  */
-#line 381 "Parser.y"
+#line 389 "Parser.y"
                                                         {
         fprintf(f_html, "<div style='border: 1px solid green; padding: 20px; margin-bottom: 10px;'>\n");
         fprintf(f_html, "  <label><b>%s</b></label> (brillo) valor actual frente a: <span>%s</span>\n", (yyvsp[-4].str), (yyvsp[0].str));
         fprintf(f_html, "</div>\n");
         free((yyvsp[-4].str)); free((yyvsp[0].str));
     }
-#line 1975 "Parser.tab.c"
+#line 1976 "Parser.tab.c"
     break;
 
   case 72: /* comparacion_actuador: FOCO_ID OP_PUNTO TK_COLOR OP_IGUALDAD VALOR_COLOR  */
-#line 387 "Parser.y"
+#line 395 "Parser.y"
                                                       {
         fprintf(f_html, "<div style='border: 1px solid green; padding: 20px; margin-bottom: 10px;'>\n");
         fprintf(f_html, "  <label><b>%s</b></label> (color) valor actual frente a: <span>%s</span>\n", (yyvsp[-4].str), (yyvsp[0].str));
         fprintf(f_html, "</div>\n");
         free((yyvsp[-4].str)); free((yyvsp[0].str));
     }
-#line 1986 "Parser.tab.c"
+#line 1987 "Parser.tab.c"
     break;
 
   case 73: /* comparacion_actuador: AIRE_ID OP_PUNTO TK_ESTADO OP_IGUALDAD BOOLEANO  */
-#line 393 "Parser.y"
+#line 401 "Parser.y"
                                                     {
         fprintf(f_html, "<div style='border: 1px solid green; padding: 20px; margin-bottom: 10px;'>\n");
         fprintf(f_html, "  <label><b>%s</b></label> (estado) valor actual frente a: <span>%s</span>\n", (yyvsp[-4].str), (yyvsp[0].str));
         fprintf(f_html, "</div>\n");
         free((yyvsp[-4].str)); free((yyvsp[0].str));
     }
-#line 1997 "Parser.tab.c"
+#line 1998 "Parser.tab.c"
     break;
 
   case 74: /* comparacion_actuador: AIRE_ID OP_PUNTO TK_MODO OP_IGUALDAD MODO_AIRE  */
-#line 399 "Parser.y"
+#line 407 "Parser.y"
                                                    {
         fprintf(f_html, "<div style='border: 1px solid green; padding: 20px; margin-bottom: 10px;'>\n");
         fprintf(f_html, "  <label><b>%s</b></label> (modo) valor actual frente a: <span>%s</span>\n", (yyvsp[-4].str), (yyvsp[0].str));
         fprintf(f_html, "</div>\n");
         free((yyvsp[-4].str)); free((yyvsp[0].str));
     }
-#line 2008 "Parser.tab.c"
+#line 2009 "Parser.tab.c"
     break;
 
   case 75: /* comparacion_actuador: AIRE_ID OP_PUNTO TK_TEMP_OBJ operador_comp TEMPERATURA  */
-#line 405 "Parser.y"
+#line 413 "Parser.y"
                                                            {
         fprintf(f_html, "<div style='border: 1px solid green; padding: 20px; margin-bottom: 10px;'>\n");
         fprintf(f_html, "  <label><b>%s</b></label> (temp_obj) valor actual frente a: <span>%s</span>\n", (yyvsp[-4].str), (yyvsp[0].str));
         fprintf(f_html, "</div>\n");
         free((yyvsp[-4].str)); free((yyvsp[0].str));
     }
-#line 2019 "Parser.tab.c"
+#line 2020 "Parser.tab.c"
     break;
 
   case 76: /* comparacion_actuador: AIRE_ID OP_PUNTO TK_TEMP_ACT operador_comp TEMPERATURA  */
-#line 411 "Parser.y"
+#line 419 "Parser.y"
                                                            {
         fprintf(f_html, "<div style='border: 1px solid green; padding: 20px; margin-bottom: 10px;'>\n");
         fprintf(f_html, "  <label><b>%s</b></label> (temp_act) valor actual frente a: <span>%s</span>\n", (yyvsp[-4].str), (yyvsp[0].str));
         fprintf(f_html, "</div>\n");
         free((yyvsp[-4].str)); free((yyvsp[0].str));
     }
-#line 2030 "Parser.tab.c"
+#line 2031 "Parser.tab.c"
     break;
 
   case 77: /* comparacion_actuador: PERSIANA_ID OP_PUNTO TK_POSICION operador_comp PORCENTAJE  */
-#line 417 "Parser.y"
+#line 425 "Parser.y"
                                                               {
         fprintf(f_html, "<div style='border: 1px solid green; padding: 20px; margin-bottom: 10px;'>\n");
         fprintf(f_html, "  <label><b>%s</b></label> (posicion) valor actual frente a: <span>%s</span>\n", (yyvsp[-4].str), (yyvsp[0].str));
         fprintf(f_html, "</div>\n");
         free((yyvsp[-4].str)); free((yyvsp[0].str));
     }
-#line 2041 "Parser.tab.c"
+#line 2042 "Parser.tab.c"
     break;
 
   case 78: /* comparacion_actuador: CERRADURA_ID OP_PUNTO TK_ESTADO OP_IGUALDAD BOOLEANO  */
-#line 423 "Parser.y"
+#line 431 "Parser.y"
                                                          {
         fprintf(f_html, "<div style='border: 1px solid green; padding: 20px; margin-bottom: 10px;'>\n");
         fprintf(f_html, "  <label><b>%s</b></label> (estado) valor actual frente a: <span>%s</span>\n", (yyvsp[-4].str), (yyvsp[0].str));
         fprintf(f_html, "</div>\n");
         free((yyvsp[-4].str)); free((yyvsp[0].str));
     }
-#line 2052 "Parser.tab.c"
+#line 2053 "Parser.tab.c"
     break;
 
   case 79: /* comparacion_actuador: ALTAVOZ_ID OP_PUNTO TK_VOLUMEN operador_comp PORCENTAJE  */
-#line 429 "Parser.y"
+#line 437 "Parser.y"
                                                             {
         fprintf(f_html, "<div style='border: 1px solid green; padding: 20px; margin-bottom: 10px;'>\n");
         fprintf(f_html, "  <label><b>%s</b></label> (volumen) valor actual frente a: <span>%s</span>\n", (yyvsp[-4].str), (yyvsp[0].str));
         fprintf(f_html, "</div>\n");
         free((yyvsp[-4].str)); free((yyvsp[0].str));
     }
-#line 2063 "Parser.tab.c"
+#line 2064 "Parser.tab.c"
     break;
 
   case 80: /* comparacion_actuador: ALTAVOZ_ID OP_PUNTO TK_MUTE OP_IGUALDAD BOOLEANO  */
-#line 435 "Parser.y"
+#line 443 "Parser.y"
                                                      {
         fprintf(f_html, "<div style='border: 1px solid green; padding: 20px; margin-bottom: 10px;'>\n");
         fprintf(f_html, "  <label><b>%s</b></label> (mute) valor actual frente a: <span>%s</span>\n", (yyvsp[-4].str), (yyvsp[0].str));
         fprintf(f_html, "</div>\n");
         free((yyvsp[-4].str)); free((yyvsp[0].str));
     }
-#line 2074 "Parser.tab.c"
+#line 2075 "Parser.tab.c"
     break;
 
   case 81: /* comparacion_actuador: ALARMA_ID OP_PUNTO TK_ESTADO OP_IGUALDAD BOOLEANO  */
-#line 441 "Parser.y"
+#line 449 "Parser.y"
                                                       {
         fprintf(f_html, "<div style='border: 1px solid green; padding: 20px; margin-bottom: 10px;'>\n");
         fprintf(f_html, "  <label><b>%s</b></label> (estado) valor actual frente a: <span>%s</span>\n", (yyvsp[-4].str), (yyvsp[0].str));
         fprintf(f_html, "</div>\n");
         free((yyvsp[-4].str)); free((yyvsp[0].str));
     }
-#line 2085 "Parser.tab.c"
+#line 2086 "Parser.tab.c"
     break;
 
   case 82: /* comparacion_actuador: ALARMA_ID OP_PUNTO TK_ACTIVADA OP_IGUALDAD BOOLEANO  */
-#line 447 "Parser.y"
+#line 455 "Parser.y"
                                                         {
         fprintf(f_html, "<div style='border: 1px solid green; padding: 20px; margin-bottom: 10px;'>\n");
         fprintf(f_html, "  <label><b>%s</b></label> (activada) valor actual frente a: <span>%s</span>\n", (yyvsp[-4].str), (yyvsp[0].str));
         fprintf(f_html, "</div>\n");
         free((yyvsp[-4].str)); free((yyvsp[0].str));
     }
-#line 2096 "Parser.tab.c"
+#line 2097 "Parser.tab.c"
     break;
 
 
-#line 2100 "Parser.tab.c"
+#line 2101 "Parser.tab.c"
 
       default: break;
     }
@@ -2320,7 +2321,7 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 461 "Parser.y"
+#line 469 "Parser.y"
 
 
 /* --- Implementación de yyerror --- */

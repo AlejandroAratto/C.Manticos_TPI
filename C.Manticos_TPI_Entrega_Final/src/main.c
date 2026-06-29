@@ -12,7 +12,7 @@ extern FILE *yyin;
 extern int yyparse();
 int cant_errores = 0;
 
-/* --- para el modo interactivo --- */
+/* para el modo interactivo */
 typedef struct yy_buffer_state *YY_BUFFER_STATE;
 extern YY_BUFFER_STATE yy_scan_string(const char *str);
 extern void yy_delete_buffer(YY_BUFFER_STATE b);
@@ -38,20 +38,19 @@ int main(int argc, char *argv[])
             return -1;
         }
 
-        /* 1. CREAMOS LA VARIABLE PARA EL NOMBRE DINÁMICO */
+        /* creacion de varaible para nombre dinamico del archivo html */
         char nombre_html[1024];
         strncpy(nombre_html, argv[1], sizeof(nombre_html) - 1);
-        nombre_html[sizeof(nombre_html) - 1] = '\0'; /* Garantía de cierre de cadena */
-
-        /* Buscamos la última aparición del punto (ej: de "rutina.smart" encuentra el punto) */
+        nombre_html[sizeof(nombre_html) - 1] = '\0';
         char *punto = strrchr(nombre_html, '.');
+
         if (punto != NULL)
         {
-            *punto = '\0'; /* Cortamos la palabra ahí: "rutina.smart" -> "rutina" */
+            *punto = '\0'; /* Cortamos la palabra ahí "rutina.smart" -> "rutina" */
         }
         strcat(nombre_html, ".html"); /* Le pegamos la nueva extensión: "rutina" -> "rutina.html" */
 
-        /* 2. EL PARSER ESCRIBE TEMPORALMENTE EN EL BORRADOR OCULTO */
+        /* parcer crea archivo temporal */
         f_html = fopen("borrador.tmp", "wt");
         if (f_html == NULL)
         {
@@ -73,10 +72,10 @@ int main(int argc, char *argv[])
 
         fclose(f_html);
 
-        /* 3. EL VEREDICTO FINAL */
+        /* ver si no hay errores traducir finalmente al html  */
         if (cant_errores == 0)
         {
-            /* COMPILACIÓN EXITOSA: Usamos nuestra variable dinámica 'nombre_html' */
+
             FILE *oficial = fopen(nombre_html, "wt");
             FILE *tmp = fopen("borrador.tmp", "rt");
 
@@ -111,7 +110,7 @@ int main(int argc, char *argv[])
     }
     else
     {
-        /* 1. Nace el HTML oficial con su cabecera */
+        /* Nace el HTML oficial con su cabecera */
         FILE *oficial = fopen("Resultado.html", "wt");
         fprintf(oficial, "<!DOCTYPE html><html lang=\"es\"><head><meta charset=\"UTF-8\"><title>Smart Home - Interprete</title></head><body>\n");
         fclose(oficial);
@@ -121,17 +120,19 @@ int main(int argc, char *argv[])
         printf("Tipee 'salir' o 'quit' para finalizar.\n");
         printf("-----------------------------------------------------------------\n\n");
 
-        char linea_repl[2048];
+        char linea_repl[2048]; /* mem temporal para lo que ingrase el usuario */
 
         while (1)
         {
             printf("> ");
 
-            if (!fgets(linea_repl, sizeof(linea_repl), stdin))
+            if (!fgets(linea_repl, sizeof(linea_repl), stdin)) /* lectura segura */
                 break;
-            if (linea_repl[0] == '\n' || linea_repl[0] == '\r')
+
+            if (linea_repl[0] == '\n' || linea_repl[0] == '\r') /* filtrado de espacios vacios */
                 continue;
 
+            /* interpretacion de salida */
             if (strncmp(linea_repl, "salir", 5) == 0 || strncmp(linea_repl, "quit", 4) == 0)
             {
                 printf("Generando archivo HTML y saliendo...\n");
@@ -142,20 +143,21 @@ int main(int argc, char *argv[])
                 break;
             }
 
-            /* 2. Apuntamos el puntero global hacia el papel borrador */
+            /* tolerancia a fallos */
             f_html = fopen("borrador.tmp", "wt");
             cant_errores = 0;
 
+            /* memoria virtual para el escaneo de ingreso*/
             YY_BUFFER_STATE buffer_virtual = yy_scan_string(linea_repl);
             yyparse(); /* Bison escribe todo en borrador.tmp */
             yy_delete_buffer(buffer_virtual);
 
-            fclose(f_html); /* Sellamos el borrador */
+            fclose(f_html);
 
-            /* 3. EL MOMENTO DE LA VERDAD */
+            /* Verificacion si hay errores o no copiar en el html */
             if (cant_errores == 0)
             {
-                /* ES VÁLIDA: Copiamos el borrador adentro del HTML oficial */
+                /* si es correcto, copiamos el borrador adentro del HTML oficial */
                 oficial = fopen("Resultado.html", "at");
                 FILE *tmp = fopen("borrador.tmp", "rt");
 
