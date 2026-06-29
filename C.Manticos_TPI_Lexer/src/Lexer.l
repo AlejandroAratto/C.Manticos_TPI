@@ -24,7 +24,8 @@ LETRA       [a-zA-Z]
 ALFANUM     [a-zA-Z0-9_]
 
 /*----- Literales y Unidades -----*/
-TEMPERATURA -?{DIGITO}+(\.{DIGITO}+)?([\xB0\xBA\xF8]|\xC2[\xB0\xBA])"C"
+GRADO       "\302\260"
+TEMPERATURA -?{DIGITO}+(\.{DIGITO}+)?{GRADO}"C"
 PORCENTAJE  {DIGITO}+"%"
 ILUMINANCIA {DIGITO}+"lux"
 TIEMPO      {DIGITO}+[smh]
@@ -101,17 +102,7 @@ ALARMA      alarma(_[a-zA-Z0-9_]+)?
 {ALARMA}                { printf("Token: ALARMA_ID | Lexema: %s\n", yytext); }
 
 	/* Literales y Unidades Compuestas */
-{TEMPERATURA} { 
-#ifdef _WIN32
-    DWORD written;
-    HANDLE hOut = GetStdHandle(STD_OUTPUT_HANDLE);
-    char msg[512];
-    int len = snprintf(msg, sizeof(msg), "Token: TEMPERATURA | Lexema: %s\n", yytext);
-    WriteConsoleA(hOut, msg, len, &written, NULL);
-#else
-    printf("Token: TEMPERATURA | Lexema: %s\n", yytext);
-#endif
-}
+{TEMPERATURA}           { printf("Token: TEMPERATURA | Lexema: %s\n", yytext); }
 {PORCENTAJE}            { printf("Token: PORCENTAJE | Lexema: %s\n", yytext); }
 {ILUMINANCIA}           { printf("Token: ILUMINANCIA | Lexema: %s\n", yytext); }
 {TIEMPO}                { printf("Token: TIEMPO | Lexema: %s\n", yytext); }
@@ -141,53 +132,14 @@ ALARMA      alarma(_[a-zA-Z0-9_]+)?
 %%
 	/*----- Sección de Procedimientos --------*/
 
-int main(int argc, char *argv[]) {
-#ifdef _WIN32
-    SetConsoleOutputCP(65001);
-    SetConsoleCP(65001);
-#endif
-    setlocale(LC_ALL, "");
+/* Función auxiliar para que main.c pueda mandarle texto al autómata en Windows */
+void analizar_cadena_windows(const char* buffer, int longitud) {
+    YY_BUFFER_STATE bs = yy_scan_bytes(buffer, longitud);
+    yylex();
+    yy_delete_buffer(bs);
+}
 
-    if (argc == 2) {
-        yyin = fopen(argv[1], "rt");
-        if (yyin == NULL) {
-            printf("Error: El archivo %s no se puede abrir\n", argv[1]);
-            exit(-1);
-        }
-        printf("Analizando archivo: %s\n\n", argv[1]);
-        yylex();
-    } else {
-        printf("--- Modo Interactivo Smart Home ---\n");
-        printf("Escribe comandos o escribe 'quit', 'q' o 'salir' para terminar.\n");
-
-#ifdef _WIN32
-        HANDLE hIn = GetStdHandle(STD_INPUT_HANDLE);
-        wchar_t wbuf[1024];
-        char    ubuf[4096];
-        SetConsoleOutputCP(65001);
-        while (1) {
-            DWORD nread = 0;
-            if (!ReadConsoleW(hIn, wbuf, 1023, &nread, NULL) || nread == 0)
-                break;
-            wbuf[nread] = L'\0';
-
-            /* Convertir UTF-16 a UTF-8 */
-            int ulen = WideCharToMultiByte(CP_UTF8, 0, wbuf, -1,
-                                           ubuf, sizeof(ubuf), NULL, NULL);
-            if (ulen <= 0) continue;
-            /* ulen incluye el \0 final, lo descartamos */
-            ulen--;
-
-            /* Pasarle el buffer a Flex */
-            YY_BUFFER_STATE bs = yy_scan_bytes(ubuf, ulen);
-            yylex();
-            yy_delete_buffer(bs);
-        }
-#else
-        yyin = stdin;
-        yylex();
-#endif
-    }
-
-    return 0;
+/* Función auxiliar para ejecutar el lexer completo sobre un archivo */
+void ejecutar_analisis_archivo() {
+    yylex();
 }
