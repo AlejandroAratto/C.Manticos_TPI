@@ -1,0 +1,17 @@
+// Script de prueba para verificar la traduccion HTML
+// Cubre: Sensores, Actuadores, Atributos, Emails y Condicionales.
+
+WHEN sensor_luz < 250lux DO
+    foco_entrada.estado = ON
+    foco_entrada.brillo = 80%
+    altavoz_comedor.email = felipe@smart-home.com.ar
+END
+
+EVERY 30m DO
+    IF sensor_movimiento == TRUE THEN
+        aire_acondicionado.estado = ON
+        aire_acondicionado.temp_objetivo = 22°C
+    ELSE
+        aire_acondicionado.estado = OFF
+    END
+END

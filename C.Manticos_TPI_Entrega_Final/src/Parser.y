@@ -151,21 +151,24 @@ asignacion_foco:
     FOCO_ID OP_PUNTO TK_COLOR ASIGNACION VALOR_COLOR {
         fprintf(f_html, "<div style='border: 1px solid gray; padding: 20px; margin-bottom: 10px;'>\n");
         fprintf(f_html, "  <label><b>%s</b></label>\n", $1);
-        fprintf(f_html, "  <ul>\n    <li>color = %s</li>\n  </ul>\n", $5);
+        fprintf(f_html, "  <p>Atributo: <b>color</b></p>\n");
+        fprintf(f_html, "  <ul>\n    <li>%s</li>\n  </ul>\n", $5);
         fprintf(f_html, "</div>\n");
         free($1); free($5);
     }
   | FOCO_ID OP_PUNTO TK_ESTADO ASIGNACION BOOLEANO {
         fprintf(f_html, "<div style='border: 1px solid gray; padding: 20px; margin-bottom: 10px;'>\n");
         fprintf(f_html, "  <label><b>%s</b></label>\n", $1);
-        fprintf(f_html, "  <ul>\n    <li>estado = %s</li>\n  </ul>\n", $5);
+        fprintf(f_html, "  <p>Atributo: <b>estado</b></p>\n");
+        fprintf(f_html, "  <ul>\n    <li>%s</li>\n  </ul>\n", $5);
         fprintf(f_html, "</div>\n");
         free($1); free($5);
     }
   | FOCO_ID OP_PUNTO TK_BRILLO ASIGNACION PORCENTAJE {
         fprintf(f_html, "<div style='border: 1px solid gray; padding: 20px; margin-bottom: 10px;'>\n");
         fprintf(f_html, "  <label><b>%s</b></label>\n", $1);
-        fprintf(f_html, "  <ul>\n    <li>brillo = %s</li>\n  </ul>\n", $5);
+        fprintf(f_html, "  <p>Atributo: <b>brillo</b></p>\n");
+        fprintf(f_html, "  <ul>\n    <li>%s</li>\n  </ul>\n", $5);
         fprintf(f_html, "</div>\n");
         free($1); free($5);
     }
@@ -175,28 +178,32 @@ asignacion_aire:
     AIRE_ID OP_PUNTO TK_TEMP_OBJ ASIGNACION TEMPERATURA {
         fprintf(f_html, "<div style='border: 1px solid gray; padding: 20px; margin-bottom: 10px;'>\n");
         fprintf(f_html, "  <label><b>%s</b></label>\n", $1);
-        fprintf(f_html, "  <ul>\n    <li>temp_obj = %s</li>\n  </ul>\n", $5);
+        fprintf(f_html, "  <p>Atributo: <b>temp_obj</b></p>\n");
+        fprintf(f_html, "  <ul>\n    <li>%s</li>\n  </ul>\n", $5);
         fprintf(f_html, "</div>\n");
         free($1); free($5);
     }
   | AIRE_ID OP_PUNTO TK_TEMP_OBJETIVO ASIGNACION TEMPERATURA {
         fprintf(f_html, "<div style='border: 1px solid gray; padding: 20px; margin-bottom: 10px;'>\n");
         fprintf(f_html, "  <label><b>%s</b></label>\n", $1);
-        fprintf(f_html, "  <ul>\n    <li>temp_objetivo = %s</li>\n  </ul>\n", $5);
+        fprintf(f_html, "  <p>Atributo: <b>temp_objetivo</b></p>\n");
+        fprintf(f_html, "  <ul>\n    <li>%s</li>\n  </ul>\n", $5);
         fprintf(f_html, "</div>\n");
         free($1); free($5);
     }
   | AIRE_ID OP_PUNTO TK_ESTADO ASIGNACION BOOLEANO {
         fprintf(f_html, "<div style='border: 1px solid gray; padding: 20px; margin-bottom: 10px;'>\n");
         fprintf(f_html, "  <label><b>%s</b></label>\n", $1);
-        fprintf(f_html, "  <ul>\n    <li>estado = %s</li>\n  </ul>\n", $5);
+        fprintf(f_html, "  <p>Atributo: <b>estado</b></p>\n");
+        fprintf(f_html, "  <ul>\n    <li>%s</li>\n  </ul>\n", $5);
         fprintf(f_html, "</div>\n");
         free($1); free($5);
     }
   | AIRE_ID OP_PUNTO TK_MODO ASIGNACION MODO_AIRE {
         fprintf(f_html, "<div style='border: 1px solid gray; padding: 20px; margin-bottom: 10px;'>\n");
         fprintf(f_html, "  <label><b>%s</b></label>\n", $1);
-        fprintf(f_html, "  <ul>\n    <li>modo = %s</li>\n  </ul>\n", $5);
+        fprintf(f_html, "  <p>Atributo: <b>modo</b></p>\n");
+        fprintf(f_html, "  <ul>\n    <li>%s</li>\n  </ul>\n", $5);
         fprintf(f_html, "</div>\n");
         free($1); free($5);
     }
@@ -206,14 +213,16 @@ asignacion_persiana:
     PERSIANA_ID OP_PUNTO TK_POSICION ASIGNACION PORCENTAJE {
         fprintf(f_html, "<div style='border: 1px solid gray; padding: 20px; margin-bottom: 10px;'>\n");
         fprintf(f_html, "  <label><b>%s</b></label>\n", $1);
-        fprintf(f_html, "  <ul>\n    <li>posicion = %s</li>\n  </ul>\n", $5);
+        fprintf(f_html, "  <p>Atributo: <b>posicion</b></p>\n");
+        fprintf(f_html, "  <ul>\n    <li>%s</li>\n  </ul>\n", $5);
         fprintf(f_html, "</div>\n");
         free($1); free($5);
     }
   | PERSIANA_ID OP_PUNTO TK_ESTADO ASIGNACION BOOLEANO {
         fprintf(f_html, "<div style='border: 1px solid gray; padding: 20px; margin-bottom: 10px;'>\n");
         fprintf(f_html, "  <label><b>%s</b></label>\n", $1);
-        fprintf(f_html, "  <ul>\n    <li>estado = %s</li>\n  </ul>\n", $5);
+        fprintf(f_html, "  <p>Atributo: <b>estado</b></p>\n");
+        fprintf(f_html, "  <ul>\n    <li>%s</li>\n  </ul>\n", $5);
         fprintf(f_html, "</div>\n");
         free($1); free($5);
     }
@@ -223,21 +232,24 @@ asignacion_altavoz:
     ALTAVOZ_ID OP_PUNTO TK_VOLUMEN ASIGNACION PORCENTAJE {
         fprintf(f_html, "<div style='border: 1px solid gray; padding: 20px; margin-bottom: 10px;'>\n");
         fprintf(f_html, "  <label><b>%s</b></label>\n", $1);
-        fprintf(f_html, "  <ul>\n    <li>volumen = %s</li>\n  </ul>\n", $5);
+        fprintf(f_html, "  <p>Atributo: <b>volumen</b></p>\n");
+        fprintf(f_html, "  <ul>\n    <li>%s</li>\n  </ul>\n", $5);
         fprintf(f_html, "</div>\n");
         free($1); free($5);
     }
   | ALTAVOZ_ID OP_PUNTO TK_MUTE ASIGNACION BOOLEANO {
         fprintf(f_html, "<div style='border: 1px solid gray; padding: 20px; margin-bottom: 10px;'>\n");
         fprintf(f_html, "  <label><b>%s</b></label>\n", $1);
-        fprintf(f_html, "  <ul>\n    <li>mute = %s</li>\n  </ul>\n", $5);
+        fprintf(f_html, "  <p>Atributo: <b>mute</b></p>\n");
+        fprintf(f_html, "  <ul>\n    <li>%s</li>\n  </ul>\n", $5);
         fprintf(f_html, "</div>\n");
         free($1); free($5);
     }
   | ALTAVOZ_ID OP_PUNTO TK_MENSAJE ASIGNACION TEXTO {
         fprintf(f_html, "<div style='border: 1px solid gray; padding: 20px; margin-bottom: 10px;'>\n");
         fprintf(f_html, "  <label><b>%s</b></label>\n", $1);
-        fprintf(f_html, "  <ul>\n    <li>mensaje = %s</li>\n  </ul>\n", $5);
+        fprintf(f_html, "  <p>Atributo: <b>mensaje</b></p>\n");
+        fprintf(f_html, "  <ul>\n    <li>%s</li>\n  </ul>\n", $5);
         fprintf(f_html, "</div>\n");
         free($1); free($5);
     }
@@ -261,14 +273,16 @@ asignacion_alarma:
     ALARMA_ID OP_PUNTO TK_ESTADO ASIGNACION BOOLEANO {
         fprintf(f_html, "<div style='border: 1px solid gray; padding: 20px; margin-bottom: 10px;'>\n");
         fprintf(f_html, "  <label><b>%s</b></label>\n", $1);
-        fprintf(f_html, "  <ul>\n    <li>estado = %s</li>\n  </ul>\n", $5);
+        fprintf(f_html, "  <p>Atributo: <b>estado</b></p>\n");
+        fprintf(f_html, "  <ul>\n    <li>%s</li>\n  </ul>\n", $5);
         fprintf(f_html, "</div>\n");
         free($1); free($5);
     }
   | ALARMA_ID OP_PUNTO TK_ACTIVADA ASIGNACION BOOLEANO {
         fprintf(f_html, "<div style='border: 1px solid gray; padding: 20px; margin-bottom: 10px;'>\n");
         fprintf(f_html, "  <label><b>%s</b></label>\n", $1);
-        fprintf(f_html, "  <ul>\n    <li>activada = %s</li>\n  </ul>\n", $5);
+        fprintf(f_html, "  <p>Atributo: <b>activada</b></p>\n");
+        fprintf(f_html, "  <ul>\n    <li>%s</li>\n  </ul>\n", $5);
         fprintf(f_html, "</div>\n");
         free($1); free($5);
     }
@@ -278,7 +292,8 @@ asignacion_cerradura:
     CERRADURA_ID OP_PUNTO TK_ESTADO ASIGNACION BOOLEANO {
         fprintf(f_html, "<div style='border: 1px solid gray; padding: 20px; margin-bottom: 10px;'>\n");
         fprintf(f_html, "  <label><b>%s</b></label>\n", $1);
-        fprintf(f_html, "  <ul>\n    <li>estado = %s</li>\n  </ul>\n", $5);
+        fprintf(f_html, "  <p>Atributo: <b>estado</b></p>\n");
+        fprintf(f_html, "  <ul>\n    <li>%s</li>\n  </ul>\n", $5);
         fprintf(f_html, "</div>\n");
         free($1); free($5);
     }
