@@ -21,6 +21,17 @@ FILE *f_html = NULL;
 #define MAX_LINE_SIZE 1024
 char linea_actual[MAX_LINE_SIZE] = {0};
 
+/* Valida que el archivo recibido tenga extension .smart */
+int es_archivo_valido(const char *nombre)
+{
+    const char *punto = strrchr(nombre, '.');
+    if (punto == NULL)
+    {
+        return 0; /* No tiene extension */
+    }
+    return strcmp(punto, ".smart") == 0;
+}
+
 int main(int argc, char *argv[])
 {
 #ifdef _WIN32
@@ -31,6 +42,12 @@ int main(int argc, char *argv[])
 
     if (argc == 2)
     {
+        if (!es_archivo_valido(argv[1]))
+        {
+            printf("Error: El archivo '%s' no tiene extension .smart\n", argv[1]);
+            return -1;
+        }
+
         yyin = fopen(argv[1], "rt");
         if (yyin == NULL)
         {
@@ -48,7 +65,7 @@ int main(int argc, char *argv[])
         {
             *punto = '\0'; /* Cortamos la palabra ahí "rutina.smart" -> "rutina" */
         }
-        strcat(nombre_html, ".html"); /* Le pegamos la nueva extensión: "rutina" -> "rutina.html" */
+        strcat(nombre_html, ".html"); /* Le pegamos la nueva extension: "rutina" -> "rutina.html" */
 
         /* parcer crea archivo temporal */
         f_html = fopen("borrador.tmp", "wt");
@@ -68,9 +85,9 @@ int main(int argc, char *argv[])
 
         cant_errores = 0;
 
-        yyparse();
+        yyparse(); // analisis sintactico
 
-        fclose(f_html);
+        fclose(f_html); // para liberar recursos
 
         /* ver si no hay errores traducir finalmente al html  */
         if (cant_errores == 0)

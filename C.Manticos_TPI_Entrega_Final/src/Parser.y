@@ -326,7 +326,7 @@ primaria_condicion: comparacion
 
 /* 4.3.14 Reglas de comparacion */
 comparacion: comparacion_temp
-           | comparacion_hum
+           | comparacion_humedad
            | comparacion_luz
            | comparacion_mov
            | comparacion_humo
@@ -343,7 +343,7 @@ comparacion_temp:
     }
 ;
 
-comparacion_hum: 
+comparacion_humedad: 
     SENSOR_HUMEDAD_ID operador_comp PORCENTAJE {
         fprintf(f_html, "<div style='border: 1px solid green; padding: 20px; margin-bottom: 10px;'>\n");
         fprintf(f_html, "  <label><b>%s</b></label> valor actual frente a: <span>%s</span>\n", $1, $3);

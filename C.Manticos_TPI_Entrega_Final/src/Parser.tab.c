@@ -198,7 +198,7 @@ enum yysymbol_kind_t
   YYSYMBOL_primaria_condicion = 84,        /* primaria_condicion  */
   YYSYMBOL_comparacion = 85,               /* comparacion  */
   YYSYMBOL_comparacion_temp = 86,          /* comparacion_temp  */
-  YYSYMBOL_comparacion_hum = 87,           /* comparacion_hum  */
+  YYSYMBOL_comparacion_humedad = 87,       /* comparacion_humedad  */
   YYSYMBOL_comparacion_luz = 88,           /* comparacion_luz  */
   YYSYMBOL_comparacion_mov = 89,           /* comparacion_mov  */
   YYSYMBOL_comparacion_humo = 90,          /* comparacion_humo  */
@@ -638,7 +638,7 @@ static const char *const yytname[] =
   "asignacion_persiana", "asignacion_altavoz", "asignacion_alarma",
   "asignacion_cerradura", "bloque", "condicion", "expresion_or",
   "expresion_and", "expresion_not", "primaria_condicion", "comparacion",
-  "comparacion_temp", "comparacion_hum", "comparacion_luz",
+  "comparacion_temp", "comparacion_humedad", "comparacion_luz",
   "comparacion_mov", "comparacion_humo", "comparacion_reloj",
   "comparacion_actuador", "operador_comp", YY_NULLPTR
 };
@@ -1902,7 +1902,7 @@ yyreduce:
 #line 1903 "Parser.tab.c"
     break;
 
-  case 64: /* comparacion_hum: SENSOR_HUMEDAD_ID operador_comp PORCENTAJE  */
+  case 64: /* comparacion_humedad: SENSOR_HUMEDAD_ID operador_comp PORCENTAJE  */
 #line 347 "Parser.y"
                                                {
         fprintf(f_html, "<div style='border: 1px solid green; padding: 20px; margin-bottom: 10px;'>\n");
